@@ -1,0 +1,69 @@
+2022-06-22 20:24:55.842 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-22 20:24:56.058 +01:00 [DBG] Hosting starting
+2022-06-22 20:24:56.298 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-22 20:24:56.489 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-22 20:24:56.498 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-22 20:24:56.498 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-22 20:24:56.499 +01:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2022-06-22 20:24:56.499 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-22 20:24:56.500 +01:00 [INF] Hosting environment: Development
+2022-06-22 20:24:56.500 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-22 20:24:56.501 +01:00 [DBG] Hosting started
+2022-06-22 20:25:15.004 +01:00 [DBG] Connection id "0HMIKGJNHCVUH" accepted.
+2022-06-22 20:25:15.024 +01:00 [DBG] Connection id "0HMIKGJNHCVUH" started.
+2022-06-22 20:25:15.088 +01:00 [DBG] Connection id "0HMIKGJNHCVUH" received FIN.
+2022-06-22 20:25:15.090 +01:00 [DBG] Connection id "0HMIKGJNHCVUI" accepted.
+2022-06-22 20:25:15.093 +01:00 [DBG] Connection id "0HMIKGJNHCVUI" started.
+2022-06-22 20:25:15.128 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-22 20:25:15.137 +01:00 [DBG] Connection 0HMIKGJNHCVUI established using the following protocol: "Tls13"
+2022-06-22 20:25:15.165 +01:00 [DBG] Connection id "0HMIKGJNHCVUH" stopped.
+2022-06-22 20:25:15.166 +01:00 [DBG] Connection id "0HMIKGJNHCVUH" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-22 20:25:15.269 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-22 20:25:15.303 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-22 20:25:15.338 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-22 20:25:15.338 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:15.488 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-22 20:25:15.511 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-22 20:25:15.516 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 259.0314ms
+2022-06-22 20:25:15.716 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-22 20:25:15.719 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-22 20:25:15.720 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:15.741 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-22 20:25:15.757 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 15.6521ms
+2022-06-22 20:25:15.791 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-22 20:25:15.807 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 90.4912ms
+2022-06-22 20:25:16.436 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-22 20:25:16.436 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-22 20:25:16.436 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:16.502 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-22 20:25:16.503 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-22 20:25:16.503 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:16.504 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-22 20:25:16.507 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 4.6955ms
+2022-06-22 20:25:16.511 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 75.4098ms
+2022-06-22 20:25:17.459 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-22 20:25:17.459 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-22 20:25:17.459 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:17.476 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-22 20:25:17.488 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-22 20:25:17.522 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 63.3752ms
+2022-06-22 20:25:17.677 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-22 20:25:17.678 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 0.5079ms
+2022-06-22 20:25:17.997 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-22 20:25:17.997 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-22 20:25:17.998 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:17.999 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 1.7429ms
+2022-06-22 20:25:18.000 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-22 20:25:18.000 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-22 20:25:18.000 +01:00 [DBG] Request did not match any endpoints
+2022-06-22 20:25:18.005 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-22 20:25:18.007 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 7.2153ms
