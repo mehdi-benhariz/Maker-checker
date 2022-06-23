@@ -10,8 +10,31 @@ namespace maker_checker_v1
         public RequestDataStore()
         {
             //seed data
-            ServiceTypes.Add(new ServiceType("international"));
-            ServiceTypes.Add(new ServiceType("intrabank"));
+            ServiceTypes.Add(new ServiceType("international")
+            {
+                validation = new Validation(ServiceTypes.Count)
+                {
+                    rules = new List<Rule>{
+                        new Rule("A",2),
+                        new Rule("B",2),
+                        new Rule("C")
+                    }
+                }
+
+            });
+
+            ServiceTypes.Add(new ServiceType("intrabank")
+            {
+                validation = new Validation(ServiceTypes.Count)
+                {
+                    rules = new List<Rule>{
+                        new Rule("A",1),
+                        new Rule("B",2),
+                        new Rule("C",2)
+                    }
+                }
+            }
+            );
 
             Roles.Add(new Role("A"));
             Roles.Add(new Role("B"));
@@ -22,8 +45,13 @@ namespace maker_checker_v1
         {
             return ServiceTypes.Find(s => s.Id == serviceTypeId) != null;
         }
+        public bool RoleExits(string roleName)
+        {
+            return Roles.Find(r => r.Name == roleName) != null;
+        }
         public byte GetRoleMaxNbr(string roleName)
         {
+            //todo later get max nbr from role table
             var MaxNbr = roleName switch
             {
                 "A" => 2,
@@ -34,5 +62,7 @@ namespace maker_checker_v1
             // var MaxNbr = Roles.Count(r => r.Name == roleName);
             return (byte)MaxNbr;
         }
+
+
     }
 }

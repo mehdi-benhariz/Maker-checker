@@ -19,22 +19,8 @@ namespace maker_checker_v1.models.entities
             this.Status = status;
             this.ServiceTypeId = serviceTypeId;
             ValidationProgress = new ValidationProgress(this.Id);
-            initValidationProgress();
 
         }
 
-        private void initValidationProgress()
-        {
-            //init validation progress from servicesType validation rules
-            //get the service type by id
-            var _requestDataStore = new RequestDataStore();
-            var serviceType = _requestDataStore.ServiceTypes.FirstOrDefault(s => s.Id == this.ServiceTypeId);
-            if (serviceType == null)
-                throw new System.Exception("Service type not found");
-
-            foreach (var rule in serviceType.validation.rules)
-                ValidationProgress.rules.Add(rule);
-
-        }
     }
 }
