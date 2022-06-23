@@ -1036,3 +1036,7 @@ System.Security.Authentication.AuthenticationException: Authentication failed, s
 2022-06-23 11:27:19.293 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 51145.0278ms
 2022-06-23 11:27:19.294 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
 2022-06-23 11:27:19.295 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 195 - 200 196 application/json;+charset=utf-8 51216.4400ms
+2022-06-23 11:33:47.104 +01:00 [DBG] Connection id "0HMIL0B62PNAP" received FIN.
+2022-06-23 11:33:47.176 +01:00 [DBG] Connection id "0HMIL0B62PNAP" is closed. The last processed stream ID was 3.
+2022-06-23 11:33:47.176 +01:00 [DBG] Connection id "0HMIL0B62PNAP" sending FIN because: "The client closed the connection."
+2022-06-23 11:33:47.176 +01:00 [DBG] Connection id "0HMIL0B62PNAP" stopped.
