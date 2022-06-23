@@ -1,0 +1,1038 @@
+2022-06-23 10:40:23.055 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 10:40:23.261 +01:00 [DBG] Hosting starting
+2022-06-23 10:40:23.413 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 10:40:23.536 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 10:40:23.544 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 10:40:23.550 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 10:40:23.551 +01:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2022-06-23 10:40:23.553 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 10:40:23.554 +01:00 [INF] Hosting environment: Development
+2022-06-23 10:40:23.556 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 10:40:23.557 +01:00 [DBG] Hosting started
+2022-06-23 10:44:05.127 +01:00 [DBG] Connection id "0HMIKVJKMU16H" accepted.
+2022-06-23 10:44:05.130 +01:00 [DBG] Connection id "0HMIKVJKMU16H" started.
+2022-06-23 10:44:05.236 +01:00 [DBG] Connection id "0HMIKVJKMU16H" received FIN.
+2022-06-23 10:44:05.238 +01:00 [DBG] Connection id "0HMIKVJKMU16I" accepted.
+2022-06-23 10:44:05.240 +01:00 [DBG] Connection id "0HMIKVJKMU16I" started.
+2022-06-23 10:44:05.300 +01:00 [DBG] Connection 0HMIKVJKMU16I established using the following protocol: "Tls13"
+2022-06-23 10:44:05.285 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 10:44:05.388 +01:00 [DBG] Connection id "0HMIKVJKMU16H" stopped.
+2022-06-23 10:44:05.395 +01:00 [DBG] Connection id "0HMIKVJKMU16H" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 10:44:05.522 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger - -
+2022-06-23 10:44:05.536 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 10:44:05.593 +01:00 [DBG] No candidates found for the request path '/swagger'
+2022-06-23 10:44:05.595 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:05.678 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger - - - 301 0 - 163.1152ms
+2022-06-23 10:44:05.693 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:44:05.694 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:44:05.694 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:05.814 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-23 10:44:05.823 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-23 10:44:05.824 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 131.0134ms
+2022-06-23 10:44:05.914 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 10:44:05.917 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 10:44:05.917 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:05.924 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - -
+2022-06-23 10:44:05.925 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2022-06-23 10:44:05.926 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:05.926 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - -
+2022-06-23 10:44:05.928 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2022-06-23 10:44:05.928 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:05.930 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-23 10:44:05.938 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 7.7792ms
+2022-06-23 10:44:06.025 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-06-23 10:44:06.025 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 10:44:06.032 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 118.0667ms
+2022-06-23 10:44:06.060 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-06-23 10:44:06.072 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 148.0295ms
+2022-06-23 10:44:06.069 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 143.7787ms
+2022-06-23 10:44:06.411 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:44:06.412 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:44:06.415 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:06.474 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 10:44:06.474 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 10:44:06.474 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:44:06.475 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 10:44:06.476 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 1.8326ms
+2022-06-23 10:44:06.641 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 229.9904ms
+2022-06-23 10:44:24.825 +01:00 [INF] Request starting HTTP/2 POST https://localhost:5000/api/ServiceType application/json-patch+json 29
+2022-06-23 10:44:24.845 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType'
+2022-06-23 10:44:24.861 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)' with route pattern 'api/ServiceType' is valid for the request path '/api/ServiceType'
+2022-06-23 10:44:24.862 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:24.862 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:44:24.867 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:24.920 +01:00 [INF] Route matched with {action = "Post", controller = "ServiceType"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.ServiceType] Post(maker_checker_v1.Controllers.ServiceTypeForCreationDTO) on controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1).
+2022-06-23 10:44:24.923 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:44:24.933 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:44:24.935 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:44:24.935 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:44:24.937 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:44:24.940 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:44:24.942 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:44:24.955 +01:00 [DBG] Attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' ...
+2022-06-23 10:44:24.966 +01:00 [DBG] Attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' using the name '' in request data ...
+2022-06-23 10:44:24.975 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:44:24.979 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:44:24.990 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000011": started reading request body.
+2022-06-23 10:44:24.993 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000011": done reading request body.
+2022-06-23 10:44:25.259 +01:00 [DBG] Done attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:25.260 +01:00 [DBG] Done attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:25.260 +01:00 [DBG] Attempting to validate the bound parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' ...
+2022-06-23 10:44:25.275 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:25.290 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:44:25.297 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:44:25.298 +01:00 [DBG] Could not find an output formatter based on content negotiation. Accepted types were (["text/plain"])
+2022-06-23 10:44:25.299 +01:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2022-06-23 10:44:25.299 +01:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2022-06-23 10:44:25.303 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter' and content type 'application/json' to write the response.
+2022-06-23 10:44:25.304 +01:00 [INF] Executing CreatedAtActionResult, writing value of type 'maker_checker_v1.models.entities.ServiceType'.
+2022-06-23 10:44:25.366 +01:00 [DBG] Found the endpoints ["maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)","maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)"] for address Microsoft.AspNetCore.Routing.RouteValuesAddress
+2022-06-23 10:44:25.380 +01:00 [DBG] Successfully processed template api/ServiceType/{serviceTypeId} for maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1) resulting in /api/ServiceType/0 and 
+2022-06-23 10:44:25.381 +01:00 [DBG] Link generation succeeded for endpoints ["maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)","maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)"] with result /api/ServiceType/0
+2022-06-23 10:44:25.480 +01:00 [INF] Executed action maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1) in 535.6498ms
+2022-06-23 10:44:25.480 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:25.481 +01:00 [INF] Request finished HTTP/2 POST https://localhost:5000/api/ServiceType application/json-patch+json 29 - 201 241 application/json;+charset=utf-8 655.7521ms
+2022-06-23 10:44:31.151 +01:00 [INF] Request starting HTTP/2 POST https://localhost:5000/api/ServiceType application/json-patch+json 29
+2022-06-23 10:44:31.153 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType'
+2022-06-23 10:44:31.154 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)' with route pattern 'api/ServiceType' is valid for the request path '/api/ServiceType'
+2022-06-23 10:44:31.154 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:31.161 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:44:31.161 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:31.162 +01:00 [INF] Route matched with {action = "Post", controller = "ServiceType"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.ServiceType] Post(maker_checker_v1.Controllers.ServiceTypeForCreationDTO) on controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1).
+2022-06-23 10:44:31.163 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:44:31.164 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:44:31.165 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:44:31.166 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:44:31.168 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:44:31.174 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:44:31.174 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:44:31.176 +01:00 [DBG] Attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' ...
+2022-06-23 10:44:31.178 +01:00 [DBG] Attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' using the name '' in request data ...
+2022-06-23 10:44:31.179 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:44:31.179 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:44:31.180 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000013": started reading request body.
+2022-06-23 10:44:31.181 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000013": done reading request body.
+2022-06-23 10:44:31.184 +01:00 [DBG] Done attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:31.185 +01:00 [DBG] Done attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:31.186 +01:00 [DBG] Attempting to validate the bound parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' ...
+2022-06-23 10:44:31.188 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:31.190 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:44:31.190 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:44:31.190 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 10:44:31.191 +01:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2022-06-23 10:44:31.192 +01:00 [INF] Executed action maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1) in 18.8587ms
+2022-06-23 10:44:31.193 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:31.195 +01:00 [INF] Request finished HTTP/2 POST https://localhost:5000/api/ServiceType application/json-patch+json 29 - 400 - text/plain;+charset=utf-8 43.8146ms
+2022-06-23 10:44:42.902 +01:00 [INF] Request starting HTTP/2 POST https://localhost:5000/api/ServiceType application/json-patch+json 25
+2022-06-23 10:44:42.904 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType'
+2022-06-23 10:44:42.906 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)' with route pattern 'api/ServiceType' is valid for the request path '/api/ServiceType'
+2022-06-23 10:44:42.907 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:42.908 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:44:42.913 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:42.914 +01:00 [INF] Route matched with {action = "Post", controller = "ServiceType"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.ServiceType] Post(maker_checker_v1.Controllers.ServiceTypeForCreationDTO) on controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1).
+2022-06-23 10:44:42.914 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:44:42.914 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:44:42.916 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:44:42.916 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:44:42.918 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:44:42.918 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:44:42.918 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:44:42.919 +01:00 [DBG] Attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' ...
+2022-06-23 10:44:42.919 +01:00 [DBG] Attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' using the name '' in request data ...
+2022-06-23 10:44:42.923 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:44:42.923 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:44:42.924 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000015": started reading request body.
+2022-06-23 10:44:42.925 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000015": done reading request body.
+2022-06-23 10:44:42.926 +01:00 [DBG] Done attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:42.926 +01:00 [DBG] Done attempting to bind parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:42.926 +01:00 [DBG] Attempting to validate the bound parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO' ...
+2022-06-23 10:44:42.926 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceType' of type 'maker_checker_v1.Controllers.ServiceTypeForCreationDTO'.
+2022-06-23 10:44:42.927 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:44:42.927 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:44:42.927 +01:00 [DBG] Could not find an output formatter based on content negotiation. Accepted types were (["text/plain"])
+2022-06-23 10:44:42.927 +01:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2022-06-23 10:44:42.927 +01:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2022-06-23 10:44:42.928 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter' and content type 'application/json' to write the response.
+2022-06-23 10:44:42.928 +01:00 [INF] Executing CreatedAtActionResult, writing value of type 'maker_checker_v1.models.entities.ServiceType'.
+2022-06-23 10:44:42.928 +01:00 [DBG] Found the endpoints ["maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)","maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)"] for address Microsoft.AspNetCore.Routing.RouteValuesAddress
+2022-06-23 10:44:42.929 +01:00 [DBG] Successfully processed template api/ServiceType/{serviceTypeId} for maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1) resulting in /api/ServiceType/1 and 
+2022-06-23 10:44:42.929 +01:00 [DBG] Link generation succeeded for endpoints ["maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)","maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)"] with result /api/ServiceType/1
+2022-06-23 10:44:42.930 +01:00 [INF] Executed action maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1) in 11.8492ms
+2022-06-23 10:44:42.931 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Post (maker-checker-v1)'
+2022-06-23 10:44:42.933 +01:00 [INF] Request finished HTTP/2 POST https://localhost:5000/api/ServiceType application/json-patch+json 25 - 201 237 application/json;+charset=utf-8 29.7159ms
+2022-06-23 10:45:40.220 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109
+2022-06-23 10:45:40.221 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:45:40.221 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:45:40.222 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:45:40.222 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:45:40.223 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:45:40.229 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 10:45:40.233 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:45:40.234 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:45:40.234 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:45:40.235 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:45:40.235 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:45:40.236 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:45:40.236 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:45:40.237 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:45:40.238 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 10:45:40.241 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:45:40.241 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:45:40.241 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:45:40.242 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:45:40.244 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:45:40.244 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 10:45:40.245 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:45:40.247 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:45:40.248 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000017": started reading request body.
+2022-06-23 10:45:40.248 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000017": done reading request body.
+2022-06-23 10:45:40.292 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:45:40.292 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:45:40.293 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:45:40.304 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:45:40.306 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:45:40.307 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:45:40.307 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 10:45:40.307 +01:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2022-06-23 10:45:40.308 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 72.2317ms
+2022-06-23 10:45:40.312 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:45:40.315 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109 - 404 - text/plain;+charset=utf-8 94.2911ms
+2022-06-23 10:45:55.506 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/api/ServiceType - -
+2022-06-23 10:45:55.507 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType'
+2022-06-23 10:45:55.508 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)' with route pattern 'api/ServiceType' is valid for the request path '/api/ServiceType'
+2022-06-23 10:45:55.509 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)'
+2022-06-23 10:45:55.510 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:45:55.511 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)'
+2022-06-23 10:45:55.515 +01:00 [INF] Route matched with {action = "Get", controller = "ServiceType"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[maker_checker_v1.models.entities.ServiceType]] Get() on controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1).
+2022-06-23 10:45:55.518 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:45:55.518 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:45:55.519 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:45:55.519 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:45:55.519 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:45:55.519 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:45:55.520 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ServiceTypeController (maker-checker-v1)
+2022-06-23 10:45:55.520 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:45:55.521 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:45:55.521 +01:00 [DBG] Could not find an output formatter based on content negotiation. Accepted types were (["text/plain"])
+2022-06-23 10:45:55.521 +01:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2022-06-23 10:45:55.521 +01:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2022-06-23 10:45:55.521 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter' and content type 'application/json' to write the response.
+2022-06-23 10:45:55.522 +01:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[maker_checker_v1.models.entities.ServiceType, maker-checker-v1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-06-23 10:45:55.524 +01:00 [INF] Executed action maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1) in 4.1498ms
+2022-06-23 10:45:55.524 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ServiceTypeController.Get (maker-checker-v1)'
+2022-06-23 10:45:55.524 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/api/ServiceType - - - 200 481 application/json;+charset=utf-8 18.3312ms
+2022-06-23 10:46:15.686 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/0/Validation application/json-patch+json 109
+2022-06-23 10:46:15.687 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/0/Validation'
+2022-06-23 10:46:15.688 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/0/Validation'
+2022-06-23 10:46:15.688 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:46:15.688 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:46:15.688 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:46:15.688 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 10:46:15.689 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:46:15.689 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:46:15.689 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:46:15.689 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:46:15.689 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:46:15.690 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:46:15.690 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:46:15.690 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:46:15.690 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 10:46:15.691 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:46:15.691 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:46:15.691 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:46:15.691 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:46:15.691 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:46:15.692 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 10:46:15.692 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:46:15.692 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:46:15.692 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:0000001B": started reading request body.
+2022-06-23 10:46:15.693 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:0000001B": done reading request body.
+2022-06-23 10:46:15.693 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:46:15.693 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:46:15.694 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:46:15.694 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:46:15.694 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:46:15.695 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:46:15.695 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 10:46:15.695 +01:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2022-06-23 10:46:15.696 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 6.7704ms
+2022-06-23 10:46:15.697 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:46:15.697 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/0/Validation application/json-patch+json 109 - 404 - text/plain;+charset=utf-8 11.4513ms
+2022-06-23 10:47:23.455 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:47:23.457 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:47:23.458 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:47:23.472 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-23 10:47:23.475 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-23 10:47:23.479 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 23.5024ms
+2022-06-23 10:47:23.552 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 10:47:23.553 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 10:47:23.554 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:47:23.557 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 10:47:23.560 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 7.4483ms
+2022-06-23 10:47:23.567 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-23 10:47:23.568 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 0.7281ms
+2022-06-23 10:47:23.977 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:47:23.977 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:47:23.978 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:47:23.994 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 16.7918ms
+2022-06-23 10:47:24.003 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 10:47:24.004 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 10:47:24.005 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:47:24.007 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 10:47:24.008 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 4.7953ms
+2022-06-23 10:47:40.567 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 114
+2022-06-23 10:47:40.568 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:47:40.568 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:47:40.568 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:47:40.569 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:47:40.569 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:47:40.572 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 10:47:40.582 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:47:40.583 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:47:40.584 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:47:40.584 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:47:40.585 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:47:40.589 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:47:40.591 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:47:40.592 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:47:40.593 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 10:47:40.594 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:47:40.595 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:47:40.595 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:47:40.596 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:47:40.597 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:47:40.598 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 10:47:40.598 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:47:40.599 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:47:40.600 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000027": started reading request body.
+2022-06-23 10:47:40.609 +01:00 [DBG] Connection id "0HMIKVJKMU16I", Request id "0HMIKVJKMU16I:00000027": done reading request body.
+2022-06-23 10:47:40.611 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:47:40.611 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:47:40.612 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:47:40.623 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:47:40.625 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:47:40.626 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:47:40.627 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 10:47:40.627 +01:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2022-06-23 10:47:40.628 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 38.8772ms
+2022-06-23 10:47:40.633 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:47:40.637 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 114 - 404 - text/plain;+charset=utf-8 69.6490ms
+2022-06-23 10:49:52.451 +01:00 [DBG] Connection id "0HMIKVJKMU16I" is closing.
+2022-06-23 10:49:52.465 +01:00 [DBG] Connection id "0HMIKVJKMU16I" is closed. The last processed stream ID was 39.
+2022-06-23 10:49:52.468 +01:00 [DBG] Connection id "0HMIKVJKMU16I" stopped.
+2022-06-23 10:49:52.473 +01:00 [DBG] Connection id "0HMIKVJKMU16I" received FIN.
+2022-06-23 10:49:52.475 +01:00 [DBG] Connection id "0HMIKVJKMU16I" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 10:51:43.314 +01:00 [DBG] Connection id "0HMIKVJKMU16J" accepted.
+2022-06-23 10:51:43.314 +01:00 [DBG] Connection id "0HMIKVJKMU16J" started.
+2022-06-23 10:51:43.318 +01:00 [DBG] Connection id "0HMIKVJKMU16J" received FIN.
+2022-06-23 10:51:43.319 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 10:51:43.320 +01:00 [DBG] Connection id "0HMIKVJKMU16J" stopped.
+2022-06-23 10:51:43.320 +01:00 [DBG] Connection id "0HMIKVJKMU16J" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 10:51:43.321 +01:00 [DBG] Connection id "0HMIKVJKMU16K" accepted.
+2022-06-23 10:51:43.321 +01:00 [DBG] Connection id "0HMIKVJKMU16K" started.
+2022-06-23 10:51:43.348 +01:00 [DBG] Connection 0HMIKVJKMU16K established using the following protocol: "Tls13"
+2022-06-23 10:51:43.351 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:51:43.351 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:51:43.352 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:51:43.374 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-23 10:51:43.375 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-23 10:51:43.376 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 25.4603ms
+2022-06-23 10:51:43.559 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 10:51:43.560 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 10:51:43.562 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:51:43.568 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-23 10:51:43.569 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 0.4008ms
+2022-06-23 10:51:43.573 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 10:51:43.574 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 14.9410ms
+2022-06-23 10:51:43.849 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:51:43.852 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:51:43.853 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:51:43.870 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 10:51:43.872 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 10:51:43.873 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:51:43.873 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 10:51:43.873 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 3.0843ms
+2022-06-23 10:51:43.901 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 51.7720ms
+2022-06-23 10:52:11.127 +01:00 [INF] Application is shutting down...
+2022-06-23 10:52:11.129 +01:00 [DBG] Hosting stopping
+2022-06-23 10:52:11.160 +01:00 [DBG] Connection id "0HMIKVJKMU16K" is closing.
+2022-06-23 10:52:11.160 +01:00 [DBG] Connection id "0HMIKVJKMU16K" is closed. The last processed stream ID was 9.
+2022-06-23 10:52:11.161 +01:00 [DBG] Connection id "0HMIKVJKMU16K" received FIN.
+2022-06-23 10:52:11.162 +01:00 [DBG] Connection id "0HMIKVJKMU16K" stopped.
+2022-06-23 10:52:11.163 +01:00 [DBG] Connection id "0HMIKVJKMU16K" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 10:52:11.169 +01:00 [DBG] Hosting stopped
+2022-06-23 10:52:21.696 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 10:52:21.932 +01:00 [DBG] Hosting starting
+2022-06-23 10:52:22.216 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 10:52:22.408 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 10:52:22.433 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 10:52:22.433 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 10:52:22.434 +01:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2022-06-23 10:52:22.435 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 10:52:22.436 +01:00 [INF] Hosting environment: Development
+2022-06-23 10:52:22.436 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 10:52:22.437 +01:00 [DBG] Hosting started
+2022-06-23 10:52:22.578 +01:00 [DBG] Connection id "0HMIKVO8V0CK0" accepted.
+2022-06-23 10:52:22.580 +01:00 [DBG] Connection id "0HMIKVO8V0CK0" started.
+2022-06-23 10:52:22.652 +01:00 [DBG] Connection id "0HMIKVO8V0CK0" received FIN.
+2022-06-23 10:52:22.657 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" accepted.
+2022-06-23 10:52:22.665 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" started.
+2022-06-23 10:52:22.718 +01:00 [DBG] Connection 0HMIKVO8V0CK1 established using the following protocol: "Tls13"
+2022-06-23 10:52:22.680 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 10:52:22.748 +01:00 [DBG] Connection id "0HMIKVO8V0CK0" stopped.
+2022-06-23 10:52:22.750 +01:00 [DBG] Connection id "0HMIKVO8V0CK0" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 10:52:22.869 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:52:22.884 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 10:52:22.951 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:52:22.952 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:23.118 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-23 10:52:23.142 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-23 10:52:23.157 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 291.0167ms
+2022-06-23 10:52:23.283 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-23 10:52:23.286 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 3.1586ms
+2022-06-23 10:52:23.283 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - -
+2022-06-23 10:52:23.283 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - -
+2022-06-23 10:52:23.295 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2022-06-23 10:52:23.295 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:23.283 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 10:52:23.302 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 10:52:23.302 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:23.289 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2022-06-23 10:52:23.329 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:23.417 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 10:52:23.415 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-06-23 10:52:23.473 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 190.0257ms
+2022-06-23 10:52:23.469 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-06-23 10:52:23.494 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 210.8801ms
+2022-06-23 10:52:23.494 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 211.2044ms
+2022-06-23 10:52:23.950 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:52:23.953 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:52:23.953 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:24.018 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 10:52:24.020 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 10:52:24.022 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:24.023 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 10:52:24.024 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 5.5490ms
+2022-06-23 10:52:24.269 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 318.8023ms
+2022-06-23 10:52:34.740 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 114
+2022-06-23 10:52:34.754 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:52:34.783 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:52:34.786 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:52:34.791 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:52:34.802 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:52:34.851 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 10:52:34.853 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:52:34.854 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:52:34.855 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:52:34.857 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:52:34.858 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:52:34.860 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:52:34.863 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:52:34.869 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:52:34.877 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 10:52:34.879 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:52:34.879 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:52:34.880 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:52:34.882 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:52:34.885 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:52:34.891 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 10:52:34.894 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:52:34.895 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:52:34.909 +01:00 [DBG] Connection id "0HMIKVO8V0CK1", Request id "0HMIKVO8V0CK1:0000000F": started reading request body.
+2022-06-23 10:52:34.912 +01:00 [DBG] Connection id "0HMIKVO8V0CK1", Request id "0HMIKVO8V0CK1:0000000F": done reading request body.
+2022-06-23 10:52:35.113 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:52:35.113 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:52:35.114 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:52:35.133 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:52:35.140 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 10:52:35.146 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 10:52:35.148 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 10:52:35.150 +01:00 [INF] Executing NotFoundObjectResult, writing value of type 'System.String'.
+2022-06-23 10:52:35.162 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 292.067ms
+2022-06-23 10:52:35.164 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:52:35.166 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 114 - 404 - text/plain;+charset=utf-8 426.0657ms
+2022-06-23 10:52:53.155 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:52:53.156 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:52:53.156 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:53.170 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-23 10:52:53.172 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-23 10:52:53.180 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 24.6906ms
+2022-06-23 10:52:53.241 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 10:52:53.241 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-23 10:52:53.242 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 10:52:53.243 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:53.243 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 1.4256ms
+2022-06-23 10:52:53.245 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 10:52:53.247 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 6.4057ms
+2022-06-23 10:52:53.509 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:52:53.510 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:52:53.511 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:53.512 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 10:52:53.512 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 10:52:53.512 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:53.513 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 10:52:53.514 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 2.0811ms
+2022-06-23 10:52:53.529 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 19.7271ms
+2022-06-23 10:52:55.520 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:52:55.522 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:52:55.523 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:55.535 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2022-06-23 10:52:55.540 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2022-06-23 10:52:55.543 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 23.6600ms
+2022-06-23 10:52:55.631 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - -
+2022-06-23 10:52:55.636 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/_framework/aspnetcore-browser-refresh.js - - - 200 11966 application/javascript;+charset=utf-8 5.2752ms
+2022-06-23 10:52:55.796 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:52:55.796 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:52:55.796 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:55.809 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 12.8605ms
+2022-06-23 10:52:55.836 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 10:52:55.838 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 10:52:55.839 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:52:55.840 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 10:52:55.841 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 4.1970ms
+2022-06-23 10:53:03.223 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 114
+2022-06-23 10:53:03.223 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:53:03.223 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:53:03.224 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:53:03.224 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:53:03.224 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:53:03.228 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 10:53:03.228 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:53:03.229 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:53:03.229 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:53:03.230 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:53:03.230 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:53:03.231 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:53:03.231 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:53:03.232 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:53:03.232 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 10:53:03.232 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:53:03.233 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:53:03.233 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:53:03.233 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:53:03.233 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:53:03.234 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 10:53:03.234 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:53:03.234 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:53:03.235 +01:00 [DBG] Connection id "0HMIKVO8V0CK1", Request id "0HMIKVO8V0CK1:00000023": started reading request body.
+2022-06-23 10:53:03.235 +01:00 [DBG] Connection id "0HMIKVO8V0CK1", Request id "0HMIKVO8V0CK1:00000023": done reading request body.
+2022-06-23 10:53:03.236 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:53:03.236 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:53:03.236 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:53:03.238 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:53:03.242 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 10.8204ms
+2022-06-23 10:53:03.243 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:53:03.244 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at maker_checker_v1.Controllers.ValidationController.setValidation(Int32 serviceTypeId, ValidationForCreationDTO validation)
+   at lambda_method14(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-06-23 10:53:03.259 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 114 - 500 - text/plain;+charset=utf-8 36.6055ms
+2022-06-23 10:54:54.742 +01:00 [INF] Application is shutting down...
+2022-06-23 10:54:54.744 +01:00 [DBG] Hosting stopping
+2022-06-23 10:54:54.798 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" is closing.
+2022-06-23 10:54:54.813 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" is closed. The last processed stream ID was 35.
+2022-06-23 10:54:54.822 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" received FIN.
+2022-06-23 10:54:54.822 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" sending FIN because: "The client closed the connection."
+2022-06-23 10:54:54.826 +01:00 [DBG] Connection id "0HMIKVO8V0CK1" stopped.
+2022-06-23 10:54:54.832 +01:00 [DBG] Hosting stopped
+2022-06-23 10:55:06.260 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 10:55:06.429 +01:00 [DBG] Hosting starting
+2022-06-23 10:55:06.770 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 10:55:06.930 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 10:55:06.930 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 10:55:06.930 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 10:55:06.930 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 10:55:06.931 +01:00 [INF] Hosting environment: Development
+2022-06-23 10:55:06.932 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 10:55:06.932 +01:00 [DBG] Hosting started
+2022-06-23 10:55:07.400 +01:00 [DBG] Connection id "0HMIKVPQ2REM8" accepted.
+2022-06-23 10:55:07.403 +01:00 [DBG] Connection id "0HMIKVPQ2REM8" started.
+2022-06-23 10:55:07.524 +01:00 [DBG] Connection id "0HMIKVPQ2REM8" received FIN.
+2022-06-23 10:55:07.536 +01:00 [DBG] Connection id "0HMIKVPQ2REM9" accepted.
+2022-06-23 10:55:07.537 +01:00 [DBG] Connection id "0HMIKVPQ2REM9" started.
+2022-06-23 10:55:07.703 +01:00 [DBG] Connection 0HMIKVPQ2REM9 established using the following protocol: "Tls13"
+2022-06-23 10:55:07.602 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 10:55:07.790 +01:00 [DBG] Connection id "0HMIKVPQ2REM8" stopped.
+2022-06-23 10:55:07.795 +01:00 [DBG] Connection id "0HMIKVPQ2REM8" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 10:55:07.903 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - -
+2022-06-23 10:55:07.904 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 10:55:07.971 +01:00 [DBG] 1 candidate(s) found for the request path '/'
+2022-06-23 10:55:07.972 +01:00 [DBG] Request matched endpoint '/ HTTP: GET'
+2022-06-23 10:55:08.057 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:55:08.070 +01:00 [INF] Executing endpoint '/ HTTP: GET'
+2022-06-23 10:55:08.097 +01:00 [INF] Executed endpoint '/ HTTP: GET'
+2022-06-23 10:55:08.106 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/ - - - 200 - - 215.7173ms
+2022-06-23 10:55:08.498 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/favicon.ico - -
+2022-06-23 10:55:08.499 +01:00 [DBG] No candidates found for the request path '/favicon.ico'
+2022-06-23 10:55:08.499 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:08.501 +01:00 [DBG] The request path  does not match the path filter
+2022-06-23 10:55:08.504 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/favicon.ico - - - 404 0 - 6.2967ms
+2022-06-23 10:55:11.634 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger - -
+2022-06-23 10:55:11.634 +01:00 [DBG] No candidates found for the request path '/swagger'
+2022-06-23 10:55:11.634 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:11.637 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger - - - 301 0 - 3.5365ms
+2022-06-23 10:55:11.648 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 10:55:11.648 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 10:55:11.648 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:11.770 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 122.6815ms
+2022-06-23 10:55:11.853 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 10:55:11.854 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 10:55:11.854 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:11.878 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - -
+2022-06-23 10:55:11.878 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2022-06-23 10:55:11.878 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:11.878 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - -
+2022-06-23 10:55:11.879 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2022-06-23 10:55:11.879 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:11.916 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 10:55:11.933 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 81.5586ms
+2022-06-23 10:55:12.016 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-06-23 10:55:12.017 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 138.3638ms
+2022-06-23 10:55:12.019 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-06-23 10:55:12.029 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 151.7108ms
+2022-06-23 10:55:12.280 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 10:55:12.280 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 10:55:12.280 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 10:55:12.562 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 282.2795ms
+2022-06-23 10:55:28.373 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109
+2022-06-23 10:55:28.376 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:55:28.382 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 10:55:28.383 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:55:28.383 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 10:55:28.384 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 10:55:28.423 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 10:55:28.426 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 10:55:28.426 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 10:55:28.427 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 10:55:28.427 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 10:55:28.428 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 10:55:28.431 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:55:28.434 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 10:55:28.466 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:55:28.469 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 10:55:28.470 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:55:28.470 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:55:28.471 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 10:55:28.473 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 10:55:28.478 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:55:28.482 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 10:55:28.485 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:55:28.486 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 10:55:28.503 +01:00 [DBG] Connection id "0HMIKVPQ2REM9", Request id "0HMIKVPQ2REM9:00000011": started reading request body.
+2022-06-23 10:55:28.504 +01:00 [DBG] Connection id "0HMIKVPQ2REM9", Request id "0HMIKVPQ2REM9:00000011": done reading request body.
+2022-06-23 10:55:28.835 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:55:28.835 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 10:55:28.835 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 10:55:28.849 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:03:40.605 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 11:03:40.853 +01:00 [DBG] Hosting starting
+2022-06-23 11:03:41.222 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 11:03:41.332 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 11:03:41.332 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 11:03:41.332 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 11:03:41.333 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 11:03:41.334 +01:00 [INF] Hosting environment: Development
+2022-06-23 11:03:41.334 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 11:03:41.334 +01:00 [DBG] Hosting started
+2022-06-23 11:03:41.676 +01:00 [DBG] Connection id "0HMIKVUJBBPDV" accepted.
+2022-06-23 11:03:41.679 +01:00 [DBG] Connection id "0HMIKVUJBBPDV" started.
+2022-06-23 11:03:41.736 +01:00 [DBG] Connection id "0HMIKVUJBBPDV" received FIN.
+2022-06-23 11:03:41.745 +01:00 [DBG] Connection id "0HMIKVUJBBPE0" accepted.
+2022-06-23 11:03:41.747 +01:00 [DBG] Connection id "0HMIKVUJBBPE0" started.
+2022-06-23 11:03:41.846 +01:00 [DBG] Connection 0HMIKVUJBBPE0 established using the following protocol: "Tls13"
+2022-06-23 11:03:41.793 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 11:03:41.884 +01:00 [DBG] Connection id "0HMIKVUJBBPDV" stopped.
+2022-06-23 11:03:41.887 +01:00 [DBG] Connection id "0HMIKVUJBBPDV" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 11:03:41.985 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - -
+2022-06-23 11:03:41.987 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 11:03:42.037 +01:00 [DBG] 1 candidate(s) found for the request path '/'
+2022-06-23 11:03:42.039 +01:00 [DBG] Request matched endpoint '/ HTTP: GET'
+2022-06-23 11:03:42.105 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:03:42.109 +01:00 [INF] Executing endpoint '/ HTTP: GET'
+2022-06-23 11:03:42.123 +01:00 [INF] Executed endpoint '/ HTTP: GET'
+2022-06-23 11:03:42.130 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/ - - - 200 - - 150.0629ms
+2022-06-23 11:03:46.632 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger - -
+2022-06-23 11:03:46.633 +01:00 [DBG] No candidates found for the request path '/swagger'
+2022-06-23 11:03:46.634 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:03:46.639 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger - - - 301 0 - 6.9343ms
+2022-06-23 11:03:46.652 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 11:03:46.653 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 11:03:46.653 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:03:46.754 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 101.8273ms
+2022-06-23 11:03:46.815 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 11:03:46.816 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 11:03:46.816 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:03:46.818 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - -
+2022-06-23 11:03:46.818 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2022-06-23 11:03:46.818 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:03:46.818 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - -
+2022-06-23 11:03:46.819 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2022-06-23 11:03:46.819 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:03:46.840 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 11:03:46.844 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 28.9817ms
+2022-06-23 11:03:46.945 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-06-23 11:03:46.990 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 172.3401ms
+2022-06-23 11:03:47.019 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-06-23 11:03:47.022 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 202.6187ms
+2022-06-23 11:03:47.289 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 11:03:47.289 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 11:03:47.290 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:03:47.517 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 228.6866ms
+2022-06-23 11:04:23.006 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109
+2022-06-23 11:04:23.013 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:04:23.032 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:04:23.034 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:04:23.034 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:04:23.034 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:04:23.073 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 11:04:23.075 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 11:04:23.075 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 11:04:23.076 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 11:04:23.077 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 11:04:23.078 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 11:04:23.080 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:04:23.085 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:04:23.109 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:04:23.114 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 11:04:23.117 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:04:23.118 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:04:23.118 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:04:23.122 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:04:23.124 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:04:23.126 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 11:04:23.128 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:04:23.129 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:04:23.142 +01:00 [DBG] Connection id "0HMIKVUJBBPE0", Request id "0HMIKVUJBBPE0:0000000F": started reading request body.
+2022-06-23 11:04:23.143 +01:00 [DBG] Connection id "0HMIKVUJBBPE0", Request id "0HMIKVUJBBPE0:0000000F": done reading request body.
+2022-06-23 11:04:23.442 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:04:23.443 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:04:23.443 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:04:23.458 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:04:27.599 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 11:04:27.617 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 11:04:27.623 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 11:04:27.624 +01:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2022-06-23 11:04:27.666 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 4551.8719ms
+2022-06-23 11:04:27.667 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:04:27.668 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109 - 400 - text/plain;+charset=utf-8 4661.5012ms
+2022-06-23 11:14:47.549 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 11:14:47.725 +01:00 [DBG] Hosting starting
+2022-06-23 11:14:48.067 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 11:14:48.183 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 11:14:48.184 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 11:14:48.184 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 11:14:48.184 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 11:14:48.191 +01:00 [INF] Hosting environment: Development
+2022-06-23 11:14:48.191 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 11:14:48.192 +01:00 [DBG] Hosting started
+2022-06-23 11:14:48.545 +01:00 [DBG] Connection id "0HMIL04Q31QUF" accepted.
+2022-06-23 11:14:48.554 +01:00 [DBG] Connection id "0HMIL04Q31QUF" started.
+2022-06-23 11:14:48.709 +01:00 [DBG] Connection id "0HMIL04Q31QUG" accepted.
+2022-06-23 11:14:48.710 +01:00 [DBG] Connection id "0HMIL04Q31QUG" started.
+2022-06-23 11:14:48.714 +01:00 [DBG] Connection id "0HMIL04Q31QUF" received FIN.
+2022-06-23 11:14:48.758 +01:00 [DBG] Connection 0HMIL04Q31QUG established using the following protocol: "Tls13"
+2022-06-23 11:14:48.742 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 11:14:48.867 +01:00 [DBG] Connection id "0HMIL04Q31QUF" stopped.
+2022-06-23 11:14:48.869 +01:00 [DBG] Connection id "0HMIL04Q31QUF" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 11:14:48.974 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - -
+2022-06-23 11:14:48.977 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 11:14:49.033 +01:00 [DBG] 1 candidate(s) found for the request path '/'
+2022-06-23 11:14:49.035 +01:00 [DBG] Request matched endpoint '/ HTTP: GET'
+2022-06-23 11:14:49.105 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:14:49.113 +01:00 [INF] Executing endpoint '/ HTTP: GET'
+2022-06-23 11:14:49.136 +01:00 [INF] Executed endpoint '/ HTTP: GET'
+2022-06-23 11:14:49.150 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/ - - - 200 - - 183.1859ms
+2022-06-23 11:14:51.581 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/index.html - -
+2022-06-23 11:14:51.582 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2022-06-23 11:14:51.582 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:14:51.721 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 140.1650ms
+2022-06-23 11:14:51.826 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - -
+2022-06-23 11:14:51.826 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2022-06-23 11:14:51.827 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:14:51.852 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-06-23 11:14:51.853 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/swagger-ui.css - - - 200 143632 text/css 26.3237ms
+2022-06-23 11:14:52.234 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - -
+2022-06-23 11:14:52.234 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2022-06-23 11:14:52.234 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:14:52.269 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - -
+2022-06-23 11:14:52.269 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2022-06-23 11:14:52.269 +01:00 [DBG] Request did not match any endpoints
+2022-06-23 11:14:52.269 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-06-23 11:14:52.270 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 1.0472ms
+2022-06-23 11:14:52.486 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 253.8580ms
+2022-06-23 11:15:11.957 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109
+2022-06-23 11:15:11.965 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:15:11.971 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:15:11.971 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:15:11.971 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:15:11.972 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:15:12.012 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 11:15:12.014 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 11:15:12.014 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 11:15:12.015 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 11:15:12.016 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 11:15:12.016 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 11:15:12.018 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:15:12.021 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:15:12.053 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:15:12.059 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 11:15:12.063 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:15:12.063 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:15:12.063 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:15:12.067 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:15:12.071 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:15:12.074 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 11:15:12.078 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:15:12.080 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:15:12.100 +01:00 [DBG] Connection id "0HMIL04Q31QUG", Request id "0HMIL04Q31QUG:0000000B": started reading request body.
+2022-06-23 11:15:12.101 +01:00 [DBG] Connection id "0HMIL04Q31QUG", Request id "0HMIL04Q31QUG:0000000B": done reading request body.
+2022-06-23 11:15:12.446 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:15:12.446 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:15:12.446 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:15:12.458 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:15:34.662 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 11:15:34.667 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 11:15:34.675 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter' and content type 'text/plain' to write the response.
+2022-06-23 11:15:34.676 +01:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2022-06-23 11:15:34.691 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 22661.9713ms
+2022-06-23 11:15:34.693 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:15:34.693 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109 - 400 - text/plain;+charset=utf-8 22736.2040ms
+2022-06-23 11:24:40.947 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 11:24:41.115 +01:00 [DBG] Hosting starting
+2022-06-23 11:24:41.409 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 11:24:41.525 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 11:24:41.525 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 11:24:41.526 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 11:24:41.526 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 11:24:41.527 +01:00 [INF] Hosting environment: Development
+2022-06-23 11:24:41.527 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 11:24:41.527 +01:00 [DBG] Hosting started
+2022-06-23 11:24:41.894 +01:00 [DBG] Connection id "0HMIL0AATML4B" accepted.
+2022-06-23 11:24:41.897 +01:00 [DBG] Connection id "0HMIL0AATML4B" started.
+2022-06-23 11:24:42.009 +01:00 [DBG] Connection id "0HMIL0AATML4B" received FIN.
+2022-06-23 11:24:42.021 +01:00 [DBG] Connection id "0HMIL0AATML4C" accepted.
+2022-06-23 11:24:42.024 +01:00 [DBG] Connection id "0HMIL0AATML4C" started.
+2022-06-23 11:24:42.090 +01:00 [DBG] Connection 0HMIL0AATML4C established using the following protocol: "Tls13"
+2022-06-23 11:24:42.096 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 11:24:42.200 +01:00 [DBG] Connection id "0HMIL0AATML4B" stopped.
+2022-06-23 11:24:42.204 +01:00 [DBG] Connection id "0HMIL0AATML4B" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 11:24:42.309 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - -
+2022-06-23 11:24:42.311 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 11:24:42.363 +01:00 [DBG] 1 candidate(s) found for the request path '/'
+2022-06-23 11:24:42.365 +01:00 [DBG] Request matched endpoint '/ HTTP: GET'
+2022-06-23 11:24:42.430 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:24:42.434 +01:00 [INF] Executing endpoint '/ HTTP: GET'
+2022-06-23 11:24:42.453 +01:00 [INF] Executed endpoint '/ HTTP: GET'
+2022-06-23 11:24:42.463 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/ - - - 200 - - 162.4725ms
+2022-06-23 11:24:46.800 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109
+2022-06-23 11:24:46.805 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:24:46.815 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:24:46.816 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:24:46.816 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:24:46.818 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:24:46.857 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 11:24:46.859 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 11:24:46.859 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 11:24:46.860 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 11:24:46.861 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 11:24:46.861 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 11:24:46.863 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:24:46.865 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:24:46.886 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:24:46.892 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 11:24:46.893 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:24:46.894 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:24:46.894 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:24:46.897 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:24:46.900 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:24:46.902 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 11:24:46.904 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:24:46.907 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:24:46.919 +01:00 [DBG] Connection id "0HMIL0AATML4C", Request id "0HMIL0AATML4C:00000003": started reading request body.
+2022-06-23 11:24:46.920 +01:00 [DBG] Connection id "0HMIL0AATML4C", Request id "0HMIL0AATML4C:00000003": done reading request body.
+2022-06-23 11:24:47.239 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:24:47.240 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:24:47.240 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:24:47.253 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:25:12.028 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 25158.5259ms
+2022-06-23 11:25:12.030 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:25:12.031 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at maker_checker_v1.Controllers.ValidationController.setValidation(Int32 serviceTypeId, ValidationForCreationDTO validation) in /home/mehdi/Documents/stage/proxym/maker-checker-v1/models/DTO/ValidationController.cs:line 39
+   at lambda_method2(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-06-23 11:25:12.042 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 109 - 500 - text/plain;+charset=utf-8 25241.7729ms
+2022-06-23 11:26:12.136 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2022-06-23 11:26:12.287 +01:00 [DBG] Hosting starting
+2022-06-23 11:26:12.583 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: CC9E9009553DDD8D0B2987AF0ADCB76AA1A2234C)
+2022-06-23 11:26:12.705 +01:00 [INF] Now listening on: https://localhost:5000
+2022-06-23 11:26:12.705 +01:00 [INF] Now listening on: http://localhost:5156
+2022-06-23 11:26:12.705 +01:00 [DBG] Loaded hosting startup assembly maker-checker-v1
+2022-06-23 11:26:12.705 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 11:26:12.706 +01:00 [INF] Hosting environment: Development
+2022-06-23 11:26:12.706 +01:00 [INF] Content root path: /home/mehdi/Documents/stage/proxym/maker-checker-v1/
+2022-06-23 11:26:12.706 +01:00 [DBG] Hosting started
+2022-06-23 11:26:13.021 +01:00 [DBG] Connection id "0HMIL0B62PNAO" accepted.
+2022-06-23 11:26:13.023 +01:00 [DBG] Connection id "0HMIL0B62PNAO" started.
+2022-06-23 11:26:13.092 +01:00 [DBG] Connection id "0HMIL0B62PNAO" received FIN.
+2022-06-23 11:26:13.098 +01:00 [DBG] Connection id "0HMIL0B62PNAP" accepted.
+2022-06-23 11:26:13.100 +01:00 [DBG] Connection id "0HMIL0B62PNAP" started.
+2022-06-23 11:26:13.222 +01:00 [DBG] Connection 0HMIL0B62PNAP established using the following protocol: "Tls13"
+2022-06-23 11:26:13.129 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
+ ---> Interop+OpenSsl+SslException: SSL Handshake failed with OpenSSL error - SSL_ERROR_SSL.
+ ---> Interop+Crypto+OpenSslCryptographicException: error:14094416:SSL routines:ssl3_read_bytes:sslv3 alert certificate unknown
+   --- End of inner exception stack trace ---
+   at Interop.OpenSsl.DoSslHandshake(SafeSslHandle context, ReadOnlySpan`1 input, Byte[]& sendBuf, Int32& sendCount)
+   at System.Net.Security.SslStreamPal.HandshakeInternal(SafeFreeCredentials credential, SafeDeleteSslContext& context, ReadOnlySpan`1 inputBuffer, Byte[]& outputBuffer, SslAuthenticationOptions sslAuthenticationOptions)
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2022-06-23 11:26:13.235 +01:00 [DBG] Connection id "0HMIL0B62PNAO" stopped.
+2022-06-23 11:26:13.238 +01:00 [DBG] Connection id "0HMIL0B62PNAO" sending FIN because: "The Socket transport's send loop completed gracefully."
+2022-06-23 11:26:13.312 +01:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - -
+2022-06-23 11:26:13.314 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2022-06-23 11:26:13.355 +01:00 [DBG] 1 candidate(s) found for the request path '/'
+2022-06-23 11:26:13.356 +01:00 [DBG] Request matched endpoint '/ HTTP: GET'
+2022-06-23 11:26:13.412 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:26:13.417 +01:00 [INF] Executing endpoint '/ HTTP: GET'
+2022-06-23 11:26:13.432 +01:00 [INF] Executed endpoint '/ HTTP: GET'
+2022-06-23 11:26:13.439 +01:00 [INF] Request finished HTTP/2 GET https://localhost:5000/ - - - 200 - - 131.2457ms
+2022-06-23 11:26:28.078 +01:00 [INF] Request starting HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 195
+2022-06-23 11:26:28.083 +01:00 [DBG] 1 candidate(s) found for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:26:28.094 +01:00 [DBG] Endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)' with route pattern 'api/ServiceType/{serviceTypeId}/Validation' is valid for the request path '/api/ServiceType/1/Validation'
+2022-06-23 11:26:28.094 +01:00 [DBG] Request matched endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:26:28.095 +01:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2022-06-23 11:26:28.095 +01:00 [INF] Executing endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:26:28.137 +01:00 [INF] Route matched with {action = "setValidation", controller = "Validation"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[maker_checker_v1.models.entities.Validation] setValidation(Int32, maker_checker_v1.Controllers.ValidationForCreationDTO) on controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1).
+2022-06-23 11:26:28.139 +01:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2022-06-23 11:26:28.139 +01:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2022-06-23 11:26:28.139 +01:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2022-06-23 11:26:28.140 +01:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2022-06-23 11:26:28.140 +01:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2022-06-23 11:26:28.141 +01:00 [DBG] Executing controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:26:28.143 +01:00 [DBG] Executed controller factory for controller maker_checker_v1.Controllers.ValidationController (maker-checker-v1)
+2022-06-23 11:26:28.165 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:26:28.170 +01:00 [DBG] Attempting to bind parameter 'serviceTypeId' of type 'System.Int32' using the name 'serviceTypeId' in request data ...
+2022-06-23 11:26:28.172 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:26:28.172 +01:00 [DBG] Done attempting to bind parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:26:28.172 +01:00 [DBG] Attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32' ...
+2022-06-23 11:26:28.175 +01:00 [DBG] Done attempting to validate the bound parameter 'serviceTypeId' of type 'System.Int32'.
+2022-06-23 11:26:28.178 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:26:28.180 +01:00 [DBG] Attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' using the name '' in request data ...
+2022-06-23 11:26:28.184 +01:00 [DBG] Rejected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonPatchInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:26:28.186 +01:00 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonInputFormatter' for content type 'application/json-patch+json'.
+2022-06-23 11:26:28.201 +01:00 [DBG] Connection id "0HMIL0B62PNAP", Request id "0HMIL0B62PNAP:00000003": started reading request body.
+2022-06-23 11:26:28.202 +01:00 [DBG] Connection id "0HMIL0B62PNAP", Request id "0HMIL0B62PNAP:00000003": done reading request body.
+2022-06-23 11:26:28.511 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:26:28.512 +01:00 [DBG] Done attempting to bind parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:26:28.512 +01:00 [DBG] Attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO' ...
+2022-06-23 11:26:28.526 +01:00 [DBG] Done attempting to validate the bound parameter 'validation' of type 'maker_checker_v1.Controllers.ValidationForCreationDTO'.
+2022-06-23 11:27:19.161 +01:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter"]
+2022-06-23 11:27:19.170 +01:00 [DBG] Attempting to select an output formatter based on Accept header '["text/plain"]'.
+2022-06-23 11:27:19.170 +01:00 [DBG] Could not find an output formatter based on content negotiation. Accepted types were (["text/plain"])
+2022-06-23 11:27:19.171 +01:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2022-06-23 11:27:19.171 +01:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2022-06-23 11:27:19.172 +01:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.NewtonsoftJsonOutputFormatter' and content type 'application/json' to write the response.
+2022-06-23 11:27:19.173 +01:00 [INF] Executing OkObjectResult, writing value of type 'maker_checker_v1.models.entities.Validation'.
+2022-06-23 11:27:19.293 +01:00 [INF] Executed action maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1) in 51145.0278ms
+2022-06-23 11:27:19.294 +01:00 [INF] Executed endpoint 'maker_checker_v1.Controllers.ValidationController.setValidation (maker-checker-v1)'
+2022-06-23 11:27:19.295 +01:00 [INF] Request finished HTTP/2 PUT https://localhost:5000/api/ServiceType/1/Validation application/json-patch+json 195 - 200 196 application/json;+charset=utf-8 51216.4400ms
