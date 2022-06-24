@@ -1,3 +1,4 @@
+using maker_checker_v1.data;
 using maker_checker_v1.models.entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,12 @@ namespace maker_checker_v1.Controllers
     public class ServiceTypeController : ControllerBase
     {
         private readonly RequestDataStore _requestDataStore;
-        public ServiceTypeController(RequestDataStore requestDataStore)
+        private readonly RequestContext _requestContext;
+
+        public ServiceTypeController(RequestDataStore requestDataStore, RequestContext requestContext)
         {
             _requestDataStore = requestDataStore;
+            _requestContext = requestContext;
         }
         [HttpGet]
         public ActionResult<IEnumerable<ServiceType>> Get()
@@ -45,5 +49,6 @@ namespace maker_checker_v1.Controllers
                 serviceTypeId = serviceTypeToCreate.Id
             }, serviceTypeToCreate);
         }
+
     }
 }

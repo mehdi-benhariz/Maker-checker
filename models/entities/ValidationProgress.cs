@@ -1,24 +1,29 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace maker_checker_v1.models.entities
 {
     public class ValidationProgress
     {
-        public static int nbr = 0;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int requestId { get; set; }
-        public List<Rule> rules = new List<Rule>();
+        public int RequestId { get; set; }
 
-        public bool isValidated
+        public Request Request { get; set; }
+        public List<Rule> Rules = new List<Rule>();
+
+        public bool IsValidated
         {
             get
             {
-                return (rules.Count == rules.Count(r => r.nbr == 0));
+                return (Rules.Count == Rules.Count(r => r.nbr == 0));
             }
         }
 
         public ValidationProgress(int requestId)
         {
-            this.Id = nbr++;
-            this.requestId = requestId;
+            this.RequestId = requestId;
         }
         // initRules();
 

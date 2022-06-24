@@ -43,7 +43,7 @@ namespace maker_checker_v1.Controllers
             };
             requestToCreate.ValidationProgress = new ValidationProgress(requestToCreate.Id)
             {
-                rules = serviceType.validation.rules
+                Rules = serviceType.Validation.Rules
             };
 
 
@@ -66,10 +66,10 @@ namespace maker_checker_v1.Controllers
             var request = _requestDataStore.Requests.Find(r => r.Id == requestId);
             if (request == null)
                 return NotFound("Request not found");
-            if (!request.ValidationProgress.isValidated)
+            if (!request.ValidationProgress.IsValidated)
             {
                 var validationProgress = request.ValidationProgress;
-                var rule = validationProgress.rules.First(r => r.role.Name == role);
+                var rule = validationProgress.Rules.First(r => r.Role.Name == role);
                 if (rule == null)
                     return NotFound("Rule not found");
                 if (rule.nbr == 0)

@@ -12,12 +12,19 @@ namespace maker_checker_v1
             //seed data
             ServiceTypes.Add(new ServiceType("international")
             {
-                validation = new Validation(ServiceTypes.Count)
+                Validation = new Validation(ServiceTypes.Count)
                 {
-                    rules = new List<Rule>{
-                        new Rule("A",2),
-                        new Rule("B",2),
-                        new Rule("C")
+                    Rules = new List<Rule>{
+                        new Rule(2){
+                            Role = new Role("A")
+                        },
+                        new Rule(2){
+                          Role=  new Role("B"),
+                        },
+
+                        new Rule(){
+                            Role =new Role("C")
+                        }
                     }
                 }
 
@@ -25,12 +32,18 @@ namespace maker_checker_v1
 
             ServiceTypes.Add(new ServiceType("intrabank")
             {
-                validation = new Validation(ServiceTypes.Count)
+                Validation = new Validation(ServiceTypes.Count)
                 {
-                    rules = new List<Rule>{
-                        new Rule("A",1),
-                        new Rule("B",2),
-                        new Rule("C",2)
+                    Rules = new List<Rule>{
+                        new Rule(1){
+                        Role =new Role( "A"),
+                        },
+                        new Rule(2){
+                        Role =new Role("B"),
+                        },
+                        new Rule(2){
+                        Role= new Role("C")
+                        }
                     }
                 }
             }
