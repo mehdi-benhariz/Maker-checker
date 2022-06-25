@@ -46,6 +46,7 @@ namespace maker_checker_v1.Controllers
                 return BadRequest("error while saving Role");
             return Ok();
         }
+        
         [HttpDelete("{roleId}")]
         public async Task<ActionResult<Role>> DeleteRole(int roleId)
         {

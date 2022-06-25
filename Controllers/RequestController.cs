@@ -1,3 +1,6 @@
+using AutoMapper;
+using FluentValidation;
+using maker_checker_v1.data.Validators;
 using maker_checker_v1.models.DTO;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
@@ -11,11 +14,16 @@ namespace maker_checker_v1.Controllers
     {
         private readonly RequestRepository _requestRepository;
         private readonly ServiceTypeRepository _serviceTypeRepository;
+        private readonly IMapper _mapper;
+        private readonly RequestValidator _validator;
 
-        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository)
+        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper)
         {
             _requestRepository = requestRepository ?? throw new System.ArgumentNullException(nameof(requestRepository));
             _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(serviceTypeRepository));
+            _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
+            _validator = new RequestValidator();
+
         }
 
         //impliment search and filter (maybe paggination)
@@ -41,7 +49,12 @@ namespace maker_checker_v1.Controllers
             var serviceType = await _serviceTypeRepository.getServiceType(request.ServiceTypeId);
             if (serviceType == null)
                 return NotFound("Service type not found");
-            var requestToCreate = new Request(request.Name, request.ServiceTypeId, request.Amount);
+
+            // var requestToCreate = new Request(request.Name, request.ServiceTypeId, request.Amount);
+            var requestToCreate = _mapper.Map<Request>(request);
+            var validationResult = _validator.Validate(requestToCreate);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
             var ValiProgressToBeAdded = new ValidationProgress(requestToCreate.Id)
             {
                 Rules = serviceType.Validation.Rules ?? new List<Rule>()

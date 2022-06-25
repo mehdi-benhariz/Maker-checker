@@ -1,4 +1,6 @@
+using AutoMapper;
 using maker_checker_v1.data;
+using maker_checker_v1.data.Validators;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +13,14 @@ namespace maker_checker_v1.Controllers
     public class ServiceTypeController : ControllerBase
     {
         private readonly ServiceTypeRepository _serviceTypeRepository;
-        private readonly RequestContext _requestContext;
+        private readonly IMapper _mapper;
+        private readonly ServiceTypeValidator _validator;
 
-        public ServiceTypeController(RequestContext requestContext, ServiceTypeRepository serviceTypeRepository)
+        public ServiceTypeController(ServiceTypeRepository serviceTypeRepository, IMapper mapper)
         {
-            _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(requestContext));
-            _requestContext = requestContext;
+            _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(ServiceTypeRepository));
+            _mapper = mapper ?? throw new System.ArgumentNullException(nameof(IMapper));
+            _validator = new ServiceTypeValidator();
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceType>>> Get()
@@ -37,13 +41,15 @@ namespace maker_checker_v1.Controllers
         public async Task<ActionResult<ServiceType>> Post(ServiceTypeForCreationDTO serviceType)
         {
             //validate service type
-            if (serviceType.Name == "")
-                return BadRequest("Service type name cannot be empty");
+            var serviceTypeToCreate = _mapper.Map<ServiceType>(serviceType);
+            var validationResult = _validator.Validate(serviceTypeToCreate);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
 
             if (await _serviceTypeRepository.Exists(serviceType.Name))
                 return BadRequest("Service type already exists");
 
-            var serviceTypeToCreate = new ServiceType(serviceType.Name);
+            // var serviceTypeToCreate = new ServiceType(serviceType.Name);
             _serviceTypeRepository.Add(serviceTypeToCreate);
             if (!await _serviceTypeRepository.SaveChangesAsync())
                 return BadRequest("Error creating service type");
@@ -60,9 +66,9 @@ namespace maker_checker_v1.Controllers
             if (serviceType == null)
                 return NotFound("Service type not found");
             _serviceTypeRepository.Remove(serviceType);
-            if (await _serviceTypeRepository.SaveChangesAsync())
-                return Ok(serviceType);
-            return BadRequest("Error deleting service type");
+            if (!await _serviceTypeRepository.SaveChangesAsync())
+                return BadRequest("Error deleting service type");
+            return Ok(serviceType);
         }
 
     }

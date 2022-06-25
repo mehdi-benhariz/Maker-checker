@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace maker_checker_v1.models.entities
 {
+
     public class Request
     {
         // [Key]
