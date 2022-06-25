@@ -12,7 +12,7 @@ namespace maker_checker_v1.data
         public RequestContext(DbContextOptions<RequestContext> options)
             : base(options)
         {
-            // Database.SetInitializer<RequestContext>(new CreateDatabaseIfNotExists<RequestContext>());
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

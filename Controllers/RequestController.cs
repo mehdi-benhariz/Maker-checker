@@ -5,6 +5,7 @@ using maker_checker_v1.models.DTO;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace maker_checker_v1.Controllers
 {
@@ -34,7 +35,7 @@ namespace maker_checker_v1.Controllers
             return Ok(requests);
 
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetRequest")]
         public async Task<ActionResult<Request>> GetAsync(int id)
         {
             var request = await _requestRepository.getRequest(id);
@@ -55,20 +56,23 @@ namespace maker_checker_v1.Controllers
             var validationResult = _validator.Validate(requestToCreate);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
-            var ValiProgressToBeAdded = new ValidationProgress(requestToCreate.Id)
+            ValidationProgress ValiProgressToBeAdded = new ValidationProgress(requestToCreate.Id)
             {
-                Rules = serviceType.Validation.Rules ?? new List<Rule>()
+                Rules = serviceType?.Validation?.Rules ?? new List<Rule>()
             };
-            requestToCreate.ValidationProgressId = ValiProgressToBeAdded.Id;
-
+            requestToCreate.ValidationProgress = ValiProgressToBeAdded;
 
             _requestRepository.Add(requestToCreate);
             if (!await _requestRepository.SaveChangesAsync())
                 return BadRequest("Error creating request");
-            return CreatedAtAction(nameof(Get), new
+            // return Ok(requestToCreate);
+
+            return CreatedAtRoute("GetRequest", new
             {
                 id = requestToCreate.Id
             }, requestToCreate);
+
+
         }
         /// <summary>
         /// User with role:role can validate request with id:requestId

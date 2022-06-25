@@ -34,10 +34,7 @@ namespace maker_checker_v1.Controllers
                 return NotFound("Service type not found");
 
             var serviceType = await _serviceTypeRepository.getServiceType(serviceTypeId);
-            //convert the validation to a validation entity
 
-            // serviceType.ValidationId = validation;
-            // _validationRepository.Add(validation);
             var validationToCreate = new Validation(serviceTypeId)
             {
                 Rules = validation.Rules,

@@ -28,12 +28,16 @@ namespace maker_checker_v1.Services
         }
         public async Task<Request?> getRequest(int requestId)
         {
-            var request = await _context.Set<Request>().FindAsync(requestId);
+            var request = await _context.Set<Request>().Include(r => r.ServiceType).IgnoreAutoIncludes().FirstOrDefaultAsync(r => r.Id == requestId);
             return request;
         }
         public async void Add(Request request)
         {
             await _context.Set<Request>().AddAsync(request);
+            // await _context.Set<ValidationProgress>().AddAsync(new ValidationProgress(request.Id)
+            // {
+            //     Rules = request?.ServiceType?.Validation?.Rules ?? new List<Rule>()
+            // });
         }
         public async Task<Boolean> Exits(int requestId)
         {
