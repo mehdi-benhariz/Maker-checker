@@ -1,5 +1,6 @@
 using maker_checker_v1.models.DTO;
 using maker_checker_v1.models.entities;
+using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace maker_checker_v1.Controllers
@@ -8,47 +9,49 @@ namespace maker_checker_v1.Controllers
     [ApiController]
     public class RequestController : ControllerBase
     {
-        private readonly RequestDataStore _requestDataStore;
+        private readonly RequestRepository _requestRepository;
+        private readonly ServiceTypeRepository _serviceTypeRepository;
 
-        public RequestController(RequestDataStore requestDataStore)
+        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository)
         {
-            _requestDataStore = requestDataStore;
+            _requestRepository = requestRepository ?? throw new System.ArgumentNullException(nameof(requestRepository));
+            _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(serviceTypeRepository));
         }
+
+        //impliment search and filter (maybe paggination)
         [HttpGet]
-        public ActionResult<IEnumerable<Request>> Get()
+        public async Task<ActionResult<IEnumerable<Request>>> Get()
         {
-            return _requestDataStore.Requests;
+            var requests = await _requestRepository.getRequests();
+            return Ok(requests);
+
         }
         [HttpGet("{id}")]
-        public ActionResult<Request> Get(int id)
+        public async Task<ActionResult<Request>> GetAsync(int id)
         {
-            var request = _requestDataStore.Requests.Find(r => r.Id == id);
+            var request = await _requestRepository.getRequest(id);
             if (request == null)
-            {
                 return NotFound("Request not found");
-            }
-            return request;
+            return Ok(request);
         }
         [HttpPost]
-        public ActionResult<Request> SubmitRequest(RequestForCreationDTO request)
+        public async Task<ActionResult<Request>> SubmitRequest(RequestForCreationDTO request)
         {
             //validate request 
-            var serviceType = _requestDataStore.ServiceTypes.FirstOrDefault(s => s.Id == request.serviceTypeId);
-            Console.WriteLine($"serviceType: {serviceType}");
+            var serviceType = await _serviceTypeRepository.getServiceType(request.ServiceTypeId);
             if (serviceType == null)
                 return NotFound("Service type not found");
-            var requestToCreate = new Request(request.Name, request.serviceTypeId, request.Amount)
+            var requestToCreate = new Request(request.Name, request.ServiceTypeId, request.Amount);
+            var ValiProgressToBeAdded = new ValidationProgress(requestToCreate.Id)
             {
-                ServiceType = serviceType,
+                Rules = serviceType.Validation.Rules ?? new List<Rule>()
             };
-            requestToCreate.ValidationProgress = new ValidationProgress(requestToCreate.Id)
-            {
-                Rules = serviceType.Validation.Rules
-            };
+            requestToCreate.ValidationProgressId = ValiProgressToBeAdded.Id;
 
 
-
-            _requestDataStore.Requests.Add(requestToCreate);
+            _requestRepository.Add(requestToCreate);
+            if (!await _requestRepository.SaveChangesAsync())
+                return BadRequest("Error creating request");
             return CreatedAtAction(nameof(Get), new
             {
                 id = requestToCreate.Id
@@ -61,23 +64,28 @@ namespace maker_checker_v1.Controllers
         /// <body name="role"></body>
         /// <returns></returns>
         [HttpPut("validate/{requestId}")]
-        public ActionResult<Request> validateRequest(int requestId, [FromBody] string role)
+        public async Task<ActionResult<Request>> validateRequest(int requestId, [FromBody] string role)
         {
-            var request = _requestDataStore.Requests.Find(r => r.Id == requestId);
+            var request = await _requestRepository.getRequest(requestId);
             if (request == null)
                 return NotFound("Request not found");
+
             if (!request.ValidationProgress.IsValidated)
             {
                 var validationProgress = request.ValidationProgress;
                 var rule = validationProgress.Rules.First(r => r.Role.Name == role);
                 if (rule == null)
                     return NotFound("Rule not found");
-                if (rule.nbr == 0)
+                var serviceType = await _serviceTypeRepository.getServiceType(request.ServiceTypeId);
+
+                var ruleValidationNbr = serviceType?.Validation?.Rules.First(r => r.Role.Name == role).nbr;
+                if (rule.nbr == ruleValidationNbr)
                     return BadRequest("Rule already validated");
                 else
-                    rule.nbr--;
+                    rule.nbr++;
                 //todo :add event listner to update validation progress
-
+                if (!await _requestRepository.SaveChangesAsync())
+                    return BadRequest("Error validating request");
                 return Ok(request);
             }
             return BadRequest("Request already validated");

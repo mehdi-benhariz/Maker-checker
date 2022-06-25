@@ -1,5 +1,6 @@
 using maker_checker_v1.data;
 using maker_checker_v1.models.entities;
+using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,19 +10,21 @@ namespace maker_checker_v1.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
+        private readonly RoleRepository _roleRepository;
         private readonly RequestContext _requestContext;
 
-        public RoleController(RequestContext requestContext)
+        public RoleController(RequestContext requestContext, RoleRepository roleRepository)
         {
+            _roleRepository = roleRepository;
             _requestContext = requestContext;
-
         }
+
         [HttpGet]
         public async Task<IEnumerable<Role>> Get()
         {
             //todo:use a generic repository to get all roles
 
-            var roles = await _requestContext.Set<Role>().ToListAsync();
+            var roles = await _roleRepository.getRoles();
             return roles;
         }
         [HttpGet("{roleId}")]

@@ -11,7 +11,7 @@ namespace maker_checker_v1.models.entities
         [Required(ErrorMessage = "Role name is required")]
         [MaxLength(20, ErrorMessage = "Role name cannot be longer than 20 characters")]
         public string Name { get; set; }
-        public List<Rule> Rules { get; set; }
+        public List<Rule> Rules { get; set; } = new List<Rule>();
         public Role(string name)
         {
             this.Name = name;

@@ -1,6 +1,8 @@
 using maker_checker_v1.data;
 using maker_checker_v1.models.entities;
+using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1.Controllers
 {
@@ -8,46 +10,59 @@ namespace maker_checker_v1.Controllers
     [ApiController]
     public class ServiceTypeController : ControllerBase
     {
-        private readonly RequestDataStore _requestDataStore;
+        private readonly ServiceTypeRepository _serviceTypeRepository;
         private readonly RequestContext _requestContext;
 
-        public ServiceTypeController(RequestDataStore requestDataStore, RequestContext requestContext)
+        public ServiceTypeController(RequestContext requestContext, ServiceTypeRepository serviceTypeRepository)
         {
-            _requestDataStore = requestDataStore;
+            _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(requestContext));
             _requestContext = requestContext;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<ServiceType>> Get()
+        public async Task<ActionResult<IEnumerable<ServiceType>>> Get()
         {
-            var serviceTypes = _requestDataStore.ServiceTypes;
-
-            return serviceTypes;
+            var serviceTypes = await _serviceTypeRepository.getServiceTypes();
+            return Ok(serviceTypes);
         }
         [HttpGet("{serviceTypeId}")]
-        public ActionResult<ServiceType> Get(int serviceTypeId)
+        public async Task<ActionResult<ServiceType>> Get(int serviceTypeId)
         {
 
-            var serviceType = _requestDataStore.ServiceTypes.Find(s => s.Id == serviceTypeId);
+            var serviceType = await _serviceTypeRepository.getServiceType(serviceTypeId);
             if (serviceType == null)
                 return NotFound("Service type not found");
-            return serviceType;
+            return Ok(serviceType);
         }
         [HttpPost]
-        public ActionResult<ServiceType> Post(ServiceTypeForCreationDTO serviceType)
+        public async Task<ActionResult<ServiceType>> Post(ServiceTypeForCreationDTO serviceType)
         {
             //validate service type
             if (serviceType.Name == "")
                 return BadRequest("Service type name cannot be empty");
 
-            if (_requestDataStore.ServiceTypes.Find(s => s.Name == serviceType.Name) != null)
+            if (await _serviceTypeRepository.Exists(serviceType.Name))
                 return BadRequest("Service type already exists");
 
             var serviceTypeToCreate = new ServiceType(serviceType.Name);
-            _requestDataStore.ServiceTypes.Add(serviceTypeToCreate);
+            _serviceTypeRepository.Add(serviceTypeToCreate);
+            if (!await _serviceTypeRepository.SaveChangesAsync())
+                return BadRequest("Error creating service type");
+
             return CreatedAtAction(nameof(Get), new
             {
                 serviceTypeId = serviceTypeToCreate.Id
             }, serviceTypeToCreate);
+        }
+        [HttpDelete("{serviceTypeId}")]
+        public async Task<ActionResult<ServiceType>> Delete(int serviceTypeId)
+        {
+            var serviceType = await _serviceTypeRepository.getServiceType(serviceTypeId);
+            if (serviceType == null)
+                return NotFound("Service type not found");
+            _serviceTypeRepository.Remove(serviceType);
+            if (await _serviceTypeRepository.SaveChangesAsync())
+                return Ok(serviceType);
+            return BadRequest("Error deleting service type");
         }
 
     }

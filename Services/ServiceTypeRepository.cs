@@ -1,9 +1,10 @@
 using maker_checker_v1.data;
 using maker_checker_v1.models.entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1.Services
 {
-    public class ServiceTypeRepository
+    public class ServiceTypeRepository : IRepository
     {
         private readonly RequestContext _context;
 
@@ -14,7 +15,7 @@ namespace maker_checker_v1.Services
         }
         public async Task<IEnumerable<ServiceType>> getServiceTypes()
         {
-            var serviceTypes = _context.Set<ServiceType>();
+            var serviceTypes = await _context.Set<ServiceType>().ToListAsync();
             return serviceTypes;
         }
         public async Task<ServiceType?> getServiceType(int serviceTypeId)
@@ -22,11 +23,24 @@ namespace maker_checker_v1.Services
             var serviceType = await _context.Set<ServiceType>().FindAsync(serviceTypeId);
             return serviceType;
         }
-        public void Add(ServiceType serviceType)
+        public async void Add(ServiceType serviceType)
         {
-            _context.Set<ServiceType>().Add(serviceType);
-            // _context.ServiceTypes.Add(serviceType);
+            await _context.Set<ServiceType>().AddAsync(serviceType);
         }
+        public async Task<Boolean> Exists(int serviceTypeId)
+        {
+            return await _context.Set<ServiceType>().FirstOrDefaultAsync(s => s.Id == serviceTypeId) != null;
+        }
+        public async Task<Boolean> Exists(string serviceTypeName)
+        {
+            return await _context.Set<ServiceType>().FirstOrDefaultAsync(s => s.Name == serviceTypeName) != null;
+        }
+
+        public void Remove(ServiceType serviceType)
+        {
+            _context.Set<ServiceType>().Remove(serviceType);
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() >= 0;

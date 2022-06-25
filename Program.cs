@@ -1,4 +1,3 @@
-using maker_checker_v1;
 using maker_checker_v1.data;
 using maker_checker_v1.Services;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +23,10 @@ builder.Services.AddDbContext<RequestContext>(options =>
 });
 
 builder.Services.AddScoped<ServiceTypeRepository>();
-builder.Services.AddSingleton<RequestDataStore>();
+builder.Services.AddScoped<RequestRepository>();
+builder.Services.AddScoped<ValidationRepository>();
+builder.Services.AddScoped<RoleRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
