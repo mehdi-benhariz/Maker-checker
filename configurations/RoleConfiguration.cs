@@ -9,6 +9,7 @@ namespace maker_checker_v1.configurations
         {
             builder.HasKey(r => r.Id);
             builder.Property(r => r.Name).IsRequired().HasMaxLength(20);
+            builder.HasMany(r => r.Rules).WithOne(r => r.Role).HasForeignKey(r => r.RoleId).OnDelete(DeleteBehavior.Cascade);
             // builder.HasMany(r => r.Users).WithOne(u => u.Role).HasForeignKey(u => u.RoleId);
         }
     }

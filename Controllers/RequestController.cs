@@ -43,7 +43,7 @@ namespace maker_checker_v1.Controllers
                 return NotFound("Request not found");
             return Ok(request);
         }
-        [HttpPost]
+        [HttpPost(Name = "submit request")]
         public async Task<ActionResult<Request>> SubmitRequest(RequestForCreationDTO request)
         {
             //validate request 
@@ -60,8 +60,11 @@ namespace maker_checker_v1.Controllers
             {
                 Rules = serviceType?.Validation?.Rules ?? new List<Rule>()
             };
+            //todo check with ahmed if we could delete this code
+            ValiProgressToBeAdded.RequestId = requestToCreate.Id;
             requestToCreate.ValidationProgress = ValiProgressToBeAdded;
-
+            requestToCreate.ServiceType = serviceType;
+            requestToCreate.ServiceTypeId = serviceType.Id;
             _requestRepository.Add(requestToCreate);
             if (!await _requestRepository.SaveChangesAsync())
                 return BadRequest("Error creating request");
@@ -95,17 +98,28 @@ namespace maker_checker_v1.Controllers
                     return NotFound("Rule not found");
                 var serviceType = await _serviceTypeRepository.getServiceType(request.ServiceTypeId);
 
-                var ruleValidationNbr = serviceType?.Validation?.Rules.First(r => r.Role.Name == role).nbr;
-                if (rule.nbr == ruleValidationNbr)
+                var ruleValidationNbr = serviceType?.Validation?.Rules.First(r => r.Role.Name == role).Nbr;
+                if (rule.Nbr == ruleValidationNbr)
                     return BadRequest("Rule already validated");
                 else
-                    rule.nbr++;
+                    rule.Nbr++;
                 //todo :add event listner to update validation progress
                 if (!await _requestRepository.SaveChangesAsync())
                     return BadRequest("Error validating request");
                 return Ok(request);
             }
             return BadRequest("Request already validated");
+        }
+        [HttpDelete("{id}", Name = "DeleteRequest")]
+        public async Task<ActionResult<Request>> DeleteRequest(int id)
+        {
+            var request = await _requestRepository.getRequest(id);
+            if (request == null)
+                return NotFound("Request not found");
+            _requestRepository.Remove(request);
+            if (!await _requestRepository.SaveChangesAsync())
+                return BadRequest("Error deleting request");
+            return Ok(request);
         }
     }
 }

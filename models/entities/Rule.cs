@@ -16,10 +16,10 @@ namespace maker_checker_v1.models.entities
         public int ValidationProgressId { get; set; }
         public ValidationProgress ValidationProgress { get; set; }
         [Range(0, byte.MaxValue, ErrorMessage = "Please enter a value bigger than {0}")]
-        public byte nbr { get; set; } = 0;
+        public byte Nbr { get; set; } = 0;
         public Rule(byte nbr = 0)
         {
-            this.nbr = nbr;
+            this.Nbr = nbr;
         }
 
 

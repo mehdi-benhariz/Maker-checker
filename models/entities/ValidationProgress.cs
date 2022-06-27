@@ -18,7 +18,7 @@ namespace maker_checker_v1.models.entities
                 bool hasValidation = Request.ServiceType.Validation != null;
                 if (!hasValidation)
                     return false;
-                bool countCompleted = Rules.Count == Rules.Count(r => r.nbr == 0);
+                bool countCompleted = Rules.Count == Rules.Count(r => r.Nbr == 0);
                 return countCompleted;
 
             }

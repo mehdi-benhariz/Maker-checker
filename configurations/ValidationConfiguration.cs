@@ -12,8 +12,8 @@ namespace maker_checker_v1.configurations
         {
             builder.HasKey(v => v.Id);
             //the foriegn key is in validation table
-            builder.HasOne(v => v.ServiceType).WithOne(st => st.Validation).HasForeignKey<Validation>(v => v.ServicesTypeId);
-            builder.HasMany(v => v.Rules);
+            builder.HasOne(v => v.ServiceType).WithOne(st => st.Validation).HasForeignKey<Validation>(v => v.ServiceTypeId);
+            builder.HasMany(v => v.Rules).WithOne(r => r.Validation).HasForeignKey(r => r.ValidationId).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

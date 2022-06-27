@@ -5,7 +5,7 @@ namespace maker_checker_v1.Controllers
 {
     public class ValidationForCreationDTO
     {
-        public List<Rule> Rules { get; set; } = new List<Rule>();
+        public List<RuleForCreationDTO> Rules { get; set; } = new List<RuleForCreationDTO>();
         public ValidationForCreationDTO()
         {
         }

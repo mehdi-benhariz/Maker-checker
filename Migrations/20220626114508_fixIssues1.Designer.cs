@@ -11,8 +11,8 @@ using maker_checker_v1.data;
 namespace maker_checker_v1.Migrations
 {
     [DbContext(typeof(RequestContext))]
-    [Migration("20220624111438_sec")]
-    partial class sec
+    [Migration("20220626114508_fixIssues1")]
+    partial class fixIssues1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,14 +42,56 @@ namespace maker_checker_v1.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ValidationProgressId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceTypeId");
 
                     b.ToTable("Request");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.Rule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte>("Nbr")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ValidationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ValidationProgressId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("ValidationId");
+
+                    b.HasIndex("ValidationProgressId");
+
+                    b.ToTable("Rule");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.ServiceType", b =>
@@ -60,14 +102,10 @@ namespace maker_checker_v1.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("validationId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("validationId");
 
                     b.ToTable("ServiceType");
                 });
@@ -78,13 +116,16 @@ namespace maker_checker_v1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("servicesTypeId")
+                    b.Property<int>("ServiceTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("timeStamp")
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServiceTypeId")
+                        .IsUnique();
 
                     b.ToTable("Validation");
                 });
@@ -95,12 +136,12 @@ namespace maker_checker_v1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("requestId")
+                    b.Property<int>("RequestId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("requestId")
+                    b.HasIndex("RequestId")
                         .IsUnique();
 
                     b.ToTable("ValidationProgress");
@@ -117,26 +158,53 @@ namespace maker_checker_v1.Migrations
                     b.Navigation("ServiceType");
                 });
 
-            modelBuilder.Entity("maker_checker_v1.models.entities.ServiceType", b =>
+            modelBuilder.Entity("maker_checker_v1.models.entities.Rule", b =>
                 {
-                    b.HasOne("maker_checker_v1.models.entities.Validation", "validation")
-                        .WithMany()
-                        .HasForeignKey("validationId")
+                    b.HasOne("maker_checker_v1.models.entities.Role", "Role")
+                        .WithMany("Rules")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("validation");
+                    b.HasOne("maker_checker_v1.models.entities.Validation", "Validation")
+                        .WithMany("Rules")
+                        .HasForeignKey("ValidationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("maker_checker_v1.models.entities.ValidationProgress", "ValidationProgress")
+                        .WithMany("Rules")
+                        .HasForeignKey("ValidationProgressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("Validation");
+
+                    b.Navigation("ValidationProgress");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.Validation", b =>
+                {
+                    b.HasOne("maker_checker_v1.models.entities.ServiceType", "ServiceType")
+                        .WithOne("Validation")
+                        .HasForeignKey("maker_checker_v1.models.entities.Validation", "ServiceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceType");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.ValidationProgress", b =>
                 {
-                    b.HasOne("maker_checker_v1.models.entities.Request", "request")
+                    b.HasOne("maker_checker_v1.models.entities.Request", "Request")
                         .WithOne("ValidationProgress")
-                        .HasForeignKey("maker_checker_v1.models.entities.ValidationProgress", "requestId")
+                        .HasForeignKey("maker_checker_v1.models.entities.ValidationProgress", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("request");
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Request", b =>
@@ -145,9 +213,26 @@ namespace maker_checker_v1.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("maker_checker_v1.models.entities.Role", b =>
+                {
+                    b.Navigation("Rules");
+                });
+
             modelBuilder.Entity("maker_checker_v1.models.entities.ServiceType", b =>
                 {
                     b.Navigation("Requests");
+
+                    b.Navigation("Validation");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.Validation", b =>
+                {
+                    b.Navigation("Rules");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.ValidationProgress", b =>
+                {
+                    b.Navigation("Rules");
                 });
 #pragma warning restore 612, 618
         }

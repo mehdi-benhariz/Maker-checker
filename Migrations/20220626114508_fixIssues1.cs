@@ -4,7 +4,7 @@
 
 namespace maker_checker_v1.Migrations
 {
-    public partial class sec : Migration
+    public partial class fixIssues1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

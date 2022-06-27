@@ -9,7 +9,7 @@ namespace maker_checker_v1.configurations
         {
             builder.HasKey(vp => vp.Id);
             builder.HasOne(vp => vp.Request).WithOne(r => r.ValidationProgress).HasForeignKey<ValidationProgress>(vp => vp.RequestId);
-            builder.HasMany(vp => vp.Rules);
+            builder.HasMany(vp => vp.Rules).WithOne(r => r.ValidationProgress).HasForeignKey(r => r.ValidationProgressId).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

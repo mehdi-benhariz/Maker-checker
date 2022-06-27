@@ -7,7 +7,7 @@ namespace maker_checker_v1.data.Validators
     {
         public ServiceTypeValidator()
         {
-            RuleFor(serviceType => serviceType.Id).NotEmpty();
+            // RuleFor(serviceType => serviceType.Id).NotEmpty();
             RuleFor(serviceType => serviceType.Name).NotEmpty().Length(3, 50).WithMessage("Name must be between 3 and 50 characters");
         }
     }

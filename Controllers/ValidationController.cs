@@ -1,3 +1,4 @@
+using AutoMapper;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace maker_checker_v1.Controllers
     {
         private readonly ServiceTypeRepository _serviceTypeRepository;
         private readonly ValidationRepository _validationRepository;
+        private readonly IMapper _mapper;
 
-        public ValidationController(ValidationRepository validationRepository, ServiceTypeRepository serviceTypeRepository)
+        public ValidationController(ValidationRepository validationRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper)
         {
             _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(serviceTypeRepository));
             _validationRepository = validationRepository ?? throw new System.ArgumentNullException(nameof(validationRepository));
+            _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet("{validationId}")]
@@ -35,11 +38,9 @@ namespace maker_checker_v1.Controllers
 
             var serviceType = await _serviceTypeRepository.getServiceType(serviceTypeId);
 
-            var validationToCreate = new Validation(serviceTypeId)
-            {
-                Rules = validation.Rules,
-
-            };
+            var validationToCreate = _mapper.Map<Validation>(validation);
+            validationToCreate.ServiceTypeId = serviceTypeId;
+            //todo ask ahmed for help
             _validationRepository.Add(validationToCreate);
             if (!await _validationRepository.SaveChangesAsync())
                 return BadRequest("Error creating validation");
@@ -62,14 +63,14 @@ namespace maker_checker_v1.Controllers
             for (int i = 0; i < validationToBeChanged.Rules.Count; i++)
             {
                 if (validation.Rules.ElementAtOrDefault(i) == null)
-                    validation.Rules.Add(validationToBeChanged.Rules[i]);
+                    validation.Rules.Add(_mapper.Map<RuleForCreationDTO>(validationToBeChanged.Rules[i]));
                 //for now its static , but later it will be dynamic(count all users with specific role)
                 var maxNbrByRole = 3;
-                if (validation.Rules[i].nbr > maxNbrByRole)
+                if (validation.Rules[i].Nbr > maxNbrByRole)
                     return BadRequest("Rule nbr is higher than nbr of Rules for service type");
                 //todo later validate that the model contain the same Rules as the validationToBeChanged.Rules[]
-                if (validationToBeChanged.Rules[i].nbr != validation.Rules[i].nbr)
-                    validationToBeChanged.Rules[i].nbr = validation.Rules[i].nbr;
+                if (validationToBeChanged.Rules[i].Nbr != validation.Rules[i].Nbr)
+                    validationToBeChanged.Rules[i].Nbr = validation.Rules[i].Nbr;
             }
             await _validationRepository.SaveChangesAsync();
 

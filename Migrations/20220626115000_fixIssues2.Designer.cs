@@ -11,8 +11,8 @@ using maker_checker_v1.data;
 namespace maker_checker_v1.Migrations
 {
     [DbContext(typeof(RequestContext))]
-    [Migration("20220625182434_fixReqVal")]
-    partial class fixReqVal
+    [Migration("20220626115000_fixIssues2")]
+    partial class fixIssues2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,9 @@ namespace maker_checker_v1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<byte>("Nbr")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
@@ -78,9 +81,6 @@ namespace maker_checker_v1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ValidationProgressId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte>("nbr")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -116,7 +116,7 @@ namespace maker_checker_v1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ServicesTypeId")
+                    b.Property<int>("ServiceTypeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("TimeStamp")
@@ -124,7 +124,7 @@ namespace maker_checker_v1.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServicesTypeId")
+                    b.HasIndex("ServiceTypeId")
                         .IsUnique();
 
                     b.ToTable("Validation");
@@ -189,7 +189,7 @@ namespace maker_checker_v1.Migrations
                 {
                     b.HasOne("maker_checker_v1.models.entities.ServiceType", "ServiceType")
                         .WithOne("Validation")
-                        .HasForeignKey("maker_checker_v1.models.entities.Validation", "ServicesTypeId")
+                        .HasForeignKey("maker_checker_v1.models.entities.Validation", "ServiceTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

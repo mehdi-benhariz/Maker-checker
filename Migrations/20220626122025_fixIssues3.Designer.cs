@@ -11,8 +11,8 @@ using maker_checker_v1.data;
 namespace maker_checker_v1.Migrations
 {
     [DbContext(typeof(RequestContext))]
-    [Migration("20220624144542_addCOnfig")]
-    partial class addCOnfig
+    [Migration("20220626122025_fixIssues3")]
+    partial class fixIssues3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,9 +42,6 @@ namespace maker_checker_v1.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ValidationProgressId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceTypeId");
@@ -65,13 +62,16 @@ namespace maker_checker_v1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Rule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte>("Nbr")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RoleId")
@@ -81,9 +81,6 @@ namespace maker_checker_v1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ValidationProgressId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte>("nbr")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -119,7 +116,7 @@ namespace maker_checker_v1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ServicesTypeId")
+                    b.Property<int>("ServiceTypeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("TimeStamp")
@@ -127,7 +124,7 @@ namespace maker_checker_v1.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServicesTypeId")
+                    b.HasIndex("ServiceTypeId")
                         .IsUnique();
 
                     b.ToTable("Validation");
@@ -192,7 +189,7 @@ namespace maker_checker_v1.Migrations
                 {
                     b.HasOne("maker_checker_v1.models.entities.ServiceType", "ServiceType")
                         .WithOne("Validation")
-                        .HasForeignKey("maker_checker_v1.models.entities.Validation", "ServicesTypeId")
+                        .HasForeignKey("maker_checker_v1.models.entities.Validation", "ServiceTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -225,8 +222,7 @@ namespace maker_checker_v1.Migrations
                 {
                     b.Navigation("Requests");
 
-                    b.Navigation("Validation")
-                        .IsRequired();
+                    b.Navigation("Validation");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Validation", b =>

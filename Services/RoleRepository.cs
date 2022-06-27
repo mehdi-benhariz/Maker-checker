@@ -14,7 +14,7 @@ namespace maker_checker_v1.Services
         }
         public async Task<IEnumerable<Role>> getRoles()
         {
-            var roles = await _context.Set<Role>().ToListAsync();
+            var roles = await _context.Set<Role>().IgnoreAutoIncludes().ToListAsync();
             return roles;
         }
         public async Task<Role?> getRole(int roleId)
