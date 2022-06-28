@@ -17,7 +17,7 @@ namespace maker_checker_v1.configurations
             builder.Property(u => u.Username).IsRequired().HasMaxLength(20);
             builder.Property(u => u.Password).IsRequired();
             builder.HasOne<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleId);
-            builder.HasMany<Request>(u => u.Requests).WithOne(r => r.User).HasForeignKey(r => r.UserId);
+            // builder.HasMany<Request>(u => u.Requests).WithOne(r => r.User).HasForeignKey(r => r.UserId);
         }
     }
 }

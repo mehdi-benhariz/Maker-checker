@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace maker_checker_v1.Migrations
 {
-    public partial class addedUser1 : Migration
+    public partial class addVirtuel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,8 +128,7 @@ namespace maker_checker_v1.Migrations
                 name: "Rule",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     RoleId = table.Column<int>(type: "INTEGER", nullable: false),
                     ValidationId = table.Column<int>(type: "INTEGER", nullable: false),
                     ValidationProgressId = table.Column<int>(type: "INTEGER", nullable: false),

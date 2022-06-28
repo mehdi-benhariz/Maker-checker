@@ -12,21 +12,15 @@ namespace maker_checker_v1.Profiles
             CreateMap<RuleForCreationDTO, Rule>().ConvertUsing(
                 (source, context) =>
                 {
-                    var rule = new Rule();
-                    rule.Role = new Role(source.Role);
-                    rule.Nbr = source.Nbr;
+                    var rule = new Rule()
+                    {
+                        RoleId = source.RoleId,
+                        Nbr = source.Nbr,
+                    };
                     return rule;
                 }
             );
-            CreateMap<Rule, RuleForCreationDTO>().ConvertUsing(
-                (source, context) =>
-                {
-                    var rule = new RuleForCreationDTO();
-                    rule.Role = source.Role.Name;
-                    rule.Nbr = source.Nbr;
-                    return rule;
-                }
-            );
+
 
         }
 

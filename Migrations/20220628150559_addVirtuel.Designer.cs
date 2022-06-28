@@ -11,8 +11,8 @@ using maker_checker_v1.data;
 namespace maker_checker_v1.Migrations
 {
     [DbContext(typeof(RequestContext))]
-    [Migration("20220627153510_addedUser1")]
-    partial class addedUser1
+    [Migration("20220628150559_addVirtuel")]
+    partial class addVirtuel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,9 +72,9 @@ namespace maker_checker_v1.Migrations
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Rule", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<byte>("Nbr")
                         .HasColumnType("INTEGER");
@@ -82,10 +82,12 @@ namespace maker_checker_v1.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ValidationId")
+                    b.Property<int?>("ValidationId")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ValidationProgressId")
+                    b.Property<int?>("ValidationProgressId")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

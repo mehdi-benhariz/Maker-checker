@@ -12,13 +12,16 @@ namespace maker_checker_v1.Controllers
     {
         private readonly ServiceTypeRepository _serviceTypeRepository;
         private readonly ValidationRepository _validationRepository;
-        private readonly IMapper _mapper;
 
-        public ValidationController(ValidationRepository validationRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper)
+        private readonly IMapper _mapper;
+        private readonly RuleRepository _ruleRepository;
+
+        public ValidationController(ValidationRepository validationRepository, RuleRepository ruleRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper)
         {
             _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(serviceTypeRepository));
             _validationRepository = validationRepository ?? throw new System.ArgumentNullException(nameof(validationRepository));
             _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
+            _ruleRepository = ruleRepository ?? throw new System.ArgumentNullException(nameof(ruleRepository));
         }
 
         [HttpGet("{validationId}")]
@@ -35,15 +38,25 @@ namespace maker_checker_v1.Controllers
         {
             if (!await _serviceTypeRepository.Exists(serviceTypeId))
                 return NotFound("Service type not found");
-
             var serviceType = await _serviceTypeRepository.getServiceType(serviceTypeId);
-
+            if (serviceType.Validation != null)
+                return BadRequest("Service type already has a validation");
             var validationToCreate = _mapper.Map<Validation>(validation);
             validationToCreate.ServiceTypeId = serviceTypeId;
-            //todo ask ahmed for help
-            _validationRepository.Add(validationToCreate);
-            if (!await _validationRepository.SaveChangesAsync())
-                return BadRequest("Error creating validation");
+            validationToCreate.ServiceType = serviceType;
+            validationToCreate.Rules = new List<Rule>();
+            // _validationRepository.Add(validationToCreate);
+            // if (!await _validationRepository.SaveChangesAsync())
+            //     return BadRequest("Error creating validation");
+            foreach (RuleForCreationDTO item in validation.Rules)
+            {
+                Console.WriteLine($"item = {item}");
+                Rule rule = _mapper.Map<Rule>(item);
+                //we need to provide the validation id to the rule from database
+                rule.ValidationId = 1;
+                _ruleRepository.Add(rule);
+                await _validationRepository.Save();
+            }
             return CreatedAtAction(nameof(Get), new
             {
                 serviceTypeId = serviceTypeId,
@@ -72,7 +85,7 @@ namespace maker_checker_v1.Controllers
                 if (validationToBeChanged.Rules[i].Nbr != validation.Rules[i].Nbr)
                     validationToBeChanged.Rules[i].Nbr = validation.Rules[i].Nbr;
             }
-            await _validationRepository.SaveChangesAsync();
+            await _validationRepository.Save();
 
             return Ok(validationToBeChanged);
         }

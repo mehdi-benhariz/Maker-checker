@@ -31,6 +31,7 @@ builder.Services.AddDbContext<RequestContext>(options =>
 builder.Services.AddScoped<ServiceTypeRepository>();
 builder.Services.AddScoped<RequestRepository>();
 builder.Services.AddScoped<ValidationRepository>();
+builder.Services.AddScoped<RuleRepository>();
 builder.Services.AddScoped<RoleRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

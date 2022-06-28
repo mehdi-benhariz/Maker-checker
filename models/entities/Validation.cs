@@ -11,9 +11,6 @@ namespace maker_checker_v1.models.entities
         public DateTime TimeStamp { get; set; } = DateTime.Now;
         public List<Rule> Rules = new List<Rule>();
 
-        public Validation()
-        {
-        }
 
 
     }

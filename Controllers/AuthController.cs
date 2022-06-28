@@ -110,7 +110,7 @@ namespace maker_checker_v1.models.DTO
         [HttpPost("addStuff")]
         public async Task<ActionResult> AddStuff(UserLoginDTO userModel, string Role)
         {
-            //admin can add stuff
+            //
 
             return Ok("addStuff successful");
 

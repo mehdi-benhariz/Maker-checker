@@ -3,17 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Linq;
 using System.Data.SqlTypes;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace maker_checker_v1.configurations
 {
     public class ValidationConfiguration : IEntityTypeConfiguration<Validation>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Validation> builder)
+        public void Configure(EntityTypeBuilder<Validation> builder)
         {
             builder.HasKey(v => v.Id);
             //the foriegn key is in validation table
-            builder.HasOne(v => v.ServiceType).WithOne(st => st.Validation).HasForeignKey<Validation>(v => v.ServiceTypeId);
-            builder.HasMany(v => v.Rules).WithOne(r => r.Validation).HasForeignKey(r => r.ValidationId).OnDelete(DeleteBehavior.Cascade);
+            // builder.HasOne(v => v.ServiceType).WithOne(st => st.Validation).HasForeignKey<Validation>(v => v.ServiceTypeId);
+            builder.HasMany(v => v.Rules).WithOne(r => r.Validation).HasForeignKey(r => r.ValidationId);
 
         }
     }
