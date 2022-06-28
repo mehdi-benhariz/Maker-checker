@@ -19,7 +19,7 @@ namespace maker_checker_v1.Services
         }
         public async Task<Validation?> getValidation(int Id)
         {
-            var validation = await _context.Set<Validation>().FirstOrDefaultAsync(v => (v.Id == Id || v.ServiceTypeId == Id));
+            var validation = await _context.Set<Validation>().Include(v => v.Rules).FirstOrDefaultAsync(v => (v.Id == Id || v.ServiceTypeId == Id));
             return validation;
         }
         public async void Add(Validation validation)

@@ -6,8 +6,6 @@ namespace maker_checker_v1.models.entities
 
     public class Request
     {
-        // [Key]
-        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public float Amount { get; set; } = 0;
