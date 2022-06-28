@@ -15,7 +15,7 @@ namespace maker_checker_v1.configurations
             builder.Property(r => r.Amount).IsRequired().HasDefaultValue(0);
             builder.HasOne<ServiceType>(r => r.ServiceType).WithMany(st => st.Requests).HasForeignKey(r => r.ServiceTypeId);
             builder.HasOne<ValidationProgress>(r => r.ValidationProgress).WithOne(vp => vp.Request).HasForeignKey<ValidationProgress>(vp => vp.RequestId);
-
+            builder.HasOne<User>(r => r.User).WithMany(u => u.Requests).HasForeignKey(r => r.UserId);
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace maker_checker_v1.Migrations
 {
-    public partial class initial : Migration
+    public partial class addedUser1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,23 +36,22 @@ namespace maker_checker_v1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Request",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Amount = table.Column<float>(type: "REAL", nullable: false, defaultValue: 0f),
-                    Status = table.Column<string>(type: "TEXT", nullable: false),
-                    ServiceTypeId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Username = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Password = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    RoleId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Request", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Request_ServiceType_ServiceTypeId",
-                        column: x => x.ServiceTypeId,
-                        principalTable: "ServiceType",
+                        name: "FK_User_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -63,16 +62,45 @@ namespace maker_checker_v1.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ServicesTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServiceTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Validation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Validation_ServiceType_ServicesTypeId",
-                        column: x => x.ServicesTypeId,
+                        name: "FK_Validation_ServiceType_ServiceTypeId",
+                        column: x => x.ServiceTypeId,
                         principalTable: "ServiceType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Request",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Amount = table.Column<float>(type: "REAL", nullable: false, defaultValue: 0f),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
+                    ServiceTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Request", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Request_ServiceType_ServiceTypeId",
+                        column: x => x.ServiceTypeId,
+                        principalTable: "ServiceType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Request_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -105,7 +133,7 @@ namespace maker_checker_v1.Migrations
                     RoleId = table.Column<int>(type: "INTEGER", nullable: false),
                     ValidationId = table.Column<int>(type: "INTEGER", nullable: false),
                     ValidationProgressId = table.Column<int>(type: "INTEGER", nullable: false),
-                    nbr = table.Column<byte>(type: "INTEGER", nullable: false)
+                    Nbr = table.Column<byte>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,6 +164,11 @@ namespace maker_checker_v1.Migrations
                 column: "ServiceTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Request_UserId",
+                table: "Request",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rule_RoleId",
                 table: "Rule",
                 column: "RoleId");
@@ -151,9 +184,14 @@ namespace maker_checker_v1.Migrations
                 column: "ValidationProgressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Validation_ServicesTypeId",
+                name: "IX_User_RoleId",
+                table: "User",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Validation_ServiceTypeId",
                 table: "Validation",
-                column: "ServicesTypeId",
+                column: "ServiceTypeId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -169,9 +207,6 @@ namespace maker_checker_v1.Migrations
                 name: "Rule");
 
             migrationBuilder.DropTable(
-                name: "Role");
-
-            migrationBuilder.DropTable(
                 name: "Validation");
 
             migrationBuilder.DropTable(
@@ -182,6 +217,12 @@ namespace maker_checker_v1.Migrations
 
             migrationBuilder.DropTable(
                 name: "ServiceType");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Role");
         }
     }
 }

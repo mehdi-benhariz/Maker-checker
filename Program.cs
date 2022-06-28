@@ -1,5 +1,7 @@
+using maker_checker_v1;
 using maker_checker_v1.data;
 using maker_checker_v1.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -30,7 +32,20 @@ builder.Services.AddScoped<ServiceTypeRepository>();
 builder.Services.AddScoped<RequestRepository>();
 builder.Services.AddScoped<ValidationRepository>();
 builder.Services.AddScoped<RoleRepository>();
+builder.Services.AddScoped<UserRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+    });
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -47,7 +62,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCookiePolicy();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

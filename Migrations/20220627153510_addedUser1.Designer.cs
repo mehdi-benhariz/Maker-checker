@@ -11,8 +11,8 @@ using maker_checker_v1.data;
 namespace maker_checker_v1.Migrations
 {
     [DbContext(typeof(RequestContext))]
-    [Migration("20220626122025_fixIssues3")]
-    partial class fixIssues3
+    [Migration("20220627153510_addedUser1")]
+    partial class addedUser1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,9 +42,14 @@ namespace maker_checker_v1.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceTypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Request");
                 });
@@ -110,6 +115,31 @@ namespace maker_checker_v1.Migrations
                     b.ToTable("ServiceType");
                 });
 
+            modelBuilder.Entity("maker_checker_v1.models.entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("Password")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("maker_checker_v1.models.entities.Validation", b =>
                 {
                     b.Property<int>("Id")
@@ -155,7 +185,15 @@ namespace maker_checker_v1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("maker_checker_v1.models.entities.User", "User")
+                        .WithMany("Requests")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ServiceType");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Rule", b =>
@@ -183,6 +221,17 @@ namespace maker_checker_v1.Migrations
                     b.Navigation("Validation");
 
                     b.Navigation("ValidationProgress");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.User", b =>
+                {
+                    b.HasOne("maker_checker_v1.models.entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Validation", b =>
@@ -216,6 +265,8 @@ namespace maker_checker_v1.Migrations
             modelBuilder.Entity("maker_checker_v1.models.entities.Role", b =>
                 {
                     b.Navigation("Rules");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.ServiceType", b =>
@@ -223,6 +274,11 @@ namespace maker_checker_v1.Migrations
                     b.Navigation("Requests");
 
                     b.Navigation("Validation");
+                });
+
+            modelBuilder.Entity("maker_checker_v1.models.entities.User", b =>
+                {
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("maker_checker_v1.models.entities.Validation", b =>
