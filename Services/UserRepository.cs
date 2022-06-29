@@ -17,6 +17,10 @@ namespace maker_checker_v1
         {
             await _context.Set<User>().AddAsync(user);
         }
+        public async void AddRange(IEnumerable<User> users)
+        {
+            await _context.Set<User>().AddRangeAsync(users);
+        }
 
         public async Task<bool> Exists(int id)
         {

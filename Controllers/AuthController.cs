@@ -108,9 +108,28 @@ namespace maker_checker_v1.models.DTO
             return Ok("logout successful");
         }
         [HttpPost("addStuff")]
-        public async Task<ActionResult> AddStuff(UserLoginDTO userModel, string Role)
+        public async Task<ActionResult> AddStuff(IEnumerable<UserCreationDTO> userModels)
         {
             //
+            List<User> UsersToBeCreated = new List<User>();
+            foreach (var userModel in userModels)
+            {
+                if (await _userRepository.Exists(userModel.Username))
+                    return BadRequest("User already exists");
+                var userToBeCreated = new User()
+                {
+                    Username = userModel.Username,
+                    Password = entities.User.CreateHash(userModel.Password),
+                    RoleId = userModel.RoleId
+                };
+                UsersToBeCreated.Add(userToBeCreated);
+            }
+            //
+
+            _userRepository.AddRange(UsersToBeCreated);
+
+            if (!await _userRepository.Save())
+                return BadRequest("problem occured while saving user");
 
             return Ok("addStuff successful");
 

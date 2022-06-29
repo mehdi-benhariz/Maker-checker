@@ -24,13 +24,12 @@ namespace maker_checker_v1.Controllers
             _ruleRepository = ruleRepository ?? throw new System.ArgumentNullException(nameof(ruleRepository));
         }
 
-        [HttpGet("{validationId}")]
-        public async Task<ActionResult<Validation>> Get(int serviceTypeId, int? validationId)
+        [HttpGet]
+        public async Task<ActionResult<Validation>> Get(int serviceTypeId)
         {
-            int id = validationId ?? serviceTypeId;
-            if (!await _validationRepository.Exists(id))
+            if (!await _validationRepository.Exists(serviceTypeId))
                 return NotFound("Validation not found");
-            var validation = await _validationRepository.getValidation(id);
+            var validation = await _validationRepository.getValidation(serviceTypeId);
             return Ok(validation);
         }
         [HttpPost]
@@ -85,7 +84,8 @@ namespace maker_checker_v1.Controllers
                 if (validationToBeChanged.Rules[i].Nbr != validation.Rules[i].Nbr)
                     validationToBeChanged.Rules[i].Nbr = validation.Rules[i].Nbr;
             }
-            await _validationRepository.Save();
+            if (!await _validationRepository.Save())
+                return BadRequest("Error updating validation");
 
             return Ok(validationToBeChanged);
         }
