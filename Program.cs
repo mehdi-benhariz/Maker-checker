@@ -3,6 +3,7 @@ using maker_checker_v1.data;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -47,7 +48,22 @@ builder.Services.AddAuthentication(options =>
         options.SlidingExpiration = true;
     });
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.WithOrigins("http://localhost:3000").WithHeaders(
+            HeaderNames.ContentType,
+            HeaderNames.Authorization,
+            HeaderNames.Accept,
+            HeaderNames.Authorization
+        ).WithOrigins("http://localhost:3000")
+        .AllowCredentials()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
 
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,7 +79,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseRouting();
+app.UseCors("AllowAll");
 app.UseCookiePolicy();
 
 app.UseAuthentication();

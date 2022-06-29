@@ -47,7 +47,7 @@ namespace maker_checker_v1.Services
         {
             _context.Set<Request>().Remove(request);
         }
-        public async Task<bool> SaveChangesAsync()
+        public async Task<bool> Save()
         {
             return await _context.SaveChangesAsync() >= 0;
         }

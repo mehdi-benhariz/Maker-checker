@@ -10,7 +10,7 @@ namespace maker_checker_v1.models.entities
         public int RoleId { get; set; }
         public Role Role { get; set; }
         //! a rule must have a validation or validationProgress , but not both 
-        public int? ValidationId { get; set; }
+        public int ValidationId { get; set; }
         public virtual Validation Validation { get; set; }
         public int? ValidationProgressId { get; set; }
         public virtual ValidationProgress ValidationProgress { get; set; }

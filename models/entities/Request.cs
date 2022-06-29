@@ -12,7 +12,7 @@ namespace maker_checker_v1.models.entities
         public string Status { get; set; }
         public int ServiceTypeId { get; set; }
         public ServiceType ServiceType { get; set; }
-        public ValidationProgress ValidationProgress { get; set; }
+        public ValidationProgress? ValidationProgress { get; set; }
         public int UserId { get; internal set; }
         public User User { get; internal set; }
 

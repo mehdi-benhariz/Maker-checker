@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using maker_checker_v1.data;
 
@@ -10,9 +11,10 @@ using maker_checker_v1.data;
 namespace maker_checker_v1.Migrations
 {
     [DbContext(typeof(RequestContext))]
-    partial class RequestContextModelSnapshot : ModelSnapshot
+    [Migration("20220629090702_changeReqModel")]
+    partial class changeReqModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -80,7 +82,8 @@ namespace maker_checker_v1.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ValidationId")
+                    b.Property<int?>("ValidationId")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("ValidationProgressId")

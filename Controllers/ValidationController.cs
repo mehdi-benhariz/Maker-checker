@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace maker_checker_v1.Controllers
 {
-    [Route("api/ServiceType/{serviceTypeId}/Validation")]
-    [ApiController]
+    // [Route("api/ServiceType/{serviceTypeId}/Validation")]
+    // [ApiController]
     //todo add a middleware to check if the service type exists
     public class ValidationController : ControllerBase
     {

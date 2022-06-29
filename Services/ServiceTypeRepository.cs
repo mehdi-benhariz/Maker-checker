@@ -15,7 +15,10 @@ namespace maker_checker_v1.Services
         }
         public async Task<IEnumerable<ServiceType>> getServiceTypes()
         {
-            var serviceTypes = await _context.Set<ServiceType>().ToListAsync();
+            var serviceTypes = await _context.Set<ServiceType>()
+            .Include(s => s.Validation)
+
+            .ToListAsync();
             return serviceTypes;
         }
         public async Task<ServiceType?> getServiceType(int serviceTypeId)

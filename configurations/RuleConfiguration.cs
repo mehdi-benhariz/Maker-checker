@@ -8,6 +8,9 @@ namespace maker_checker_v1.configurations
     {
         public void Configure(EntityTypeBuilder<Rule> builder)
         {
+            //when calling rule always include the Role
+            builder.Navigation<Role>(r => r.Role).AutoInclude();
+
             builder.HasKey(r => r.Id);
             // builder.HasOne(r => r.Role).WithMany(r => r.Rules).HasForeignKey(r => r.RoleId);
             builder.HasOne(r => r.ValidationProgress)

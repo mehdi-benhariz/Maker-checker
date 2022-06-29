@@ -1,9 +1,11 @@
+using System.Security.Claims;
 using AutoMapper;
 using FluentValidation;
 using maker_checker_v1.data.Validators;
 using maker_checker_v1.models.DTO;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -17,14 +19,15 @@ namespace maker_checker_v1.Controllers
         private readonly ServiceTypeRepository _serviceTypeRepository;
         private readonly IMapper _mapper;
         private readonly RequestValidator _validator;
+        private readonly HttpContext _hContext;
 
-        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper)
+        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper, IHttpContextAccessor haccess)
         {
             _requestRepository = requestRepository ?? throw new System.ArgumentNullException(nameof(requestRepository));
             _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(serviceTypeRepository));
             _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
             _validator = new RequestValidator();
-
+            _hContext = haccess.HttpContext ?? throw new System.ArgumentNullException(nameof(haccess));
         }
 
         //impliment search and filter (maybe paggination)
@@ -44,6 +47,7 @@ namespace maker_checker_v1.Controllers
             return Ok(request);
         }
         [HttpPost(Name = "submit request")]
+        [Authorize(Roles = "Client")]
         public async Task<ActionResult<Request>> SubmitRequest(RequestForCreationDTO request)
         {
             //validate request 
@@ -53,20 +57,25 @@ namespace maker_checker_v1.Controllers
 
             // var requestToCreate = new Request(request.Name, request.ServiceTypeId, request.Amount);
             var requestToCreate = _mapper.Map<Request>(request);
+            requestToCreate.ServiceType = serviceType;
+            //TODO :later get it from the claims
+            var userId = _hContext.User.FindFirstValue("sub");
+            requestToCreate.UserId = Int32.Parse(userId);
             var validationResult = _validator.Validate(requestToCreate);
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
-            ValidationProgress ValiProgressToBeAdded = new ValidationProgress(requestToCreate.Id)
-            {
-                Rules = serviceType?.Validation?.Rules ?? new List<Rule>()
-            };
-            //todo check with ahmed if we could delete this code
-            ValiProgressToBeAdded.RequestId = requestToCreate.Id;
-            requestToCreate.ValidationProgress = ValiProgressToBeAdded;
-            requestToCreate.ServiceType = serviceType;
-            requestToCreate.ServiceTypeId = serviceType.Id;
+            //TODO :create validationProgress
+            // ValidationProgress ValiProgressToBeAdded = new ValidationProgress(requestToCreate.Id)
+            // {
+            //     Rules = serviceType?.Validation?.Rules ?? new List<Rule>()
+            // };
+
+            // ValiProgressToBeAdded.RequestId = requestToCreate.Id;
+            // requestToCreate.ValidationProgress = ValiProgressToBeAdded;
+            // requestToCreate.ServiceType = serviceType;
+            // requestToCreate.ServiceTypeId = serviceType.Id;
             _requestRepository.Add(requestToCreate);
-            if (!await _requestRepository.SaveChangesAsync())
+            if (!await _requestRepository.Save())
                 return BadRequest("Error creating request");
             // return Ok(requestToCreate);
 
@@ -77,6 +86,7 @@ namespace maker_checker_v1.Controllers
 
 
         }
+
         /// <summary>
         /// User with role:role can validate request with id:requestId
         /// </summary>
@@ -104,7 +114,7 @@ namespace maker_checker_v1.Controllers
                 else
                     rule.Nbr++;
                 //todo :add event listner to update validation progress
-                if (!await _requestRepository.SaveChangesAsync())
+                if (!await _requestRepository.Save())
                     return BadRequest("Error validating request");
                 return Ok(request);
             }
@@ -117,7 +127,7 @@ namespace maker_checker_v1.Controllers
             if (request == null)
                 return NotFound("Request not found");
             _requestRepository.Remove(request);
-            if (!await _requestRepository.SaveChangesAsync())
+            if (!await _requestRepository.Save())
                 return BadRequest("Error deleting request");
             return Ok(request);
         }
