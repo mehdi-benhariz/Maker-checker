@@ -3,7 +3,32 @@ import { ProgressCell, StatusCell } from "../../utils/Cells";
 import { getRequestByClient } from "../../../API/RequestAPI";
 import { login } from "../../../API/AuthAPI";
 const RequestHistory = () => {
-  const [requests, setRequests] = useState([]);
+  const [requests, setRequests] = useState([
+    {
+      id: 1,
+      serviceType: "intrabank",
+      status: "Pending",
+      creationDate: "2020-01-01",
+      progress: 80,
+      amount: 900,
+    },
+    {
+      id: 2,
+      serviceType: "intrabank",
+      status: "Rejected",
+      creationDate: "2020-01-01",
+      progress: 30,
+      amount: 1900,
+    },
+    {
+      id: 3,
+      serviceType: "intrabank",
+      status: "Approved",
+      creationDate: "2020-01-01",
+      progress: 100,
+      amount: 2000,
+    },
+  ]);
 
   async function getRequestHistory() {
     // await login("red", "123456789");
@@ -42,7 +67,9 @@ const RequestHistory = () => {
                 {request.creationDate}
               </h3>
             </div>
-            <div className="flex   ">{ProgressCell(request.progres)}</div>
+            <div className="flex   ">
+              {ProgressCell(request.progress, request.status)}
+            </div>
             <div className="flex items-center flex-row-reverse gap-4">
               {StatusCell(request.status)}
               <p>{request.amount} DT </p>

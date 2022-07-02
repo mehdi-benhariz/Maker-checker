@@ -17,48 +17,77 @@ export function RoleNbrCell(value, cb, max = 5) {
   );
 }
 export function StatusCell(value) {
-  //
   let colors = {
-    Pending: "orange",
-    Approved: "green",
-    Rejected: "red",
+    Pending: (
+      <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+        <span
+          aria-hidden
+          class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
+        ></span>
+        <span class="relative">{value} </span>
+      </span>
+    ),
+    Approved: (
+      <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+        <span
+          aria-hidden
+          class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+        ></span>
+        <span class="relative">{value} </span>
+      </span>
+    ),
+    Rejected: (
+      <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+        <span
+          aria-hidden
+          class="absolute inset-0 bg-red-200 opacity-50 rounded-full"
+        ></span>
+        <span class="relative">{value} </span>
+      </span>
+    ),
   };
-  let primaryStyle = `relative inline-block px-3 py-1 font-semibold text-${colors[value]}-900 leading-tight`;
-  let secondaryStyle = `absolute inset-0 bg-${colors[value]}-200 opacity-50 rounded-full`;
-
-  return (
-    <span className={primaryStyle}>
-      <span aria-hidden className={secondaryStyle}></span>
-      <span className="relative">{value} </span>
-    </span>
-  );
+  return colors[value];
 }
 
-export function ProgressCell(value) {
+export function ProgressCell(value, status) {
   let colors = (val) => {
-    if (val < 50) return "red";
-    if (val < 80) return "orange";
-    return "green";
-  };
-  // let barColors = (val) => {
-  //   if (val < 50) return "bg-red-500";
-  //   if (val < 80) return "bg-orange-500";
-  //   return "bg-green-500";
-  // };
-
-  let bgStyle = `overflow-hidden h-4 text-xs w-full flex rounded bg-${colors(
-    value
-  )}-200 w-full`;
-  let barStyle = `shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-${colors(
-    value
-  )}-500`;
-  return (
-    <div className="flex justify-center items-center w-full">
-      <div className={bgStyle}>
-        <div style={{ width: (value / 100) * 100 + "%" }} className={barStyle}>
+    if (status === "Rejected")
+      return (
+        <div className="overflow-hidden h-4 text-xs flex rounded bg-red-200 w-full">
+          <div
+            style={{ width: (value / 100) * 100 + "%" }}
+            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
+          >
+            {value}%
+          </div>
+        </div>
+      );
+    if (parseInt(val) === 100)
+      return (
+        <div className="overflow-hidden h-4 text-xs flex rounded bg-green-200 w-full">
+          <div
+            style={{ width: (value / 100) * 100 + "%" }}
+            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
+          >
+            {value}%
+          </div>
+        </div>
+      );
+    return (
+      <div className="overflow-hidden h-4 text-xs flex rounded bg-orange-200 w-full">
+        <div
+          style={{ width: (value / 100) * 100 + "%" }}
+          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
+        >
           {value}%
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div className="flex justify-center items-center w-full">
+      {colors(value)}
     </div>
   );
 }

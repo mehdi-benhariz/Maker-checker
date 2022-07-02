@@ -30,7 +30,7 @@ const RequestsTable = () => {
       username: "mehdi ben hariz",
       date: "2022-06-20",
       type: "international",
-      progres: "0",
+      progres: "90",
       status: "Rejected",
     },
     {
@@ -129,7 +129,7 @@ const RequestsTable = () => {
                         </p>
                       </td>
                       <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {ProgressCell(request.progres)}
+                        {ProgressCell(request.progres, request.status)}
                       </td>
                       <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         {StatusCell(request.status)}

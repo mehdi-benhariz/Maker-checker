@@ -87,7 +87,11 @@ const UsersTable = () => {
                       <div class="px-2">
                         <select defaultValue={row.role.name}>
                           {roles.map((role) => (
-                            <option key={role.id} value={role.id}>
+                            <option
+                              className="h-8 w-8"
+                              key={role.id}
+                              value={role.id}
+                            >
                               {role.name}
                             </option>
                           ))}
