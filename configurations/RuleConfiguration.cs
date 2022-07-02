@@ -13,10 +13,13 @@ namespace maker_checker_v1.configurations
 
             builder.HasKey(r => r.Id);
             // builder.HasOne(r => r.Role).WithMany(r => r.Rules).HasForeignKey(r => r.RoleId);
-            builder.HasOne(r => r.ValidationProgress)
-            .WithMany(vp => vp.Rules)
-            .HasForeignKey(vp => vp.ValidationProgressId)
-            .IsRequired(false);
+            //todo fix it later
+            // builder.HasOne(r => r.ValidationProgress)
+            
+            // .WithMany(vp => vp.Rules)
+            // .HasForeignKey(vp => vp.ValidationProgressId)
+            // .IsRequired(false);
+
             // builder.HasOne(r => r.Validation).WithMany(v => v.Rules).HasForeignKey(r => r.ValidationId);
         }
     }

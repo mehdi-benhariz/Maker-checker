@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1
 {
-    public class UserRepository : IRepository
+    public class UserRepository
     {
         private readonly RequestContext _context;
 

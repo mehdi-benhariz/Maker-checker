@@ -19,11 +19,11 @@ export function RoleNbrCell(value, cb, max = 5) {
 export function StatusCell(value) {
   //
   let colors = {
-    Pending: "yellow",
+    Pending: "orange",
     Approved: "green",
     Rejected: "red",
   };
-  let primaryStyle = `relative inline-block px-3 py-1 font-semibold text-${colors[value]}-900 leading-tight text-orange-900`;
+  let primaryStyle = `relative inline-block px-3 py-1 font-semibold text-${colors[value]}-900 leading-tight`;
   let secondaryStyle = `absolute inset-0 bg-${colors[value]}-200 opacity-50 rounded-full`;
 
   return (
@@ -37,15 +37,21 @@ export function StatusCell(value) {
 export function ProgressCell(value) {
   let colors = (val) => {
     if (val < 50) return "red";
-    if (val < 80) return "yellow";
+    if (val < 80) return "orange";
     return "green";
   };
-  let bgStyle = `overflow-hidden h-4 text-xs w-auto flex rounded bg-${colors(
+  // let barColors = (val) => {
+  //   if (val < 50) return "bg-red-500";
+  //   if (val < 80) return "bg-orange-500";
+  //   return "bg-green-500";
+  // };
+
+  let bgStyle = `overflow-hidden h-4 text-xs w-full flex rounded bg-${colors(
     value
   )}-200 w-full`;
   let barStyle = `shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-${colors(
     value
-  )}-500 `;
+  )}-500`;
   return (
     <div className="flex justify-center items-center w-full">
       <div className={bgStyle}>

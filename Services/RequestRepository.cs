@@ -1,10 +1,11 @@
 using maker_checker_v1.data;
+using maker_checker_v1.models.DTO;
 using maker_checker_v1.models.entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1.Services
 {
-    public class RequestRepository : IRepository
+    public class RequestRepository
     {
         private readonly RequestContext _context;
         public RequestRepository(RequestContext context)
@@ -52,5 +53,31 @@ namespace maker_checker_v1.Services
             return await _context.SaveChangesAsync() >= 0;
         }
 
+        internal async Task<(IEnumerable<RequetToReturn>, PagginationMetaData)> getRequestsHistory(int userId, int pageNumber, int pageSize = 5)
+        {
+            var collection = _context.Set<Request>() as IQueryable<Request>;
+            collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+            int totalItems = await collection.CountAsync();
+            var pagginationMetaData = new PagginationMetaData(pageNumber, pageSize, totalItems);
+            // var collectionToReturn = await collection.Include(r => r.ServiceType).ToListAsync();
+
+            var collectionToReturn = collection
+                .Join(
+                    _context.Set<ServiceType>(),
+                    r => r.ServiceTypeId,
+                    st => st.Id,
+                    (req, st) => new RequetToReturn
+                    {
+                        Id = req.Id,
+                        serviceType = st.Name,
+                        Status = req.Status,
+                        Amount = req.Amount
+                    }
+                ).ToList();
+
+            return (collectionToReturn, pagginationMetaData);
+
+        }
     }
 }

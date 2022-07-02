@@ -15,6 +15,7 @@ namespace maker_checker_v1.models.entities
         public ValidationProgress? ValidationProgress { get; set; }
         public int UserId { get; internal set; }
         public User User { get; internal set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public Request(string name, int serviceTypeId, float amount = 0, string status = "Pending")
         {

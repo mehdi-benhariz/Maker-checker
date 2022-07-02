@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { getAllServiceTypes } from "../../API/ServiceTypeAPI";
-import { RoleNbrCell } from "../utils/Cells";
-import { notify } from "../utils/Notify";
+import { getAllServiceTypes } from "../../../API/ServiceTypeAPI";
+import { RoleNbrCell } from "../../utils/Cells";
+import { notify } from "../../utils/Notify";
 const RulesTable = () => {
   const heads = ["serviceType", "A", "B", "C", "Action"];
   const handleChangeRule = (e, row) => {};
@@ -107,8 +107,7 @@ const RulesTable = () => {
                            py-5
                            px-2
                            bg-[#F3F6FF]
-                           border-b border-l border-[#E8E8E8]
-                           "
+                           border-b border-l border-[#E8E8E8]"
                 >
                   {row.serviceType}
                 </td>
@@ -131,7 +130,7 @@ const RulesTable = () => {
                            text-base
                            py-5
                            px-2
-                           bg-[#F3F6FF]
+                           bg-white
                            border-b border-[#E8E8E8]
                            "
                 >

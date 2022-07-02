@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1.Services
 {
-    public class ServiceTypeRepository : IRepository
+    public class ServiceTypeRepository
     {
         private readonly RequestContext _context;
 

@@ -2,6 +2,7 @@ using maker_checker_v1;
 using maker_checker_v1.data;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using Serilog;
@@ -13,7 +14,11 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
-
+// builder.WebHost.ConfigureKestrel(options =>
+// {
+//     // Setup a HTTP/2 endpoint without TLS.
+//     options.ListenLocalhost(5000, o => o.Protocols = HttpProtocols.Http2);
+// });
 // Add services to the container.
 
 builder.Services.AddControllers().AddNewtonsoftJson(
@@ -64,6 +69,12 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    PolicyConfiguration.setPolicies(options);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

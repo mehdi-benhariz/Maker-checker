@@ -1,5 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace maker_checker_v1.models.entities
 {
@@ -9,18 +8,13 @@ namespace maker_checker_v1.models.entities
         public int Id { get; set; }
         public int RequestId { get; set; }
         public Request Request { get; set; }
-        public List<Rule> Rules = new List<Rule>();
+        public List<Operation> Operations = new List<Operation>();
 
         public bool IsValidated
         {
             get
-            {
-                bool hasValidation = Request.ServiceType.Validation != null;
-                if (!hasValidation)
-                    return false;
-                bool countCompleted = Rules.Count == Rules.Count(r => r.Nbr == 0);
-                return countCompleted;
-
+            {//todo:change it later
+                return Operations.Count > 0;
             }
         }
 

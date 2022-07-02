@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusCell, ProgressCell } from "../utils/Cells";
+import { StatusCell, ProgressCell } from "../../utils/Cells";
 
 const RequestsTable = () => {
   const [requets, setRequets] = useState([

@@ -1,7 +1,11 @@
 import React from "react";
 import { useState, useMemo, useEffect } from "react";
 const UsersTable = () => {
-  const [roles, setroles] = useState(["A", "B", "C"]);
+  const [roles, setroles] = useState([
+    { id: 2, name: "A" },
+    { id: 3, name: "B" },
+    { id: 4, name: "C" },
+  ]);
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -81,10 +85,10 @@ const UsersTable = () => {
                         <span>{row.date}</span>
                       </div>
                       <div class="px-2">
-                        <select defaultValue={row.role}>
+                        <select defaultValue={row.role.name}>
                           {roles.map((role) => (
-                            <option key={role} value={role}>
-                              {role}
+                            <option key={role.id} value={role.id}>
+                              {role.name}
                             </option>
                           ))}
                         </select>
