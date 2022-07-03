@@ -1,5 +1,5 @@
 import React from "react";
-import RequestCarousel from "../RequestCarousel";
+import RequestCarousel from "./RequestCarousel";
 
 const StaffPage = () => {
   return (
