@@ -66,7 +66,7 @@ const RequestForm = () => {
           <label className="flex items-center dark:text-gray-400">
             <input
               type="checkbox"
-              class="w-4 h-4 accent-purple-600 text-purple-600 bg-gray-100 rounded border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 accent-purple-600 text-purple-600 bg-gray-100 rounded border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
             <span className="ml-2">
               I agree to the <span className="underline">privacy policy</span>

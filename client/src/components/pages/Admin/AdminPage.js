@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import RequestsTable from "./RequestsTable";
 import UsersTable from "./UsersTable";
@@ -11,13 +11,13 @@ const AdminPage = () => {
 
   return (
     <div className="">
-      <div class="bg-gray-50 min-h-screen">
+      <div className="bg-gray-50 min-h-screen">
         <nav>
-          <div class="flex justify-between items-center p-4 bg-white">
-            <div class="flex items-center">
+          <div className="flex justify-between items-center p-4 bg-white">
+            <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 hidden"
+                className="h-5 w-5 hidden"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -25,7 +25,7 @@ const AdminPage = () => {
               </svg>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-8 w-8 cursor-pointer"
+                className="h-8 w-8 cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -38,10 +38,10 @@ const AdminPage = () => {
                 />
               </svg>
             </div>
-            <div class="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-7 w-7 cursor-pointer"
+                className="h-7 w-7 cursor-pointer"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -53,9 +53,9 @@ const AdminPage = () => {
                   d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                 />
               </svg>
-              <div class="w-10">
+              <div className="w-10">
                 <img
-                  class="rounded-full"
+                  className="rounded-full"
                   src="https://forbesthailand.com/wp-content/uploads/2021/08/https-specials-images.forbesimg.com-imageserve-5f47d4de7637290765bce495-0x0.jpgbackground000000cropX11699cropX23845cropY1559cropY22704.jpg"
                   alt=""
                 />

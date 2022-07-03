@@ -14,7 +14,8 @@ namespace maker_checker_v1.models.entities
         public int RoleId { get; set; } = 1;
         public Role Role { get; set; }
 
-        public ICollection<Request>? Requests { get; set; }
+        public ICollection<Request>? Requests { get; set; } = new List<Request>();
+        public ICollection<Operation>? Operations { get; set; } = new List<Operation>();
         public static byte[] CreateHash(string password)
         {
             using (var sha256 = SHA256.Create())

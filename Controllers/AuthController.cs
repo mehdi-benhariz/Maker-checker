@@ -39,7 +39,6 @@ namespace maker_checker_v1.models.DTO
             {
                 Username = userModel.Username,
                 Password = entities.User.CreateHash(userModel.Password),
-                //todo change it later
             };
             _userRepository.Add(userToBeCreated);
             if (!await _userRepository.Save())
@@ -48,7 +47,7 @@ namespace maker_checker_v1.models.DTO
             var payload = new Claim[]{
                 new Claim("sub",userToBeCreated.Id.ToString()),
                 new Claim("username",userToBeCreated.Username),
-                new Claim(ClaimTypes.Role,userToBeCreated.Role.Name)
+                new Claim(ClaimTypes.Role,"Client")
              };
 
             var token = userToBeCreated.generateToken(payload, _issuer, _audience, _secret);
@@ -72,6 +71,7 @@ namespace maker_checker_v1.models.DTO
         public async Task<ActionResult> Login(UserLoginDTO userModel)
         {
             User? user = await _userRepository.GetByUsername(userModel.Username);
+            //todo make a standart error format
             if (user == null)
                 return BadRequest("User does not exist");
             if (!entities.User.CompareHash(userModel.Password, user.Password))

@@ -62,10 +62,10 @@ const RulesTable = () => {
   return (
     <div className="max-w-full overflow-x-auto flex-col  flex justify-center bg-white p-4 mt-2 ">
       <div className="flex flex-row justify-between items-center">
-        <h2 class="mb-4 text-xl font-bold text-gray-700">
+        <h2 className="mb-4 text-xl font-bold text-gray-700">
           Services & Validation
         </h2>
-        <button class="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+        <button className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
           New Service Type
         </button>
       </div>

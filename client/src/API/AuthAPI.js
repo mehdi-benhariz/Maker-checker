@@ -1,10 +1,10 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-export const register = (username, password) => {
-  const url = `${process.env.REACT_APP_API_URL}/api/auth/register`;
+export const register = async (username, password) => {
+  const url = `${process.env.REACT_APP_API_URL}/api/Auth/register`;
   try {
-    return axios.post(url, { username, password });
+    return await axios.post(url, { username, password });
   } catch (error) {
     return error.response;
   }
@@ -23,6 +23,15 @@ export const logout = () => {
   const url = `${process.env.REACT_APP_API_URL}/api/auth/logout`;
   try {
     return axios.post(url);
+  } catch (error) {
+    return error.response;
+  }
+};
+
+export const getUserInfo = () => {
+  const url = `${process.env.REACT_APP_API_URL}/api/Auth/user`;
+  try {
+    return axios.get(url);
   } catch (error) {
     return error.response;
   }

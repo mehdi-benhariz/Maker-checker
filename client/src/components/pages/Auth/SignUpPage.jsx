@@ -1,57 +1,95 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField } from "../../utils/InputFields";
 import proxym from "./proxym.png";
-
+import { register } from "../../../API/AuthAPI";
+import { AuthContext } from "../../../context/AuthContext";
 const SignUpPage = () => {
-  const [user, setUser] = useState({});
-  const [error, setError] = useState({});
+  const [user, setUser] = useState({
+    password: "",
+    username: "",
+  });
+  const [errors, setErrors] = useState({});
   let setField = (field, x) => setUser({ ...user, [field]: x });
-  async function handlRegister() {}
+
+  const { CurrentUser, setCurrentUser } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+
+  async function handlRegister(e) {
+    e.preventDefault();
+    if (user.password.localeCompare(user.passwordConfirm) !== 0)
+      return setErrors({ passwordConfirm: ["Passwords do not match"] });
+
+    let res = await register(user.username, user.password);
+    if (res.status === 200) {
+      console.log(res.data);
+      setErrors({});
+      setCurrentUser({ isLoggedIn: true, ...res.data });
+      navigate("/client");
+    } else {
+      console.log(res.data.errors);
+      setErrors(res.data.errors);
+    }
+  }
 
   return (
-    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-      <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
-        <div class="flex flex-col overflow-y-auto md:flex-row">
-          <div class="h-32 md:h-auto md:w-1/2">
+    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+        <div className="flex flex-col overflow-y-auto md:flex-row">
+          <div className="h-32 md:h-auto md:w-1/2">
             <img
               aria-hidden="true"
-              class="object-fit w-full h-full dark:hidden"
+              className="object-fit w-full h-full dark:hidden"
               src={proxym}
               alt="proxym logo"
             />
           </div>
-          <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-            <div class="w-full">
-              <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+          <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+            <div className="w-full">
+              <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Create account
               </h1>
-              <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">username</span>
-                <TextField cb={(x) => setField("username", x)} />
-              </label>
-              <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Password</span>
+              <label className="block text-sm">
+                <span className="text-gray-700 dark:text-gray-400">
+                  username
+                </span>
                 <TextField
-                  placeholder="**********"
-                  cb={(x) => setField("password", x)}
+                  cb={(x) => {
+                    setErrors({});
+                    setField("username", x);
+                  }}
                 />
               </label>
-              <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">
+              <label className="block mt-4 text-sm">
+                <span className="text-gray-700 dark:text-gray-400">
+                  Password
+                </span>
+                <TextField
+                  placeholder="**********"
+                  cb={(x) => {
+                    setErrors({});
+                    setField("password", x);
+                  }}
+                />
+              </label>
+              <label className="block mt-4 text-sm">
+                <span className="text-gray-700 dark:text-gray-400">
                   Confirm password
                 </span>
                 <TextField
                   placeholder="**********"
-                  cb={(x) => setField("passwordConfirm", x)}
+                  cb={(x) => {
+                    setErrors({});
+                    setField("passwordConfirm", x);
+                  }}
                 />
               </label>
 
-              <div class="flex mt-6 text-sm">
-                <label class="flex items-center dark:text-gray-400">
+              <div className="flex mt-6 text-sm">
+                <label className="flex items-center dark:text-gray-400">
                   <input
                     type="checkbox"
-                    class="w-4 h-4 accent-purple-600 text-purple-600 bg-gray-100 rounded border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 accent-purple-600 text-purple-600 bg-gray-100 rounded border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <span className="ml-2">
                     I agree to the {""}
@@ -60,15 +98,35 @@ const SignUpPage = () => {
                 </label>
               </div>
 
-              <button class="bg-gradient-to-tr from-indigo-600 to-purple-600 block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-white hover:border-indigo-600focus:outline-none focus:shadow-outline-purple">
+              <button
+                onClick={handlRegister}
+                className="bg-gradient-to-tr from-indigo-600 to-purple-600 block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-white hover:border-indigo-600focus:outline-none focus:shadow-outline-purple"
+              >
                 Create account
               </button>
+              <div>
+                {Object.keys(errors).map((key, i) => {
+                  return (
+                    <p
+                      key={i}
+                      className="no-underline text-red-600 mb-2 inline-flex items-center rounded-full border border-grey-light bg-red-200 text-xs 
+          pl-1 pt-1 pb-1 pr-2 leading-none mr-2 font-bold p-4"
+                    >
+                      <span className="inline-flex rounded-full bg-green-light text-red-600 mr-1 font-bold">
+                        X
+                      </span>{" "}
+                      <span>
+                        {key}: {errors[key][0]}
+                      </span>
+                    </p>
+                  );
+                })}
+              </div>
+              <hr className="my-8" />
 
-              <hr class="my-8" />
-
-              <button class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
+              <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
                 <svg
-                  class="w-4 h-4 mr-2"
+                  className="w-4 h-4 mr-2"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -77,9 +135,9 @@ const SignUpPage = () => {
                 </svg>
                 Github
               </button>
-              <button class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5  text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
+              <button className="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5  text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
                 <svg
-                  class="w-4 h-4 mr-2"
+                  className="w-4 h-4 mr-2"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -89,9 +147,9 @@ const SignUpPage = () => {
                 Twitter
               </button>
 
-              <p class="mt-4">
+              <p className="mt-4">
                 <Link
-                  class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                  className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                   to="/login"
                 >
                   Already have an account? Login
