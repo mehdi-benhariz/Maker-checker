@@ -24,8 +24,8 @@ const SignInPage = () => {
       });
       navigate("/admin");
     } else {
-      console.log(res.data.errors);
-      setErrors(res.data.errors);
+      // console.log(res.data.errors);
+      if (res.data.errors) setErrors(res.data.errors);
     }
   }
   return (

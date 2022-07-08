@@ -19,10 +19,10 @@ export const login = async (username, password) => {
   }
 };
 
-export const logout = () => {
+export const logout = async () => {
   const url = `${process.env.REACT_APP_API_URL}/api/auth/logout`;
   try {
-    return axios.post(url);
+    return await axios.post(url);
   } catch (error) {
     return error.response;
   }

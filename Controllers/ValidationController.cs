@@ -38,7 +38,7 @@ namespace maker_checker_v1.Controllers
             if (!await _serviceTypeRepository.Exists(serviceTypeId))
                 return NotFound("Service type not found");
             var serviceType = await _serviceTypeRepository.getServiceType(serviceTypeId);
-            if (serviceType.Validation != null)
+            if (serviceType!.Validation != null)
                 return BadRequest("Service type already has a validation");
             var validationToCreate = _mapper.Map<Validation>(validation);
             validationToCreate.ServiceTypeId = serviceTypeId;

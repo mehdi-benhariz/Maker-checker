@@ -27,8 +27,9 @@ const SignUpPage = () => {
       setCurrentUser({ isLoggedIn: true, ...res.data });
       navigate("/client");
     } else {
-      console.log(res.data.errors);
-      setErrors(res.data.errors);
+      console.log(res.data);
+      // console.log(res.data.errors);
+      // setErrors(res.data.errors);
     }
   }
 

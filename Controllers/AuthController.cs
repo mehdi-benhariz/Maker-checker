@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using maker_checker_v1.data;
 using maker_checker_v1.models.entities;
 using Microsoft.AspNetCore.Authentication;
@@ -16,14 +17,16 @@ namespace maker_checker_v1.models.DTO
     {
         private readonly UserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
         private readonly string _secret;
         private readonly string _issuer;
         private readonly string _audience;
 
-        public AuthController(UserRepository userRepository, IConfiguration configuration)
+        public AuthController(UserRepository userRepository, IConfiguration configuration, IMapper mapper)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _secret = _configuration["JWT:Secret"];
             _issuer = _configuration["JWT:Issuer"];
             _audience = _configuration["JWT:Audience"];
@@ -57,6 +60,7 @@ namespace maker_checker_v1.models.DTO
 
             var authProperties = new AuthenticationProperties
             {
+                IsPersistent = true,
                 AllowRefresh = true,
             };
 
@@ -68,7 +72,7 @@ namespace maker_checker_v1.models.DTO
             return Ok(userToBeCreated);
         }
         [HttpPost("login")]
-        public async Task<ActionResult> Login(UserLoginDTO userModel)
+        public async Task<ActionResult<UserToReturn>> Login(UserLoginDTO userModel)
         {
             User? user = await _userRepository.GetByUsername(userModel.Username);
             //todo make a standart error format
@@ -76,7 +80,6 @@ namespace maker_checker_v1.models.DTO
                 return BadRequest("User does not exist");
             if (!entities.User.CompareHash(userModel.Password, user.Password))
                 return BadRequest("Wrong password");
-            //todo: create token after taking ahmed opinion on its implementation
 
             var payload = new Claim[]{
                 new Claim("sub",user.Id.ToString()),
@@ -90,6 +93,7 @@ namespace maker_checker_v1.models.DTO
 
             var authProperties = new AuthenticationProperties
             {
+                IsPersistent = true,
                 AllowRefresh = true,
             };
 
@@ -97,8 +101,7 @@ namespace maker_checker_v1.models.DTO
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-
-            return Ok("login successful");
+            return Ok(_mapper.Map<UserToReturn>(user));
         }
         [Authorize(Roles = "Client")]
         [HttpPost("logout")]

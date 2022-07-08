@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useMemo, useEffect } from "react";
+import { useState } from "react";
 const UsersTable = () => {
   const [roles, setroles] = useState([
     { id: 2, name: "A" },
@@ -88,7 +88,7 @@ const UsersTable = () => {
                         <select defaultValue={row.role.name}>
                           {roles.map((role) => (
                             <option
-                              classNameName="h-8 w-8"
+                              className="h-8 w-8"
                               key={role.id}
                               value={role.id}
                             >

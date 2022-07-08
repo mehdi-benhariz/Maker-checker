@@ -4,17 +4,25 @@ import { Toaster } from "react-hot-toast";
 import RequestsTable from "./RequestsTable";
 import UsersTable from "./UsersTable";
 import RulesTable from "./RulesTable";
+import { logout } from "../../../API/AuthAPI";
+import { useNavigation } from "react-router-dom";
 // import { getAllServiceTypes } from "../api/serviceType";
 
 const AdminPage = () => {
   //get initial service types and their api
-
+  const navigate = useNavigation();
+  let handlLogout = async (e) => {
+    e.preventDefault();
+    const res = await logout();
+    if (res.status === 200) navigate("/");
+    //todo add custom error handling
+  };
   return (
     <div className="">
       <div className="bg-gray-50 min-h-screen">
         <nav>
           <div className="flex justify-between items-center p-4 bg-white">
-            <div className="flex items-center">
+            <div className="flex items-center" onClick={handlLogout}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 hidden"

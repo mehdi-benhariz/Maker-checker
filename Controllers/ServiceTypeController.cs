@@ -3,6 +3,7 @@ using maker_checker_v1.data;
 using maker_checker_v1.data.Validators;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ namespace maker_checker_v1.Controllers
             _validator = new ServiceTypeValidator();
         }
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ServiceType>>> Get()
         {
             var serviceTypes = await _serviceTypeRepository.getServiceTypes();
