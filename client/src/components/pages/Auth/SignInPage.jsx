@@ -21,8 +21,10 @@ const SignInPage = () => {
       console.log(res.data);
       setCurrentUser({
         isLoggedIn: true,
+        ...res.data,
       });
-      navigate("/admin");
+
+      navigate(`/${res.data.role}`);
     } else {
       // console.log(res.data.errors);
       if (res.data.errors) setErrors(res.data.errors);

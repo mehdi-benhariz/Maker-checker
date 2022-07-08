@@ -103,7 +103,7 @@ namespace maker_checker_v1.models.DTO
                 authProperties);
             return Ok(_mapper.Map<UserToReturn>(user));
         }
-        [Authorize(Roles = "Client")]
+        [Authorize]
         [HttpPost("logout")]
         public async Task<ActionResult> Logout()
         {
