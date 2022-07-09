@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { login } from "../../../API/AuthAPI";
+import React, { useState } from "react";
 import { addRequest } from "../../../API/RequestAPI";
 import { TextField, NumberField } from "../../utils/InputFields";
 
@@ -12,12 +11,14 @@ const RequestForm = () => {
   const [error, seterror] = useState([]);
 
   async function submitRequest() {
-    const logging = await login("red", "123456789");
-    if (!request.serviceType) request.serviceType = serviceTypes[0].id;
+    if (!request.serviceTypeId) request.serviceTypeId = serviceTypes[0].id;
     // const res = ICall("createRequest", request);
-    if (logging.status === 200) {
-      const res = await addRequest(request);
-      console.log(res);
+    console.log(request);
+    const res = await addRequest(request);
+    console.log(res);
+    if (res.status === 201) alert("Request submitted successfully");
+    else {
+      //todo created error message
     }
   }
 
@@ -27,11 +28,11 @@ const RequestForm = () => {
         Add Request
       </h4>
       <div className="w-full px-4 py-3 mb-8 grid grid-cols-2 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <label className="block text-sm">
-          <span className="text-gray-700 dark:text-gray-400">Name</span>
-          <TextField
-            value={request.name}
-            cb={(x) => setrequest({ ...request, Name: x })}
+        <label className="block text-sm ">
+          <span className="text-gray-700 dark:text-gray-400">Amount</span>
+          <NumberField
+            value={request.amount}
+            cb={(x) => setrequest({ ...request, Amount: x })}
           />
         </label>
 
@@ -54,14 +55,13 @@ const RequestForm = () => {
             ))}
           </select>
         </label>
-        <label className="block text-sm col-span-2  mr-4">
-          <span className="text-gray-700 dark:text-gray-400">Amount</span>
-          <NumberField
-            value={request.amount}
-            cb={(x) => setrequest({ ...request, Amount: x })}
+        <label className="block text-sm col-span-2 ">
+          <span className="text-gray-700 dark:text-gray-400">Description</span>
+          <TextField
+            value={request.description}
+            cb={(x) => setrequest({ ...request, Description: x })}
           />
         </label>
-
         <div className="flex mt-6 text-sm">
           <label className="flex items-center dark:text-gray-400">
             <input

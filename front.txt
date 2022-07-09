@@ -1,4 +1,3 @@
-+signIn/SignUp
 +AdminPage (admin can add rules or change the rules)
 -
 +AddRequest(clien can submit request)

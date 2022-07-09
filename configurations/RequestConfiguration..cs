@@ -11,7 +11,7 @@ namespace maker_checker_v1.configurations
         {
             builder.HasKey(r => r.Id);
             //generate key automatically
-            builder.Property(r => r.Name).IsRequired().HasMaxLength(20);
+            // builder.Property(r => r.Name).IsRequired().HasMaxLength(20);
             builder.Property(r => r.Amount).IsRequired().HasDefaultValue(0);
 
             builder.HasOne<ServiceType>(r => r.ServiceType)

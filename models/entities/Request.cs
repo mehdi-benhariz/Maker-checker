@@ -7,7 +7,7 @@ namespace maker_checker_v1.models.entities
     public class Request
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Description { get; set; }
         public float Amount { get; set; } = 0;
         public string Status { get; set; }
         public int ServiceTypeId { get; set; }
@@ -17,9 +17,8 @@ namespace maker_checker_v1.models.entities
         public User User { get; internal set; }
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public Request(string name, int serviceTypeId, float amount = 0, string status = "Pending")
+        public Request(int serviceTypeId, float amount = 0, string status = "Pending")
         {
-            this.Name = name;
             this.Amount = amount;
             this.Status = status;
             this.ServiceTypeId = serviceTypeId;

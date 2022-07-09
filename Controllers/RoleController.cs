@@ -22,7 +22,6 @@ namespace maker_checker_v1.Controllers
         [HttpGet]
         public async Task<IEnumerable<Role>> Get()
         {
-            //todo:use a generic repository to get all roles
 
             var roles = await _roleRepository.getRoles();
             return roles;
@@ -46,7 +45,7 @@ namespace maker_checker_v1.Controllers
                 return BadRequest("error while saving Role");
             return Ok();
         }
-        
+
         [HttpDelete("{roleId}")]
         public async Task<ActionResult<Role>> DeleteRole(int roleId)
         {

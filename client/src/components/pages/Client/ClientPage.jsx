@@ -30,10 +30,6 @@ const ClientPage = () => {
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
-            {/* <span className="flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-            </span> */}
           </div>
           <div className="flex items-center space-x-2">
             <div className="relative">

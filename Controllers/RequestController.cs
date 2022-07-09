@@ -59,9 +59,10 @@ namespace maker_checker_v1.Controllers
         }
         [HttpPost(Name = "submit request")]
         [Authorize(Policy = "Client")]
-        public async Task<ActionResult<Request>> SubmitRequest(RequestForCreationDTO request)
+        public async Task<ActionResult<Request>> SubmitRequest([FromBody] RequestForCreationDTO request)
         {
             //validate request 
+
             var serviceType = await _serviceTypeRepository.getServiceType(request.ServiceTypeId);
             if (serviceType == null)
                 return NotFound("Service type not found");

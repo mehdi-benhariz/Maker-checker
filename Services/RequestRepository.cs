@@ -17,13 +17,13 @@ namespace maker_checker_v1.Services
             var requests = await _context.Set<Request>().ToListAsync();
             return requests;
         }
-        public async Task<IEnumerable<Request>> GetRequests(string? name, string? searchQuery)
+        public async Task<IEnumerable<Request>> GetRequests(string? desc, string? searchQuery)
         {
             var collection = _context.Set<Request>() as IQueryable<Request>;
             if (!string.IsNullOrEmpty(searchQuery))
-                collection = collection.Where(s => s.Name.Contains(searchQuery));
-            if (!string.IsNullOrEmpty(name))
-                collection = collection.Where(s => s.Name.Contains(name));
+                collection = collection.Where(s => s.Description != null & s.Description!.Contains(searchQuery));
+            if (!string.IsNullOrEmpty(desc))
+                collection = collection.Where(s => s!.Description!.Contains(desc));
 
             return await collection.ToListAsync();
         }
@@ -35,10 +35,7 @@ namespace maker_checker_v1.Services
         public async void Add(Request request)
         {
             await _context.Set<Request>().AddAsync(request);
-            // await _context.Set<ValidationProgress>().AddAsync(new ValidationProgress(request.Id)
-            // {
-            //     Rules = request?.ServiceType?.Validation?.Rules ?? new List<Rule>()
-            // });
+
         }
         public async Task<Boolean> Exits(int requestId)
         {
@@ -53,7 +50,7 @@ namespace maker_checker_v1.Services
             return await _context.SaveChangesAsync() >= 0;
         }
 
-        internal async Task<(IEnumerable<RequetToReturn>, PagginationMetaData)> getRequestsHistory(int userId, int pageNumber, int pageSize = 5)
+        internal async Task<(IEnumerable<RequestToReturn>, PagginationMetaData)> getRequestsHistory(int userId, int pageNumber, int pageSize = 5)
         {
             var collection = _context.Set<Request>() as IQueryable<Request>;
             collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
@@ -67,7 +64,7 @@ namespace maker_checker_v1.Services
                     _context.Set<ServiceType>(),
                     r => r.ServiceTypeId,
                     st => st.Id,
-                    (req, st) => new RequetToReturn
+                    (req, st) => new RequestToReturn
                     {
                         Id = req.Id,
                         serviceType = st.Name,
