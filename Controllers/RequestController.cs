@@ -33,7 +33,7 @@ namespace maker_checker_v1.Controllers
         }
         [HttpGet("client", Name = "GetClientRequests")]
         [Authorize(Policy = "Client")]
-        public async Task<ActionResult<IEnumerable<Request>>> GetRequestsHistory([FromQuery] int pageNumber = 1)
+        public async Task<ActionResult<IEnumerable<RequestToClient>>> GetRequestsHistory([FromQuery] int pageNumber = 1)
         {
             var userId = _hContext.User.FindFirstValue("sub") ?? "1";
             var (requests, pagginationMetaData) = await _requestRepository.getRequestsHistory(Int32.Parse(userId), pageNumber);
@@ -58,7 +58,7 @@ namespace maker_checker_v1.Controllers
             return Ok(request);
         }
         [HttpPost(Name = "submit request")]
-        [Authorize(Policy = "Client")]
+        [Authorize(Roles = "Client")]
         public async Task<ActionResult<Request>> SubmitRequest([FromBody] RequestForCreationDTO request)
         {
             //validate request 

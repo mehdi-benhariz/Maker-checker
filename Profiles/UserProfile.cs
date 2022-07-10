@@ -7,9 +7,12 @@ namespace maker_checker_v1.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserToReturn>().ForMember(
-                dest => dest.Role,
-                opt => opt.MapFrom(src => src.Role.Name));
+            //convert Role in User to string
+            // CreateMap<User, UserToReturn>()
+            //     .ForMember(dest => dest.Role, opt => opt.MapFrom<RoleResolver>());
+            CreateMap<User, UserToReturn>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(u => u.Role.Name));
+
         }
 
     }

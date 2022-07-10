@@ -8,16 +8,17 @@ const RequestForm = () => {
     { id: 2, name: "intrabank" },
   ]);
   const [request, setrequest] = useState({});
-  const [error, seterror] = useState([]);
+  const [error, setError] = useState([]);
 
   async function submitRequest() {
-    if (!request.serviceTypeId) request.serviceTypeId = serviceTypes[0].id;
+    if (!request.ServiceTypeId) request.ServiceTypeId = serviceTypes[0].id;
     // const res = ICall("createRequest", request);
     console.log(request);
     const res = await addRequest(request);
     console.log(res);
     if (res.status === 201) alert("Request submitted successfully");
     else {
+      setError(res.data);
       //todo created error message
     }
   }
@@ -32,16 +33,20 @@ const RequestForm = () => {
           <span className="text-gray-700 dark:text-gray-400">Amount</span>
           <NumberField
             value={request.amount}
-            cb={(x) => setrequest({ ...request, Amount: x })}
+            cb={(x) => {
+              setError([]);
+              setrequest({ ...request, Amount: x });
+            }}
           />
         </label>
 
         <label className="block text-sm mx-4">
           <span className="text-gray-700 dark:text-gray-400">Service Type</span>
           <select
-            onChange={(e) =>
-              setrequest({ ...request, ServiceTypeId: e.target.value })
-            }
+            onChange={(e) => {
+              setError([]);
+              setrequest({ ...request, ServiceTypeId: e.target.value });
+            }}
             className="block h-10 w-full rounded-lg text-sm dark:text-gray-300 dark:border-gray-500 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
           >
             {serviceTypes.map((serviceType) => (
@@ -59,7 +64,10 @@ const RequestForm = () => {
           <span className="text-gray-700 dark:text-gray-400">Description</span>
           <TextField
             value={request.description}
-            cb={(x) => setrequest({ ...request, Description: x })}
+            cb={(x) => {
+              setError([]);
+              setrequest({ ...request, Description: x });
+            }}
           />
         </label>
         <div className="flex mt-6 text-sm">

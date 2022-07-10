@@ -1,13 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../../API/AuthAPI";
 import RequestForm from "./RequestForm";
 import RequestHistory from "./RequestHistory";
 
 const ClientPage = () => {
+  let navigate = useNavigate();
+  let handlLogout = async (e) => {
+    e.preventDefault();
+    const res = await logout();
+    if (res.status === 200) navigate("/login");
+    //todo add custom error handling
+  };
   return (
     <div className="bg-gray-50 min-h-screen">
       <nav>
         <div className="flex justify-between items-center p-4 bg-white">
-          <div className="flex items-center ">
+          <div className="flex items-center" onClick={handlLogout}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 hidden"

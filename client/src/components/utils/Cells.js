@@ -66,7 +66,7 @@ export function ProgressCell(value, status) {
       return (
         <div className="overflow-hidden h-4 text-xs flex rounded bg-green-200 w-full">
           <div
-            style={{ width: (value / 100) * 100 + "%" }}
+            style={{ width: "100%" }}
             className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
           >
             {value}%

@@ -40,6 +40,7 @@ builder.Services.AddScoped<ValidationRepository>();
 builder.Services.AddScoped<RuleRepository>();
 builder.Services.AddScoped<RoleRepository>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddTransient<UnitOfWork>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAuthentication(options =>
 {

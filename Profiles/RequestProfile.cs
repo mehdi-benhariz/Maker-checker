@@ -9,7 +9,7 @@ namespace maker_checker_v1.Profiles
         public RequestProfile()
         {
             CreateMap<RequestForCreationDTO, Request>();
-
+            CreateMap<Request, RequestToClient>().ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => src.CreationDate.ToString("dd-MM-yyyy")));
         }
     }
 }

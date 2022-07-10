@@ -14,7 +14,7 @@ const AdminPage = () => {
   let handlLogout = async (e) => {
     e.preventDefault();
     const res = await logout();
-    if (res.status === 200) navigate("/");
+    if (res.status === 200) navigate("/login");
     //todo add custom error handling
   };
   return (

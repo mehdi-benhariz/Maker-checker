@@ -50,11 +50,11 @@ namespace maker_checker_v1.Services
             return await _context.SaveChangesAsync() >= 0;
         }
 
-        internal async Task<(IEnumerable<RequestToReturn>, PagginationMetaData)> getRequestsHistory(int userId, int pageNumber, int pageSize = 5)
+        internal async Task<(IEnumerable<RequestToClient>, PagginationMetaData)> getRequestsHistory(int userId, int pageNumber, int pageSize = 5)
         {
             var collection = _context.Set<Request>() as IQueryable<Request>;
             collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-
+            collection = collection.OrderByDescending(r => r.CreationDate);
             int totalItems = await collection.CountAsync();
             var pagginationMetaData = new PagginationMetaData(pageNumber, pageSize, totalItems);
             // var collectionToReturn = await collection.Include(r => r.ServiceType).ToListAsync();
@@ -64,14 +64,16 @@ namespace maker_checker_v1.Services
                     _context.Set<ServiceType>(),
                     r => r.ServiceTypeId,
                     st => st.Id,
-                    (req, st) => new RequestToReturn
+                    (req, st) => new RequestToClient
                     {
                         Id = req.Id,
                         serviceType = st.Name,
                         Status = req.Status,
-                        Amount = req.Amount
+                        Amount = req.Amount,
+                        CreationDate = req.CreationDate.ToString("dd-MM-yyyy"),
                     }
-                ).ToList();
+                )
+                .ToList();
 
             return (collectionToReturn, pagginationMetaData);
 

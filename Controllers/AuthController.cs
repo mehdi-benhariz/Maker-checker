@@ -1,13 +1,11 @@
 using System.Security.Claims;
-using System.Text;
 using AutoMapper;
-using maker_checker_v1.data;
 using maker_checker_v1.models.entities;
+using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace maker_checker_v1.models.DTO
 {
@@ -15,16 +13,16 @@ namespace maker_checker_v1.models.DTO
     [Route("api/Auth")]
     public class AuthController : ControllerBase
     {
-        private readonly UserRepository _userRepository;
+        private readonly UnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly string _secret;
         private readonly string _issuer;
         private readonly string _audience;
 
-        public AuthController(UserRepository userRepository, IConfiguration configuration, IMapper mapper)
+        public AuthController(UnitOfWork unitOfWork, UserRepository userRepository, IConfiguration configuration, IMapper mapper)
         {
-            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _secret = _configuration["JWT:Secret"];
@@ -35,7 +33,8 @@ namespace maker_checker_v1.models.DTO
         [HttpPost("register")]
         public async Task<ActionResult> Register(UserLoginDTO userModel)
         {
-            if (await _userRepository.Exists(userModel.Username))
+            if (await _unitOfWork.Users.Exists(u => u.Username == userModel.Username))
+                // if (await _userRepository.Exists(userModel.Username))
                 return BadRequest("User already exists");
             //
             var userToBeCreated = new User()
@@ -43,8 +42,8 @@ namespace maker_checker_v1.models.DTO
                 Username = userModel.Username,
                 Password = entities.User.CreateHash(userModel.Password),
             };
-            _userRepository.Add(userToBeCreated);
-            if (!await _userRepository.Save())
+            await _unitOfWork.Users.Insert(userToBeCreated);
+            if (!await _unitOfWork.Save())
                 return BadRequest("problem occured while saving user");
             //generating token
             var payload = new Claim[]{
@@ -74,7 +73,7 @@ namespace maker_checker_v1.models.DTO
         [HttpPost("login")]
         public async Task<ActionResult<UserToReturn>> Login(UserLoginDTO userModel)
         {
-            User? user = await _userRepository.GetByUsername(userModel.Username);
+            User? user = await _unitOfWork.Users.Get(u => u.Username == userModel.Username, new List<string> { "Role" });
             //todo make a standart error format
             if (user == null)
                 return BadRequest("User does not exist");
@@ -111,13 +110,14 @@ namespace maker_checker_v1.models.DTO
             return Ok("logout successful");
         }
         [HttpPost("addStuff")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AddStuff(IEnumerable<UserCreationDTO> userModels)
         {
             //
             List<User> UsersToBeCreated = new List<User>();
             foreach (var userModel in userModels)
             {
-                if (await _userRepository.Exists(userModel.Username))
+                if (await _unitOfWork.Users.Exists(u => u.Username == userModel.Username))
                     return BadRequest("User already exists");
                 var userToBeCreated = new User()
                 {
@@ -129,9 +129,9 @@ namespace maker_checker_v1.models.DTO
             }
             //
 
-            _userRepository.AddRange(UsersToBeCreated);
+            await _unitOfWork.Users.InsertRange(UsersToBeCreated);
 
-            if (!await _userRepository.Save())
+            if (!await _unitOfWork.Save())
                 return BadRequest("problem occured while saving user");
 
             return Ok("addStuff successful");
