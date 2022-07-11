@@ -8,8 +8,6 @@ namespace maker_checker_v1.models.entities
     {
 
         public int Id { get; set; }
-        [Required(ErrorMessage = "Role name is required")]
-        [MaxLength(20, ErrorMessage = "Role name cannot be longer than 20 characters")]
         public string Name { get; set; }
         public List<Rule> Rules { get; set; } = new List<Rule>();
         public List<User> Users { get; set; } = new List<User>();
@@ -18,6 +16,6 @@ namespace maker_checker_v1.models.entities
             this.Name = name;
 
         }
-
+        public int MaxNbr() => Users.Count();
     }
 }

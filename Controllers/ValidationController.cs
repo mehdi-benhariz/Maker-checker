@@ -74,15 +74,15 @@ namespace maker_checker_v1.Controllers
 
             for (int i = 0; i < validationToBeChanged.Rules.Count; i++)
             {
-                if (validation.Rules.ElementAtOrDefault(i) == null)
-                    validation.Rules.Add(_mapper.Map<RuleForCreationDTO>(validationToBeChanged.Rules[i]));
+                // if (validation.Rules.ElementAtOrDefault(i) == null)
+                // validation.Rules.Add(_mapper.Map<RuleForCreationDTO>(validationToBeChanged.Rules[i]));
                 //for now its static , but later it will be dynamic(count all users with specific role)
                 var maxNbrByRole = 3;
                 if (validation.Rules[i].Nbr > maxNbrByRole)
                     return BadRequest("Rule nbr is higher than nbr of Rules for service type");
                 //todo later validate that the model contain the same Rules as the validationToBeChanged.Rules[]
-                if (validationToBeChanged.Rules[i].Nbr != validation.Rules[i].Nbr)
-                    validationToBeChanged.Rules[i].Nbr = validation.Rules[i].Nbr;
+                // if (validationToBeChanged.Rules[i].Nbr != validation.Rules[i].Nbr)
+                //     validationToBeChanged.Rules[i].Nbr = validation.Rules[i].Nbr;
             }
             if (!await _validationRepository.Save())
                 return BadRequest("Error updating validation");

@@ -20,7 +20,7 @@ namespace maker_checker_v1.models.DTO
         private readonly string _issuer;
         private readonly string _audience;
 
-        public AuthController(UnitOfWork unitOfWork, UserRepository userRepository, IConfiguration configuration, IMapper mapper)
+        public AuthController(UnitOfWork unitOfWork, IConfiguration configuration, IMapper mapper)
         {
             _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
@@ -110,7 +110,7 @@ namespace maker_checker_v1.models.DTO
             return Ok("logout successful");
         }
         [HttpPost("addStuff")]
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AddStuff(IEnumerable<UserCreationDTO> userModels)
         {
             //

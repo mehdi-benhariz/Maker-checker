@@ -6,19 +6,17 @@ import { login } from "../../../API/AuthAPI";
 import { AuthContext } from "../../../context/AuthContext";
 
 const SignInPage = () => {
-  const { CurrentUser, setCurrentUser } = React.useContext(AuthContext);
+  const { setCurrentUser } = React.useContext(AuthContext);
   const [user, setUser] = useState({});
   const [errors, setErrors] = useState({});
   let setField = (field, x) => setUser({ ...user, [field]: x });
   let navigate = useNavigate();
+
   async function handlLogin(e) {
     e.preventDefault();
     let res = await login(user.username, user.password);
-
     console.log(res);
-
     if (res.status === 200) {
-      console.log(res.data);
       setCurrentUser({
         isLoggedIn: true,
         ...res.data,

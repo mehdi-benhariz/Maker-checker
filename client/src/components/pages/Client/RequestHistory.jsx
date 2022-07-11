@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ProgressCell, StatusCell, DateCell } from "../../utils/Cells";
+import { ProgressCell, StatusCell } from "../../utils/Cells";
 import { getRequestByClient } from "../../../API/RequestAPI";
 const RequestHistory = () => {
   const [requests, setRequests] = useState([

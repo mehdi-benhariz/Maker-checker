@@ -67,12 +67,12 @@ namespace maker_checker_v1.Controllers
                 _validationRepository.Add(validation);
                 if (!await _validationRepository.Save())
                     return BadRequest("Could not save validation");
-
             }
             var rules = _mapper.Map<Rule[]>(ruleDtos);
             foreach (var rule in rules)
             {
                 rule.ValidationId = validation.Id;
+
                 _ruleRepository.Add(rule);
             }
             // _ruleRepository.AddRange(rules);

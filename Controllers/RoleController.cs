@@ -10,26 +10,26 @@ namespace maker_checker_v1.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
+        private readonly UnitOfWork _unitOfWork;
         private readonly RoleRepository _roleRepository;
         private readonly RequestContext _requestContext;
 
-        public RoleController(RequestContext requestContext, RoleRepository roleRepository)
+        public RoleController(UnitOfWork unitOfWork, RequestContext requestContext, RoleRepository roleRepository)
         {
-            _roleRepository = roleRepository;
-            _requestContext = requestContext;
+            _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
+            _roleRepository = roleRepository ?? throw new System.ArgumentNullException(nameof(roleRepository));
+            _requestContext = requestContext ?? throw new System.ArgumentNullException(nameof(requestContext));
         }
 
         [HttpGet]
         public async Task<IEnumerable<Role>> Get()
         {
-
-            var roles = await _roleRepository.getRoles();
-            return roles;
+            return await _unitOfWork.Roles.GetAll();
         }
         [HttpGet("{roleId}")]
         public async Task<ActionResult<Role>> Get(int roleId)
         {
-            var role = await _requestContext.Set<Role>().FindAsync(roleId);
+            var role = await _unitOfWork.Roles.Get(r => r.Id == roleId);
             if (role == null)
                 return NotFound("Role not found");
             return role;
@@ -40,8 +40,10 @@ namespace maker_checker_v1.Controllers
         {
             if (String.IsNullOrEmpty(roleName))
                 return BadRequest("Role name cannot be empty");
-            var role = await _requestContext.AddAsync(new Role(roleName));
-            if (await _requestContext.SaveChangesAsync() < 0)
+            if (await _unitOfWork.Roles.Exists(r => r.Name == roleName))
+                return BadRequest("Role already exists");
+            await _unitOfWork.Roles.Insert(new Role(roleName));
+            if (!await _unitOfWork.Save())
                 return BadRequest("error while saving Role");
             return Ok();
         }
@@ -49,11 +51,12 @@ namespace maker_checker_v1.Controllers
         [HttpDelete("{roleId}")]
         public async Task<ActionResult<Role>> DeleteRole(int roleId)
         {
-            var role = await _requestContext.Set<Role>().FindAsync(roleId);
+            var role = await _unitOfWork.Roles.Get(r => r.Id == roleId);
             if (role == null)
                 return NotFound("Role not found");
-            _requestContext.Set<Role>().Remove(role);
-            if (await _requestContext.SaveChangesAsync() < 0)
+            _unitOfWork.Roles.Delete(role);
+
+            if (await _unitOfWork.Save())
                 return BadRequest("error while deleting Role");
             return Ok("deleted");
         }

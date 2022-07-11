@@ -13,12 +13,16 @@ namespace maker_checker_v1.Services
             _context = requestContext;
 
         }
+
         public async Task<IEnumerable<ServiceType>> getServiceTypes()
         {
+
             var serviceTypes = await _context.Set<ServiceType>()
             .Include(s => s.Validation)
-
             .ToListAsync();
+            //todo ask ahmed about this
+            // var maxNbr = _context.Set<User>().Count(u => u.RoleId == 1);
+
             return serviceTypes;
         }
         public async Task<ServiceType?> getServiceType(int serviceTypeId)

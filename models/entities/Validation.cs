@@ -9,7 +9,7 @@ namespace maker_checker_v1.models.entities
         public int ServiceTypeId { get; set; }
         public ServiceType ServiceType { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.Now;
-        public List<Rule> Rules = new List<Rule>();
+        public ICollection<Rule> Rules = new List<Rule>();
 
 
 

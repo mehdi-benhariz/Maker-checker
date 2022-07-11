@@ -10,6 +10,11 @@ namespace maker_checker_v1.Profiles
         public ServiceTypeProfile()
         {
             CreateMap<ServiceTypeForCreationDTO, ServiceType>();
+            CreateMap<ServiceType, ServiceTypeToAdmin>()
+            .ForMember(
+                dest => dest.Rules,
+                opt => opt.MapFrom(src => src.Validation!.Rules)
+            );
 
         }
     }

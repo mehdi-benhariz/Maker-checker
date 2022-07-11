@@ -12,4 +12,26 @@ namespace maker_checker_v1
     {
         public string Resolve(User source, UserToReturn destination, string destMember, ResolutionContext context) => source.Role.Name;
     }
+    //!not finished yet
+    public class ServiceTypeResolver : IValueResolver<ServiceType, ServiceTypeToAdmin, List<RuleToAdmin>>
+    {
+
+        public List<RuleToAdmin> Resolve(ServiceType source, ServiceTypeToAdmin destination, List<RuleToAdmin> destMember, ResolutionContext context)
+        {
+            foreach (var item in source.Validation!.Rules)
+            {
+                destMember.Add(new RuleToAdmin
+                {
+                    Id = item.Id,
+                    RoleId = item.Role.Id,
+                    RoleName = item.Role.Name,
+                    Nbr = item.Nbr,
+                    MaxNbr = item.Role.Users.Count()
+                });
+
+            }
+            return destMember;
+
+        }
+    }
 }

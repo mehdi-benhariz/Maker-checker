@@ -5,6 +5,7 @@ using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using maker_checker_v1.models.DTO.Update;
 using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1.Controllers
@@ -13,22 +14,25 @@ namespace maker_checker_v1.Controllers
     [ApiController]
     public class ServiceTypeController : ControllerBase
     {
+        private readonly UnitOfWork _unitOfWork;
         private readonly ServiceTypeRepository _serviceTypeRepository;
         private readonly IMapper _mapper;
         private readonly ServiceTypeValidator _validator;
 
-        public ServiceTypeController(ServiceTypeRepository serviceTypeRepository, IMapper mapper)
+        public ServiceTypeController(UnitOfWork unitOfWork, ServiceTypeRepository serviceTypeRepository, IMapper mapper)
         {
+            _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
             _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(ServiceTypeRepository));
             _mapper = mapper ?? throw new System.ArgumentNullException(nameof(IMapper));
             _validator = new ServiceTypeValidator();
         }
         [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<IEnumerable<ServiceType>>> Get()
+        // [Authorize]
+        public async Task<ActionResult<IEnumerable<ServiceTypeToAdmin>>> Get()
         {
-            var serviceTypes = await _serviceTypeRepository.getServiceTypes();
-            return Ok(serviceTypes);
+            var serviceTypes = await _unitOfWork.ServiceTypes.GetAll(includes: new List<String>() { "Validation", "Validation.Rules", "Validation.Rules.Role", "Validation.Rules.Role.Users" });
+            var serviceTypesToAdmin = _mapper.Map<IEnumerable<ServiceTypeToAdmin>>(serviceTypes);
+            return Ok(serviceTypesToAdmin);
         }
         [HttpGet("{serviceTypeId}")]
         public async Task<ActionResult<ServiceType>> Get(int serviceTypeId)
@@ -60,6 +64,24 @@ namespace maker_checker_v1.Controllers
             {
                 serviceTypeId = serviceTypeToCreate.Id
             }, serviceTypeToCreate);
+        }
+        //todo edit it 
+        [HttpPut("{serviceTypeId}")]
+        [Authorize]
+        public async Task<ActionResult<ServiceType>> Put(int serviceTypeId, ServiceTypeForUpdateDTO serviceType)
+        {
+            var serviceTypeToUpdate = await _serviceTypeRepository.getServiceType(serviceTypeId);
+            if (serviceTypeToUpdate == null)
+                return NotFound("Service type not found");
+            _mapper.Map(serviceType, serviceTypeToUpdate);
+            var validationResult = _validator.Validate(serviceTypeToUpdate);
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors);
+            if (await _unitOfWork.ServiceTypes.Exists(s => s.Name == serviceType.Name))
+                return BadRequest("Service type already exists");
+            if (!await _serviceTypeRepository.SaveChangesAsync())
+                return BadRequest("Error updating service type");
+            return Ok(serviceTypeToUpdate);
         }
         [HttpDelete("{serviceTypeId}")]
         public async Task<ActionResult<ServiceType>> Delete(int serviceTypeId)

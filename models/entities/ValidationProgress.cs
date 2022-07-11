@@ -8,7 +8,9 @@ namespace maker_checker_v1.models.entities
         public int Id { get; set; }
         public int RequestId { get; set; }
         public Request Request { get; set; }
-        public List<Operation> Operations = new List<Operation>();
+        public ICollection<Operation> Operations = new List<Operation>();
+
+        public int Progress() => (int)Request.ServiceType.Validation!.Rules.Count / Operations.Count;
 
         public bool IsValidated
         {

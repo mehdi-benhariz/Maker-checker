@@ -14,7 +14,7 @@ namespace maker_checker_v1
             _context = context ?? throw (new ArgumentNullException(nameof(context)));
             _db = _context.Set<TEntity>();
         }
-        public async Task<IList<TEntity>> GetAll(Expression<Func<TEntity, bool>>? expression, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, List<string>? includes)
+        public async Task<IList<TEntity>> GetAll(Expression<Func<TEntity, bool>>? expression = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, List<string>? includes = null)
         {
             IQueryable<TEntity> query = _db;
             if (expression != null)

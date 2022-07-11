@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { TextField } from "../../utils/InputFields";
+import { SubmitRole } from "../../../API/RoleAPI";
+
 const UsersTable = () => {
   const [roles, setroles] = useState([
     { id: 2, name: "A" },
@@ -29,6 +32,18 @@ const UsersTable = () => {
       date: "2022-06-20",
     },
   ]);
+  const [addRole, setAddRole] = useState(false);
+  let toggleAddRole = () => setAddRole(!addRole);
+
+  const [role, setRole] = useState("");
+  async function handleAddRole(e) {
+    e.preventDefault();
+    const res = await SubmitRole(role);
+    if (res.status === 200) {
+      alert("added role");
+      setRole("");
+    } else console.log(res);
+  }
   return (
     <>
       <div className="py-4">
@@ -42,7 +57,10 @@ const UsersTable = () => {
                 <button className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
                   New checker
                 </button>
-                <button className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                <button
+                  onClick={toggleAddRole}
+                  className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                >
                   New Role
                 </button>
               </div>
@@ -102,6 +120,19 @@ const UsersTable = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex justify-end mt-2">
+            {addRole && (
+              <div className="flex my-4 justify-between gap-4 scale-100">
+                <TextField value={role} cb={setRole} placeholder="new role" />
+                <button
+                  onClick={handleAddRole}
+                  className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+                >
+                  Add
+                </button>
+              </div>
+            )}
           </div>
           <div className="flex justify-end mt-2">
             <button className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">

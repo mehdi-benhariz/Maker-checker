@@ -20,6 +20,20 @@ namespace maker_checker_v1.Profiles
                     return rule;
                 }
             );
+            //!not sure about this one
+            CreateMap<Rule, RuleToAdmin>()
+                .ForMember(
+                dest => dest.RoleName,
+                opt => opt.MapFrom(src => src.Role.Name)
+                )
+                .ForMember(
+                    dest => dest.RoleId,
+                    opt => opt.MapFrom(src => src.Role.Id)
+                )
+                .ForMember(
+                    dest => dest.MaxNbr,
+                    opt => opt.MapFrom(src => src.Role.Users.Count)
+                );
 
 
         }

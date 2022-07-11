@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace maker_checker_v1.Services
 {
+
     public class RoleRepository
     {
         private readonly RequestContext _context;
 
         public RoleRepository(RequestContext context)
         {
-            _context = context;
+            _context = context ?? throw new System.ArgumentNullException(nameof(context));
         }
         public async Task<IEnumerable<Role>> getRoles()
         {
