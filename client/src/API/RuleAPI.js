@@ -24,10 +24,9 @@ export const ICall = (action, ...params) => {
 //second approach
 export const editRules = async (ruleDtos, serviceTypeId) => {
   const url = `${baseURL}/api/Rule/rules`;
+  console.log(JSON.stringify(ruleDtos), serviceTypeId);
   try {
     //todo change it later to patch
-
-    console.log(JSON.stringify(ruleDtos), serviceTypeId);
 
     return await axios.put(url, JSON.stringify(ruleDtos), {
       headers: {

@@ -11,3 +11,30 @@ export const getAllServiceTypes = async () => {
     return error.response;
   }
 };
+
+export const addServiceType = async (name) => {
+  const url = `${process.env.REACT_APP_API_URL || baseUrl}/api/ServiceType`;
+  try {
+    return await axios.post(url, JSON.stringify(name), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return error.response;
+  }
+};
+export const deleteServiceType = async (stId) => {
+  const url = `${
+    process.env.REACT_APP_API_URL || baseUrl
+  }/api/ServiceType/${parseInt(stId)}`;
+  try {
+    return await axios.delete(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return error.response;
+  }
+};

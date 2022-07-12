@@ -44,15 +44,15 @@ namespace maker_checker_v1.Controllers
             return Ok(serviceType);
         }
         [HttpPost]
-        public async Task<ActionResult<ServiceType>> Post(ServiceTypeForCreationDTO serviceType)
+        public async Task<ActionResult<ServiceType>> Post([FromBody] string serviceType)
         {
             //validate service type
-            var serviceTypeToCreate = _mapper.Map<ServiceType>(serviceType);
-            var validationResult = _validator.Validate(serviceTypeToCreate);
-            if (!validationResult.IsValid)
-                return BadRequest(validationResult.Errors);
+            var serviceTypeToCreate = new ServiceType(serviceType);
+            // var validationResult = _validator.Validate(serviceTypeToCreate);
+            // if (!validationResult.IsValid)
+            //     return BadRequest(validationResult.Errors);
 
-            if (await _serviceTypeRepository.Exists(serviceType.Name))
+            if (await _serviceTypeRepository.Exists(serviceType))
                 return BadRequest("Service type already exists");
 
             // var serviceTypeToCreate = new ServiceType(serviceType.Name);
@@ -63,7 +63,7 @@ namespace maker_checker_v1.Controllers
             return CreatedAtAction(nameof(Get), new
             {
                 serviceTypeId = serviceTypeToCreate.Id
-            }, serviceTypeToCreate);
+            }, _mapper.Map<ServiceTypeToAdmin>(serviceTypeToCreate));
         }
         //todo edit it 
         [HttpPut("{serviceTypeId}")]

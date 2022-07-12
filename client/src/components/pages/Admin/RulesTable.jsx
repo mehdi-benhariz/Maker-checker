@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { editRules, addRules } from "../../../API/RuleAPI";
-import { getAllServiceTypes } from "../../../API/ServiceTypeAPI";
+import {
+  getAllServiceTypes,
+  addServiceType,
+  deleteServiceType,
+} from "../../../API/ServiceTypeAPI";
+
 import { RoleNbrCell } from "../../utils/Cells";
+import { TextField } from "../../utils/InputFields";
 import { notify } from "../../utils/Notify";
 
 const RulesTable = () => {
   const heads = ["serviceType", "A", "B", "C", "Action"];
   const [data, setData] = useState([]);
-
+  const [addST, setAddST] = useState(false);
   const [errors, setErrors] = useState([]);
 
   const handleChangeRule = async (e, row) => {
     e.preventDefault();
 
     const ruleExist = row.rules[0].roleId;
-    console.log(row, ruleExist);
     let res;
-    console.log({ row });
     const ruleDtos = row.rules.map((r) => ({
-      roleId: r.roleId,
-      nbr: r.nbr,
+      roleId: r.RoleId,
+      nbr: r.Nbr,
     }));
-    if (ruleExist) {
-      res = await editRules(ruleDtos, row.id);
-      console.log(res);
+    console.log(ruleDtos, row.id);
+    // update rule
+    if (ruleExist) res = await editRules(ruleDtos, row.id);
+    // add rule
+    else res = await addRules(ruleDtos, row.id);
 
-      // update rule
-    } else {
-      // add rule
-      res = await addRules(ruleDtos, row.id);
-      console.log(res);
-    }
     if (res.status === 200) {
       notify(e, "success", "Success", "Rule updated successfully");
     } else {
@@ -44,7 +44,7 @@ const RulesTable = () => {
     const res = await getAllServiceTypes();
     if (res.status === 200) return res.data;
   };
-
+  //todo :get it from api
   const rules = [
     { Nbr: 0, RoleId: 2 },
     { Nbr: 0, RoleId: 3 },
@@ -53,7 +53,7 @@ const RulesTable = () => {
   //call when update the table cell data
   const updateRule = (rowId, ruleIndex, value) => {
     let newData = [...data];
-    newData[rowId].rules[ruleIndex].nbr = value;
+    newData[rowId].rules[ruleIndex].Nbr = value;
     setData([...newData]);
     console.log(newData);
     // console.log(stId, roleId, value);
@@ -76,6 +76,26 @@ const RulesTable = () => {
     setData(res);
   };
 
+  const [serviceType, setServiceType] = useState("");
+  async function handleAddST(e) {
+    e.preventDefault();
+    const res = await addServiceType(serviceType);
+    if (res.status === 201) {
+      notify(e, "success", "Success", "Service type added successfully");
+      console.log(res.data);
+      // setData([...data, res.data]);
+    } else console.log(res);
+  }
+  //
+  async function handleDeleteST(e, stId) {
+    e.preventDefault();
+    const res = await deleteServiceType(stId);
+    if (res.status === 200) {
+      notify(e, "success", "Success", "Service type deleted successfully");
+      setData(data.filter((st) => st.id !== stId));
+    } else console.log(res);
+  }
+
   //init the table here
   useEffect(() => {
     initData();
@@ -87,7 +107,10 @@ const RulesTable = () => {
         <h2 className="mb-4 text-xl font-bold text-gray-700">
           Services & Validation
         </h2>
-        <button className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+        <button
+          onClick={() => setAddST(!addST)}
+          className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+        >
           New Service Type
         </button>
       </div>
@@ -154,14 +177,15 @@ const RulesTable = () => {
                 })}
 
                 <td
-                  className="
-                           text-center text-dark
+                  className="text-center text-dark
                            font-medium
                            text-base
                            py-5
                            px-2
                            bg-white
-                           border-b border-r border-[#E8E8E8]"
+                           border-b border-r border-[#E8E8E8]
+                           flex justify-between
+                           "
                 >
                   <button
                     onClick={(e) => handleChangeRule(e, row)}
@@ -177,12 +201,57 @@ const RulesTable = () => {
                   >
                     Edit
                   </button>
+                  <button
+                    onClick={(e) => handleDeleteST(e, row.id)}
+                    className="border border-red-500
+                              py-2
+                              px-6
+                              text-red-500
+                              inline-block
+                              rounded
+                              hover:bg-red-500 hover:text-white
+                              transition-colors duration-300 ease-linear
+                              "
+                  >
+                    <svg
+                      class="h-6 w-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <div className="flex justify-end mt-2">
+        {addST && (
+          <div className="flex my-4 justify-between gap-4 scale-100">
+            <TextField
+              value={serviceType}
+              cb={setServiceType}
+              placeholder="new service type"
+            />
+            <button
+              onClick={handleAddST}
+              className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+            >
+              Add
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
