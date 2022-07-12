@@ -15,7 +15,6 @@ const SignInPage = () => {
   async function handlLogin(e) {
     e.preventDefault();
     let res = await login(user.username, user.password);
-    console.log(res);
     if (res.status === 200) {
       setCurrentUser({
         isLoggedIn: true,

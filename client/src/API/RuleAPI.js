@@ -22,22 +22,36 @@ export const ICall = (action, ...params) => {
 };
 
 //second approach
-export const editRules = async (serviceTypeRules) => {
+export const editRules = async (ruleDtos, serviceTypeId) => {
   const url = `${baseURL}/api/Rule/rules`;
   try {
     //todo change it later to patch
 
-    const ruleDtos = serviceTypeRules.rules.map((r) => ({
-      RoleId: r.roleId,
-      Nbr: r.nbr,
-    }));
-    console.log(ruleDtos);
+    console.log(JSON.stringify(ruleDtos), serviceTypeId);
 
-    return await axios.patch(url, ruleDtos, {
+    return await axios.put(url, JSON.stringify(ruleDtos), {
+      headers: {
+        "Content-Type": "application/json",
+        serviceTypeId: parseInt(serviceTypeId),
+      },
+    });
+  } catch (error) {
+    return error.response;
+  }
+};
+
+export const addRules = async (ruleDtos, serviceTypeId) => {
+  const url = `${baseURL}/api/Rule/rules`;
+  try {
+    //todo change it later to patch
+
+    console.log(ruleDtos, serviceTypeId);
+
+    return await axios.post(url, JSON.stringify(ruleDtos), {
       headers: {
         "Content-Type": "application/json-patch+json",
         //add service type id here
-        serviceTypeId: serviceTypeRules.serviceTypeId,
+        serviceTypeId: parseInt(serviceTypeId),
       },
     });
   } catch (error) {

@@ -47,7 +47,7 @@ namespace maker_checker_v1
 
         public void Update(TEntity entity)
         {
-            _db.Attach(entity);
+            _db.Update(entity);
 
         }
         public void Delete(TEntity entity)

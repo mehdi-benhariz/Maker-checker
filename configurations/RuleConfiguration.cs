@@ -11,11 +11,12 @@ namespace maker_checker_v1.configurations
             //when calling rule always include the Role
             builder.Navigation<Role>(r => r.Role).AutoInclude();
 
-            builder.HasKey(r => r.Id);
+            builder.HasKey(r => new { r.RoleId, r.ValidationId });
+
             // builder.HasOne(r => r.Role).WithMany(r => r.Rules).HasForeignKey(r => r.RoleId);
             //todo fix it later
             // builder.HasOne(r => r.ValidationProgress)
-            
+
             // .WithMany(vp => vp.Rules)
             // .HasForeignKey(vp => vp.ValidationProgressId)
             // .IsRequired(false);

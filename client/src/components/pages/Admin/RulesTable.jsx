@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { editRules } from "../../../API/RuleAPI";
+import React, { useEffect, useState } from "react";
+import { editRules, addRules } from "../../../API/RuleAPI";
 import { getAllServiceTypes } from "../../../API/ServiceTypeAPI";
 import { RoleNbrCell } from "../../utils/Cells";
 import { notify } from "../../utils/Notify";
@@ -8,19 +8,34 @@ const RulesTable = () => {
   const heads = ["serviceType", "A", "B", "C", "Action"];
   const [data, setData] = useState([]);
 
-  const [error, seterror] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const handleChangeRule = async (e, row) => {
     e.preventDefault();
 
     const ruleExist = row.rules[0].roleId;
     console.log(row, ruleExist);
+    let res;
+    console.log({ row });
+    const ruleDtos = row.rules.map((r) => ({
+      roleId: r.roleId,
+      nbr: r.nbr,
+    }));
     if (ruleExist) {
-      const res = await editRules(row);
+      res = await editRules(ruleDtos, row.id);
       console.log(res);
+
       // update rule
     } else {
       // add rule
+      res = await addRules(ruleDtos, row.id);
+      console.log(res);
+    }
+    if (res.status === 200) {
+      notify(e, "success", "Success", "Rule updated successfully");
+    } else {
+      setErrors(res.data.errors);
+      notify(e, "error", "Error", "Error updating rule");
     }
   };
 
@@ -81,7 +96,7 @@ const RulesTable = () => {
           <tr className="bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold text-md text-center rounded-md">
             {heads.map((head, i) => (
               <th
-                key={i}
+                key={head}
                 className="
                            w-1/6
                            min-w-[160px]
@@ -103,7 +118,7 @@ const RulesTable = () => {
           {data.map((row, i) => {
             // console.log(row);
             return (
-              <tr key={i}>
+              <tr key={`st-${row.id}`}>
                 <td
                   className="
                            text-center text-dark
@@ -156,8 +171,9 @@ const RulesTable = () => {
                               text-purple-500
                               inline-block
                               rounded
-                              hover:bg-purple-500 hover:text-white"
-                    // onClick={(row) => handleChangeRule(row)}
+                              hover:bg-purple-500 hover:text-white
+                              transition-colors duration-300 ease-linear
+                              "
                   >
                     Edit
                   </button>
