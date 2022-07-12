@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using maker_checker_v1.models.DTO.Return;
 
 namespace maker_checker_v1.Controllers
 {
@@ -22,18 +23,20 @@ namespace maker_checker_v1.Controllers
         private readonly IMapper _mapper;
         private readonly RequestValidator _validator;
         private readonly HttpContext _hContext;
+        private readonly UnitOfWork _unitOfWork;
 
-        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper, IHttpContextAccessor haccess)
+        public RequestController(RequestRepository requestRepository, ServiceTypeRepository serviceTypeRepository, IMapper mapper, IHttpContextAccessor haccess, UnitOfWork unitOfWork)
         {
             _requestRepository = requestRepository ?? throw new System.ArgumentNullException(nameof(requestRepository));
             _serviceTypeRepository = serviceTypeRepository ?? throw new System.ArgumentNullException(nameof(serviceTypeRepository));
             _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
             _validator = new RequestValidator();
             _hContext = haccess.HttpContext ?? throw new System.ArgumentNullException(nameof(haccess));
+            _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
         }
         [HttpGet("client", Name = "GetClientRequests")]
         [Authorize(Policy = "Client")]
-        public async Task<ActionResult<IEnumerable<RequestToClient>>> GetRequestsHistory([FromQuery] int pageNumber = 1)
+        public async Task<ActionResult<IEnumerable<RequestToClient>>> GetRequestsForClient([FromQuery] int pageNumber = 1)
         {
             var userId = _hContext.User.FindFirstValue("sub") ?? "1";
             var (requests, pagginationMetaData) = await _requestRepository.getRequestsHistory(Int32.Parse(userId), pageNumber);
@@ -41,6 +44,15 @@ namespace maker_checker_v1.Controllers
 
             return Ok(requests);
         }
+        [HttpGet("admin", Name = "GetAdminRequests")]
+        // [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = "")
+        {
+            var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
+            Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
+            return Ok(requests);
+        }
+
         //impliment search and filter (maybe paggination)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> Get()
@@ -50,7 +62,7 @@ namespace maker_checker_v1.Controllers
 
         }
         [HttpGet("{id}", Name = "GetRequest")]
-        public async Task<ActionResult<Request>> GetAsync(int id)
+        public async Task<ActionResult<Request>> Get(int id)
         {
             var request = await _requestRepository.getRequest(id);
             if (request == null)

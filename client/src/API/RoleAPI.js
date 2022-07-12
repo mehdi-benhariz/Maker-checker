@@ -14,3 +14,11 @@ export const SubmitRole = async (roleName) => {
     return error.response;
   }
 };
+export const getAllStaffRoles = async () => {
+  const url = `${baseUrl}/api/Role/staff`;
+  try {
+    return await axios.get(url);
+  } catch (error) {
+    return error.response;
+  }
+};

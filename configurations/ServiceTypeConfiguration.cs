@@ -12,7 +12,8 @@ namespace maker_checker_v1.configurations
             // builder.Navigation(st => st.Validation).AutoInclude();
             builder.Property(s => s.Name).IsRequired().HasMaxLength(20);
             // builder.HasMany(s => s.Requests).WithOne(s => s.ServiceType).HasForeignKey(s => s.ServiceTypeId);
-            builder.HasOne(s => s.Validation).WithOne(v => v.ServiceType).HasForeignKey<Validation>(v => v.ServiceTypeId);
+            builder.HasOne(s => s.Validation).WithOne(v => v.ServiceType).HasForeignKey<Validation>(v => v.ServiceTypeId).OnDelete(DeleteBehavior.Cascade);
+            ;
 
         }
     }

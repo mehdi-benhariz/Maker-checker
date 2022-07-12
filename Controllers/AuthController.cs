@@ -109,34 +109,7 @@ namespace maker_checker_v1.models.DTO
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Ok("logout successful");
         }
-        [HttpPost("addStuff")]
-        // [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> AddStuff(IEnumerable<UserCreationDTO> userModels)
-        {
-            //
-            List<User> UsersToBeCreated = new List<User>();
-            foreach (var userModel in userModels)
-            {
-                if (await _unitOfWork.Users.Exists(u => u.Username == userModel.Username))
-                    return BadRequest("User already exists");
-                var userToBeCreated = new User()
-                {
-                    Username = userModel.Username,
-                    Password = entities.User.CreateHash(userModel.Password),
-                    RoleId = userModel.RoleId
-                };
-                UsersToBeCreated.Add(userToBeCreated);
-            }
-            //
 
-            await _unitOfWork.Users.InsertRange(UsersToBeCreated);
-
-            if (!await _unitOfWork.Save())
-                return BadRequest("problem occured while saving user");
-
-            return Ok("addStuff successful");
-
-        }
 
 
     }

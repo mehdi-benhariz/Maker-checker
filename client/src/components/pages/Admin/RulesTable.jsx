@@ -155,10 +155,9 @@ const RulesTable = () => {
                   {row.name}
                 </td>
                 {rules.map((rule, j) => {
-                  const ruleExist = rule.roleId === row.rules[i]?.roleId;
                   return (
                     <td
-                      key={i}
+                      key={j}
                       className="text-center text-dark
                            font-medium
                            text-base
@@ -214,7 +213,7 @@ const RulesTable = () => {
                               "
                   >
                     <svg
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -222,9 +221,9 @@ const RulesTable = () => {
                       aria-hidden="true"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>

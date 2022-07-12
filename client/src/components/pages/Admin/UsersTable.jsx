@@ -1,37 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { TextField } from "../../utils/InputFields";
-import { SubmitRole } from "../../../API/RoleAPI";
+import { SubmitRole, getAllStaffRoles } from "../../../API/RoleAPI";
+import { getAllStaff, UpdateUserRole } from "../../../API/UserAPI";
 
 const UsersTable = () => {
-  const [roles, setroles] = useState([
+  //create a map of all staff
+  //todo change the array with a Map later
+  // const [roles, setroles] = useState(new Map([2, "A"], [3, "B"], [4, "C"]));
+  const [roles, setRoles] = useState([
     { id: 2, name: "A" },
     { id: 3, name: "B" },
     { id: 4, name: "C" },
   ]);
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: "mehdi ben hariz",
-      email: "mehdi@proxym.com",
-      role: "A",
-      date: "2022-06-20",
-    },
-    {
-      id: 2,
-      username: "mehdi ben hariz",
-      email: "mehdi@proxym.com",
-      role: "B",
-      date: "2022-06-20",
-    },
-    {
-      id: 3,
-      username: "mehdi ben hariz",
-      email: "mehdi@proxym.com",
-      role: "C",
-      date: "2022-06-20",
-    },
-  ]);
+  async function initRoles() {
+    const res = await getAllStaffRoles();
+    if (res.status === 200) setRoles(res.data);
+    //todo add error handling
+    else console.log(res.data.error);
+  }
+
+  const [roleId, setRoleId] = useState(null);
+  const [users, setUsers] = useState([]);
+  let initStaff = async () => {
+    const res = await getAllStaff();
+    if (res.status === 200) setUsers(res.data);
+    //todo add error handling
+    else console.log(res.data);
+  };
+
   const [addRole, setAddRole] = useState(false);
   let toggleAddRole = () => setAddRole(!addRole);
 
@@ -42,6 +39,27 @@ const UsersTable = () => {
     if (res.status === 200) {
       alert("added role");
       setRole("");
+    } else console.log(res);
+  }
+
+  function init() {
+    initStaff();
+    initRoles();
+  }
+  useEffect(init, []);
+  const [userId, setUserId] = useState(null);
+
+  let handleUserChange = (e, row) => {
+    setRoleId(e.target.value);
+    setUserId(row.id);
+    console.log(row.id, e.target.value);
+  };
+  async function handleUpdateRule() {
+    console.log(roleId, userId);
+    const res = await UpdateUserRole(userId, roleId);
+    if (res.status === 200) {
+      setRole("");
+      setUserId(null);
     } else console.log(res);
   }
   return (
@@ -100,15 +118,20 @@ const UsersTable = () => {
                         <span>{row.role}</span>
                       </div>
                       <div className="px-2">
-                        <span>{row.date}</span>
+                        <span>{row.creationDate}</span>
                       </div>
                       <div className="px-2">
-                        <select defaultValue={row.role.name}>
+                        <select
+                          onChange={(e) => {
+                            handleUserChange(e, row);
+                          }}
+                        >
                           {roles.map((role) => (
                             <option
                               className="h-8 w-8"
                               key={role.id}
                               value={role.id}
+                              selected={row.role === role.name}
                             >
                               {role.name}
                             </option>
@@ -135,7 +158,10 @@ const UsersTable = () => {
             )}
           </div>
           <div className="flex justify-end mt-2">
-            <button className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+            <button
+              onClick={handleUpdateRule}
+              className="bg-gradient-to-tr from-indigo-600 to-purple-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"
+            >
               Submit
             </button>
           </div>

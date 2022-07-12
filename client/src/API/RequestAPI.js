@@ -27,6 +27,15 @@ export const addRequest = async (request) => {
     return error.response;
   }
 };
+export const getRequestsToAdmin = async (pageNumber, search) => {
+  const url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}&&search=${search}`;
+  try {
+    return await axios.get(url);
+  } catch (error) {
+    return error.response;
+  }
+};
+
 //option 2+
 const methods = {
   getRequestHistory: function () {

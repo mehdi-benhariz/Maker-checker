@@ -59,8 +59,11 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(options =>
 {
+    //allow any header
+
     options.AddPolicy("AllowAll",
-        policy => policy.WithOrigins("http://localhost:3000").WithHeaders(
+        policy => policy.WithOrigins("http://localhost:3000")
+        .WithHeaders(
             HeaderNames.ContentType,
             HeaderNames.Authorization,
             HeaderNames.Accept,
@@ -69,7 +72,8 @@ builder.Services.AddCors(options =>
         .AllowCredentials()
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials());
+            .AllowCredentials()
+            .WithExposedHeaders("X-Paggination"));
 
 });
 

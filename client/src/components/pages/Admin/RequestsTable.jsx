@@ -1,49 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { getRequestsToAdmin } from "../../../API/RequestAPI";
 import { StatusCell, ProgressCell } from "../../utils/Cells";
 
 const RequestsTable = () => {
-  const [requets, setRequets] = useState([
-    {
-      id: 1,
-      profileImg:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
-      username: "mehdi ben hariz",
-      date: "2022-06-20",
-      type: "international",
-      progres: "50",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      profileImg:
-        "https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80",
-      username: "mehdi ben hariz",
-      date: "2022-06-20",
-      type: "international",
-      progres: "100",
-      status: "Approved",
-    },
-    {
-      id: 3,
-      profileImg:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
-      username: "mehdi ben hariz",
-      date: "2022-06-20",
-      type: "international",
-      progres: "90",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      profileImg:
-        "https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
-      username: "mehdi ben hariz",
-      date: "2022-06-20",
-      type: "international",
-      progres: "80",
-      status: "Pending",
-    },
-  ]);
+  const [requests, setRequests] = useState([]);
+  const [pagginationData, setPagginationData] = useState({});
+  const [searchQuery, setsearchQuery] = useState(" ");
+
+  async function getRequests() {
+    const res = await getRequestsToAdmin(1, searchQuery);
+
+    if (res.status === 200) {
+      setRequests([...res.data]);
+      return res.headers;
+    }
+    //todo add error handling
+    else console.log(res.data);
+  }
+
+  function init() {
+    getRequests().then((headers) => {
+      const parsed = JSON.parse(headers["x-paggination"]);
+      setPagginationData(parsed);
+    });
+  }
+  useMemo(init, [searchQuery]);
+  // useEffect(init, []);
+
   return (
     <div className="bg-white p-8 rounded-md w-full">
       <div className=" flex items-center justify-between pb-6">
@@ -68,6 +51,7 @@ const RequestsTable = () => {
               />
             </svg>
             <input
+              onChange={(e) => setsearchQuery(e.target.value)}
               className="bg-gray-50 outline-none ml-1 block "
               type="text"
               name=""
@@ -101,7 +85,7 @@ const RequestsTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {requets.map((request) => {
+                {requests.map((request) => {
                   return (
                     <tr key={request.id}>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -115,23 +99,23 @@ const RequestsTable = () => {
                           </div>
                           <div className="ml-3">
                             <p className="text-gray-900 whitespace-no-wrap">
-                              {request.username}
+                              {request.owner}
                             </p>
                           </div>
                         </div>
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {request.type}
+                          {request.serviceType}
                         </p>
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {request.date}
+                          {request.creationDate}
                         </p>
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        {ProgressCell(request.progres, request.status)}
+                        {ProgressCell(request.progress, request.status)}
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         {StatusCell(request.status)}
@@ -143,7 +127,8 @@ const RequestsTable = () => {
             </table>
             <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
               <span className="text-xs xs:text-sm text-gray-900">
-                Showing 1 to 4 of 50 Entries
+                Showing 1 to {pagginationData.PageSize} of
+                {pagginationData.TotalItems} Entries
               </span>
               <div className="inline-flex mt-2 xs:mt-0">
                 <button className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">

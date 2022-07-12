@@ -11,14 +11,11 @@ namespace maker_checker_v1.Controllers
     public class RoleController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
-        private readonly RoleRepository _roleRepository;
-        private readonly RequestContext _requestContext;
 
         public RoleController(UnitOfWork unitOfWork, RequestContext requestContext, RoleRepository roleRepository)
         {
             _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
-            _roleRepository = roleRepository ?? throw new System.ArgumentNullException(nameof(roleRepository));
-            _requestContext = requestContext ?? throw new System.ArgumentNullException(nameof(requestContext));
+
         }
 
         [HttpGet]
@@ -26,6 +23,13 @@ namespace maker_checker_v1.Controllers
         {
             return await _unitOfWork.Roles.GetAll();
         }
+        [HttpGet("staff")]
+        public async Task<IEnumerable<Role>> GetStaffRoles()
+        {
+            return await _unitOfWork.Roles.GetAll(r => r.Name != "Admin" && r.Name != "Client");
+        }
+
+
         [HttpGet("{roleId}")]
         public async Task<ActionResult<Role>> Get(int roleId)
         {

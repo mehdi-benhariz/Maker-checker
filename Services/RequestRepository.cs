@@ -1,5 +1,6 @@
 using maker_checker_v1.data;
 using maker_checker_v1.models.DTO;
+using maker_checker_v1.models.DTO.Return;
 using maker_checker_v1.models.entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -57,7 +58,6 @@ namespace maker_checker_v1.Services
             collection = collection.OrderByDescending(r => r.CreationDate);
             int totalItems = await collection.CountAsync();
             var pagginationMetaData = new PagginationMetaData(pageNumber, pageSize, totalItems);
-            // var collectionToReturn = await collection.Include(r => r.ServiceType).ToListAsync();
 
             var collectionToReturn = collection
                 .Join(
@@ -77,6 +77,42 @@ namespace maker_checker_v1.Services
 
             return (collectionToReturn, pagginationMetaData);
 
+        }
+
+        public async Task<(IEnumerable<RequestToAdmin>, PagginationMetaData)> getRequestsForAdmin(string search = "", int pageNumber = 1, int pageSize = 5)
+        {
+            var collection = _context.Set<Request>()
+                   .Include(r => r.ServiceType)
+                   .Include(r => r.User)
+                .Include(r => r.ValidationProgress) as IQueryable<Request>;
+            collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            collection = collection.OrderByDescending(r => r.CreationDate);
+            if (!string.IsNullOrEmpty(search))
+                collection = collection.Where(r => (r.Description != null && r.Description.Contains(search)) || r.User.Username.Contains(search));
+
+            int totalItems = await collection.CountAsync();
+            var pagginationMetaData = new PagginationMetaData(pageNumber, pageSize, totalItems);
+
+            List<RequestToAdmin> collectionToReturn = new List<RequestToAdmin>();
+            foreach (Request item in collection)
+            {
+                byte progress = 0;
+                if (item.ValidationProgress != null)
+                    progress = (byte)item.ValidationProgress.Progress();
+
+                collectionToReturn.Add(new RequestToAdmin
+                {
+                    Id = item.Id,
+                    owner = item.User.Username,
+                    serviceType = item.ServiceType.Name,
+                    Status = item.Status,
+                    Amount = item.Amount,
+                    Progress = progress,
+                    CreationDate = item.CreationDate.ToString("dd-MM-yyyy"),
+                });
+            }
+
+            return (collectionToReturn, pagginationMetaData);
         }
     }
 }
