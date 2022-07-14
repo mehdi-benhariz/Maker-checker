@@ -1,6 +1,7 @@
 import React from "react";
 
-export function RoleNbrCell(value, cb, max = 5) {
+export function RoleNbrCell(value, cb, max) {
+  console.log({ max });
   return (
     <input
       type="number"

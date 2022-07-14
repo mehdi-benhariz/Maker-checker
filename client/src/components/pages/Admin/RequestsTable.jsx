@@ -10,7 +10,7 @@ const RequestsTable = () => {
 
   async function getRequests() {
     const res = await getRequestsToAdmin(1, searchQuery);
-    console.log(res);
+
     if (res.status === 200) {
       setRequests([...res.data]);
       return res.headers;

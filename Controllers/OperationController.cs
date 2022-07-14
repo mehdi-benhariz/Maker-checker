@@ -2,6 +2,7 @@ using System.Security.Claims;
 using AutoMapper;
 using maker_checker_v1.models.entities;
 using maker_checker_v1.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace maker_checker_v1.Controllers
@@ -21,6 +22,7 @@ namespace maker_checker_v1.Controllers
             _hContext = haccess.HttpContext ?? throw new System.ArgumentNullException(nameof(haccess));
 
         }
+
 
         [HttpPost]
         public async Task<ActionResult<Operation>> Post([FromBody] int requestId)

@@ -53,10 +53,10 @@ const RulesTable = () => {
   //call when update the table cell data
   const updateRule = (rowId, ruleIndex, value) => {
     let newData = [...data];
-    newData[rowId].rules[ruleIndex].Nbr = value;
+    newData[rowId].rules[ruleIndex].nbr = value;
     setData([...newData]);
-    console.log(newData);
-    // console.log(stId, roleId, value);
+    console.log({ newData });
+    console.log(rowId, ruleIndex, value);
   };
 
   const getRoleNbr = (stId, roleId) => data[stId].rules[roleId].nbr;
@@ -169,7 +169,7 @@ const RulesTable = () => {
                       {RoleNbrCell(
                         getRoleNbr(i, j),
                         (x) => updateRule(i, j, x),
-                        rule.MaxNbr
+                        rule.maxNbr
                       )}
                     </td>
                   );

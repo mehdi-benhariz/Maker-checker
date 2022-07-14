@@ -10,7 +10,7 @@ namespace maker_checker_v1.models.entities
         public Request Request { get; set; }
         public ICollection<Operation> Operations = new List<Operation>();
 
-        public int Progress() => (int)Request.ServiceType.Validation!.Rules.Count / Operations.Count;
+        public int Progress() => (int)Operations.Count / Request.ServiceType.Validation!.Rules.Count;
 
         public bool IsValidated
         {

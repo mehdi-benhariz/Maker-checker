@@ -79,7 +79,7 @@ namespace maker_checker_v1.Services
 
         }
 
-        public async Task<(IEnumerable<RequestToAdmin>, PagginationMetaData)> getRequestsForAdmin(string? search = null, int pageNumber = 1, int pageSize = 5)
+        public async Task<(IEnumerable<RequestToAdmin>, PagginationMetaData)> getRequestsForAdmin(string search = "", int pageNumber = 1, int pageSize = 5)
         {
             var collection = _context.Set<Request>()
                    .Include(r => r.ServiceType)
@@ -115,7 +115,7 @@ namespace maker_checker_v1.Services
             return (collectionToReturn, pagginationMetaData);
         }
 
-        public IEnumerable<RequestToStaff> getRequestsForStaff(string RoleName, int UserId)
+        public IEnumerable<RequestToStaff> getRequestsForStaff(int RoleId, int UserId)
         {
             var collection = _context.Set<Request>()
                                .Include(r => r.ServiceType)
@@ -124,12 +124,17 @@ namespace maker_checker_v1.Services
                                .Include(r => r.User)
                             .Include(r => r.ValidationProgress) as IQueryable<Request>;
             //*step 1 : collection where Rules include any RoleName
-            collection = collection.Where(r => r.Status == "Pending" && r.ServiceType.Validation!.Rules.Any(rule => rule.Role.Name == RoleName));
+            collection = collection.Where(r => r.Status == "Pending" && r.ServiceType.Validation!.Rules.Any(rule => rule.RoleId == RoleId));
             //*step 2 : collection where operations with RoleName are less than Nbr from Rule
-            // collection = collection.Where(r => r.ServiceType.Validation!.Rules.Any(rule => rule.Nbr <=
-            // r.ValidationProgress!.Operations.Count(op => op.User!.Role.Name == RoleName)));
+
+            // collection = collection.Where(r => r.ServiceType.Validation!.Rules.Any(rule => rule.Nbr <
+            //       r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId)));
+
+            collection = collection.Where(r => r.ServiceType.Validation!.Rules
+                .Any(rule => rule.Nbr > r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId)));
+
             //*step 3 : collection where operations wasn't made by that userId 
-            // collection = collection.Where(r => !r.ValidationProgress!.Operations.Any(op => op.User!.Id == UserId));
+            collection = collection.Where(r => !r.ValidationProgress!.Operations.Any(op => op.User!.Id == UserId));
             List<RequestToStaff> collectionToReturn = new List<RequestToStaff>();
             foreach (Request item in collection)
             {

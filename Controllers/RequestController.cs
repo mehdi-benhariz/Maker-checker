@@ -53,6 +53,7 @@ namespace maker_checker_v1.Controllers
             Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
             return Ok(requests);
         }
+
         [HttpGet("staff")]
         // [Authorize(Policy = "Staff")]]
         public ActionResult<IEnumerable<RequestToStaff>> GetRequestsForStaff()
@@ -60,9 +61,9 @@ namespace maker_checker_v1.Controllers
             // var (requests, pagginationMetaData) = await _requestRepository.(search, pageNumber);
             // Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
 
-            string RoleName = _hContext.User.FindFirstValue("Role") ?? "A";
-            int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub") ?? "1");
-            var requests = _requestRepository.getRequestsForStaff(RoleName, UserId);
+            int RoleId = Int32.Parse(_hContext.User.FindFirstValue("roleId"));
+            int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub"));
+            var requests = _requestRepository.getRequestsForStaff(RoleId, UserId);
             return Ok(requests);
         }
 

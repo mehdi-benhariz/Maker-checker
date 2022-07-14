@@ -112,7 +112,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowAll");
 app.UseCookiePolicy();
-app.UseMiddleware<ErrorHandler>();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
