@@ -27,10 +27,7 @@ export const addRequest = async (request) => {
   }
 };
 export const getRequestsToAdmin = async (pageNumber, search) => {
-  // let url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}`;
-  // console.log(search !== " ");
-  // if (search !== " ") url += `&&search=${search}`;
-  const url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}&search=${search}`;
+  const url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}&&search=${search}`;
   try {
     return await axios.get(url);
   } catch (error) {

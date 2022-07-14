@@ -47,7 +47,7 @@ namespace maker_checker_v1.Controllers
         }
         [HttpGet("admin", Name = "GetAdminRequests")]
         // [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = null)
+        public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = "")
         {
             var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
             Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
