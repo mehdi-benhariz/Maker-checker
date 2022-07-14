@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { addOperation, getRequestsDuty } from "../../../API/OperationAPI";
+import { addOperation } from "../../../API/OperationAPI";
+import { getRequestsToStaff } from "../../../API/RequestAPI";
 import { notify } from "../../utils/Notify";
 const RequestCarousel = () => {
   const [requests, setRequests] = useState([
@@ -29,6 +30,7 @@ const RequestCarousel = () => {
       creationDate: "2020-01-01",
     },
   ]);
+
   async function validateRequest(reqId) {
     const res = await addOperation(reqId);
     console.log(res);
@@ -37,8 +39,8 @@ const RequestCarousel = () => {
       notify("error", "Error validating request");
     }
   }
-  async function getRequestByStuff(userId) {
-    const res = await getRequestsDuty(userId);
+  async function getRequestByStuff() {
+    const res = await getRequestsToStaff();
     console.log(res);
     if (res.status === 200) setRequests(res.data);
     else {
@@ -52,7 +54,7 @@ const RequestCarousel = () => {
       </div>
     ) : (
       requests.map((request) => (
-        <div className="bg-white rounded-sm p-2">
+        <div key={request.id} className="bg-white rounded-sm p-2">
           <h2 className="text-gray-600 font-bold text-xl text-center">
             #{request.id}
           </h2>

@@ -1,5 +1,6 @@
 using maker_checker_v1;
 using maker_checker_v1.data;
+using maker_checker_v1.Middleware;
 using maker_checker_v1.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -21,7 +22,12 @@ builder.Host.UseSerilog();
 // });
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson(
+builder.Services.AddControllers(
+    options =>
+{
+    options.Filters.Add<HttpResponseExceptionFilter>();
+}
+).AddNewtonsoftJson(
     options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -95,11 +101,18 @@ if (app.Environment.IsDevelopment())
     });
 
 }
+app.UseExceptionHandler(new ExceptionHandlerOptions()
+{
+    AllowStatusCode404Response = true, // important!
+    ExceptionHandlingPath = "/error"
+});
+
 
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowAll");
 app.UseCookiePolicy();
+app.UseMiddleware<ErrorHandler>();
 
 app.UseAuthentication();
 app.UseAuthorization();

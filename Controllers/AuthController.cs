@@ -76,14 +76,16 @@ namespace maker_checker_v1.models.DTO
             User? user = await _unitOfWork.Users.Get(u => u.Username == userModel.Username, new List<string> { "Role" });
             //todo make a standart error format
             if (user == null)
-                return BadRequest("User does not exist");
+                throw new Exception(@"{ 'username' :'User does not exist' }");
+            // return BadRequest("User does not exist");
             if (!entities.User.CompareHash(userModel.Password, user.Password))
                 return BadRequest("Wrong password");
 
             var payload = new Claim[]{
                 new Claim("sub",user.Id.ToString()),
                 new Claim("username",user.Username),
-                new Claim(ClaimTypes.Role,user.Role.Name)
+                new Claim(ClaimTypes.Role,user.Role.Name),
+                new Claim("roleId", user.RoleId.ToString())
              };
 
             var token = user.generateToken(payload, _issuer, _audience, _secret);
@@ -98,8 +100,8 @@ namespace maker_checker_v1.models.DTO
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
             return Ok(_mapper.Map<UserToReturn>(user));
         }
         [Authorize]

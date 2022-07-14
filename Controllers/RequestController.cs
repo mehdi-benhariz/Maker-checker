@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using maker_checker_v1.models.DTO.Return;
+using System.Runtime.InteropServices;
 
 namespace maker_checker_v1.Controllers
 {
@@ -46,10 +47,22 @@ namespace maker_checker_v1.Controllers
         }
         [HttpGet("admin", Name = "GetAdminRequests")]
         // [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = "")
+        public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = null)
         {
             var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
             Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
+            return Ok(requests);
+        }
+        [HttpGet("staff")]
+        // [Authorize(Policy = "Staff")]]
+        public ActionResult<IEnumerable<RequestToStaff>> GetRequestsForStaff()
+        {
+            // var (requests, pagginationMetaData) = await _requestRepository.(search, pageNumber);
+            // Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
+
+            string RoleName = _hContext.User.FindFirstValue("Role") ?? "A";
+            int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub") ?? "1");
+            var requests = _requestRepository.getRequestsForStaff(RoleName, UserId);
             return Ok(requests);
         }
 

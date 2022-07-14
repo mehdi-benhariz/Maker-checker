@@ -5,11 +5,12 @@ import { StatusCell, ProgressCell } from "../../utils/Cells";
 const RequestsTable = () => {
   const [requests, setRequests] = useState([]);
   const [pagginationData, setPagginationData] = useState({});
-  const [searchQuery, setsearchQuery] = useState(" ");
+  const [searchQuery, setsearchQuery] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
 
   async function getRequests() {
     const res = await getRequestsToAdmin(1, searchQuery);
-
+    console.log(res);
     if (res.status === 200) {
       setRequests([...res.data]);
       return res.headers;
@@ -20,11 +21,17 @@ const RequestsTable = () => {
 
   function init() {
     getRequests().then((headers) => {
+      if (!headers) return;
       const parsed = JSON.parse(headers["x-paggination"]);
       setPagginationData(parsed);
     });
   }
-  useMemo(init, [searchQuery]);
+  let increment = () =>
+    pageNumber < pagginationData.TotalItems && setPageNumber(pageNumber + 1);
+
+  let decrement = () => pageNumber > 0 && setPageNumber(pageNumber - 1);
+
+  useMemo(init, [searchQuery, pageNumber]);
   // useEffect(init, []);
 
   return (
@@ -127,15 +134,22 @@ const RequestsTable = () => {
             </table>
             <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
               <span className="text-xs xs:text-sm text-gray-900">
-                Showing 1 to {pagginationData.PageSize} of
+                Showing {pagginationData.PageNumber} to
+                {pagginationData.PageSize} of
                 {pagginationData.TotalItems} Entries
               </span>
               <div className="inline-flex mt-2 xs:mt-0">
-                <button className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
+                <button
+                  onClick={increment}
+                  className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l"
+                >
                   Prev
                 </button>
                 &nbsp; &nbsp;
-                <button className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
+                <button
+                  onClick={decrement}
+                  className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r"
+                >
                   Next
                 </button>
               </div>

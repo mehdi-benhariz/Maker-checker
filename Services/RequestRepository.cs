@@ -79,7 +79,7 @@ namespace maker_checker_v1.Services
 
         }
 
-        public async Task<(IEnumerable<RequestToAdmin>, PagginationMetaData)> getRequestsForAdmin(string search = "", int pageNumber = 1, int pageSize = 5)
+        public async Task<(IEnumerable<RequestToAdmin>, PagginationMetaData)> getRequestsForAdmin(string? search = null, int pageNumber = 1, int pageSize = 5)
         {
             var collection = _context.Set<Request>()
                    .Include(r => r.ServiceType)
@@ -113,6 +113,41 @@ namespace maker_checker_v1.Services
             }
 
             return (collectionToReturn, pagginationMetaData);
+        }
+
+        public IEnumerable<RequestToStaff> getRequestsForStaff(string RoleName, int UserId)
+        {
+            var collection = _context.Set<Request>()
+                               .Include(r => r.ServiceType)
+                               .ThenInclude(st => st.Validation)
+                               .ThenInclude(v => v.Rules)
+                               .Include(r => r.User)
+                            .Include(r => r.ValidationProgress) as IQueryable<Request>;
+            //*step 1 : collection where Rules include any RoleName
+            collection = collection.Where(r => r.Status == "Pending" && r.ServiceType.Validation!.Rules.Any(rule => rule.Role.Name == RoleName));
+            //*step 2 : collection where operations with RoleName are less than Nbr from Rule
+            // collection = collection.Where(r => r.ServiceType.Validation!.Rules.Any(rule => rule.Nbr <=
+            // r.ValidationProgress!.Operations.Count(op => op.User!.Role.Name == RoleName)));
+            //*step 3 : collection where operations wasn't made by that userId 
+            // collection = collection.Where(r => !r.ValidationProgress!.Operations.Any(op => op.User!.Id == UserId));
+            List<RequestToStaff> collectionToReturn = new List<RequestToStaff>();
+            foreach (Request item in collection)
+            {
+                byte progress = 0;
+                if (item.ValidationProgress != null)
+                    progress = (byte)item.ValidationProgress.Progress();
+
+                collectionToReturn.Add(new RequestToStaff
+                {
+                    Id = item.Id,
+                    Owner = item.User.Username,
+                    ServiceType = item.ServiceType.Name,
+                    Amount = item.Amount,
+                    Description = item.Description,
+                    CreationDate = item.CreationDate.ToString("dd-MM-yyyy"),
+                });
+            }
+            return collectionToReturn;
         }
     }
 }

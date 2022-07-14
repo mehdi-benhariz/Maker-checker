@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addRequest } from "../../../API/RequestAPI";
 import { TextField, NumberField } from "../../utils/InputFields";
-
-const RequestForm = () => {
+import { getAllServiceTypes } from "../../../API/ServiceTypeAPI";
+import { notify } from "../../utils/Notify";
+const RequestForm = ({ action }) => {
   const [serviceTypes, setServiceTypes] = useState([
     { id: 1, name: "international" },
     { id: 2, name: "intrabank" },
@@ -10,19 +11,31 @@ const RequestForm = () => {
   const [request, setrequest] = useState({});
   const [error, setError] = useState([]);
 
-  async function submitRequest() {
+  async function submitRequest(e) {
     if (!request.ServiceTypeId) request.ServiceTypeId = serviceTypes[0].id;
     // const res = ICall("createRequest", request);
+
     console.log(request);
     const res = await addRequest(request);
     console.log(res);
-    if (res.status === 201) alert("Request submitted successfully");
-    else {
+    if (res.status === 201) {
+      action();
+      notify(e, "success", "submission", "Request submitted successfully");
+    } else {
       setError(res.data);
       //todo created error message
     }
   }
-
+  let initST = async () => {
+    const res = await getAllServiceTypes();
+    if (res.status) setServiceTypes(res.data);
+    //todo add error handler
+    else console.log(res);
+  };
+  function init() {
+    initST();
+  }
+  useEffect(init, []);
   return (
     <div className="bg-gray-100 px-2 py-1  w-4/5 my-3">
       <h4 className="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">

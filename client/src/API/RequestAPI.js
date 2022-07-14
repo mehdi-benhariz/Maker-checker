@@ -7,11 +7,10 @@ axios.defaults.withCredentials = true;
 // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 //option 1
-export const getRequestByClient = async () => {
+export const getRequestByClient = async (pageNumber) => {
+  const url = `${process.env.REACT_APP_API_URL}/api/Request/client?pageNumber=${pageNumber}`;
   try {
-    return await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/Request/client?pageNumber=1`
-    );
+    return await axios.get(url);
   } catch (error) {
     return error.response;
   }
@@ -28,14 +27,24 @@ export const addRequest = async (request) => {
   }
 };
 export const getRequestsToAdmin = async (pageNumber, search) => {
-  const url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}&&search=${search}`;
+  // let url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}`;
+  // console.log(search !== " ");
+  // if (search !== " ") url += `&&search=${search}`;
+  const url = `${process.env.REACT_APP_API_URL}/api/Request/admin?pageNumber=${pageNumber}&search=${search}`;
   try {
     return await axios.get(url);
   } catch (error) {
     return error.response;
   }
 };
-
+export const getRequestsToStaff = async () => {
+  const url = `${process.env.REACT_APP_API_URL}/api/Request/staff`;
+  try {
+    return await axios.get(url);
+  } catch (error) {
+    return error.response;
+  }
+};
 //option 2+
 const methods = {
   getRequestHistory: function () {

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../API/AuthAPI";
 import RequestForm from "./RequestForm";
@@ -12,6 +13,8 @@ const ClientPage = () => {
     if (res.status === 200) navigate("/login");
     //todo add custom error handling
   };
+  const [changeReq, setChangeReq] = useState(false);
+  let toggleChange = () => setChangeReq(!changeReq);
   return (
     <div className="bg-gray-50 min-h-screen">
       <nav>
@@ -75,8 +78,10 @@ const ClientPage = () => {
       </nav>
       <div className="h-full flex items-center flex-col gap-4">
         {/*  */}
-        <RequestHistory />
-        <RequestForm />
+        <RequestHistory depend={changeReq} />
+        <RequestForm action={toggleChange} />
+        <Toaster />
+
         {/*  */}
       </div>
     </div>
