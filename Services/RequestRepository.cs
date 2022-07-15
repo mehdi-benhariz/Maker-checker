@@ -126,12 +126,11 @@ namespace maker_checker_v1.Services
             //*step 1 : collection where Rules include any RoleName
             collection = collection.Where(r => r.Status == "Pending" && r.ServiceType.Validation!.Rules.Any(rule => rule.RoleId == RoleId));
             //*step 2 : collection where operations with RoleName are less than Nbr from Rule
+            collection = collection.Where(r => r.ServiceType.Validation!.Rules.First(rule => rule.RoleId == RoleId)
+                                .Nbr > r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId));
 
-            // collection = collection.Where(r => r.ServiceType.Validation!.Rules.Any(rule => rule.Nbr <
-            //       r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId)));
-
-            collection = collection.Where(r => r.ServiceType.Validation!.Rules
-                .Any(rule => rule.Nbr > r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId)));
+            // collection = collection.Where(r => r.ServiceType.Validation!.Rules
+            //     .Any(rule => rule.Nbr > r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId)));
 
             //*step 3 : collection where operations wasn't made by that userId 
             collection = collection.Where(r => !r.ValidationProgress!.Operations.Any(op => op.User!.Id == UserId));
@@ -145,6 +144,7 @@ namespace maker_checker_v1.Services
                 collectionToReturn.Add(new RequestToStaff
                 {
                     Id = item.Id,
+                    UserId = item.User.Id,
                     Owner = item.User.Username,
                     ServiceType = item.ServiceType.Name,
                     Amount = item.Amount,
