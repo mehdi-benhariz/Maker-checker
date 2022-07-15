@@ -90,6 +90,7 @@ namespace maker_checker_v1.Services
         {
             var collection = _context.Set<Request>()
                    .Include(r => r.ServiceType)
+                   .ThenInclude(st => st.Validation)
                    .Include(r => r.User)
                 .Include(r => r.ValidationProgress) as IQueryable<Request>;
             collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
@@ -110,7 +111,7 @@ namespace maker_checker_v1.Services
                 collectionToReturn.Add(new RequestToAdmin
                 {
                     Id = item.Id,
-                    owner = item.User.Username,
+                    Owner = item.User.Username,
                     serviceType = item.ServiceType.Name,
                     Status = item.Status,
                     Amount = item.Amount,

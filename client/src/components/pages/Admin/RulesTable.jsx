@@ -67,11 +67,13 @@ const RulesTable = () => {
   //the init function
   let initData = async () => {
     const res = await getData();
-    console.log(res);
+    console.log({ res });
     //if rules table is empty , fill it with default values
 
-    for (let i = 0; i < res.length; i++)
-      if (res[i].rules.length === 0) res[i].rules = [...rules];
+    for (let i = 0; i < res.length; i++) {
+      console.log(res[i].rules.length == 0);
+      if (res[i].rules.length == 0) res[i].rules = [...rules];
+    }
 
     setData(res);
   };
@@ -166,11 +168,11 @@ const RulesTable = () => {
                            bg-white
                            border-b border-[#E8E8E8]"
                     >
-                      {RoleNbrCell(
-                        getRoleNbr(i, j),
-                        (x) => updateRule(i, j, x),
-                        rule.maxNbr
-                      )}
+                      {RoleNbrCell({
+                        value: getRoleNbr(i, j),
+                        cb: (x) => updateRule(i, j, x),
+                        max: rule.maxNbr,
+                      })}
                     </td>
                   );
                 })}

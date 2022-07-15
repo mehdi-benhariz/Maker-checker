@@ -49,9 +49,17 @@ namespace maker_checker_v1.Controllers
         // [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = "")
         {
-            var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
-            Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
-            return Ok(requests);
+            //todo add better error handler
+            try
+            {
+                var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
+                Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
+                return Ok(requests);
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("staff")]

@@ -13,12 +13,3 @@ export const addOperation = async (reqId) => {
     return error.response;
   }
 };
-
-export const getRequestsDuty = async (userId) => {
-  const url = `${process.env.REACT_APP_API_URL}/api/Operation/duty/${userId}`;
-  try {
-    return await axios.get(url);
-  } catch (error) {
-    return error.response;
-  }
-};

@@ -9,8 +9,8 @@ const RequestsTable = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
   async function getRequests() {
-    const res = await getRequestsToAdmin(1, searchQuery);
-
+    const res = await getRequestsToAdmin(pageNumber, searchQuery);
+    console.log(res);
     if (res.status === 200) {
       setRequests([...res.data]);
       return res.headers;
@@ -27,9 +27,10 @@ const RequestsTable = () => {
     });
   }
   let increment = () =>
-    pageNumber < pagginationData.TotalItems && setPageNumber(pageNumber + 1);
+    pageNumber < pagginationData.TotalItems - 1 &&
+    setPageNumber(pageNumber + 1);
 
-  let decrement = () => pageNumber > 0 && setPageNumber(pageNumber - 1);
+  let decrement = () => pageNumber > 1 && setPageNumber(pageNumber - 1);
 
   useMemo(init, [searchQuery, pageNumber]);
   // useEffect(init, []);
@@ -140,14 +141,14 @@ const RequestsTable = () => {
               </span>
               <div className="inline-flex mt-2 xs:mt-0">
                 <button
-                  onClick={increment}
+                  onClick={decrement}
                   className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l"
                 >
                   Prev
                 </button>
                 &nbsp; &nbsp;
                 <button
-                  onClick={decrement}
+                  onClick={increment}
                   className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r"
                 >
                   Next

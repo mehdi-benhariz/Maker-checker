@@ -1,17 +1,19 @@
 import React from "react";
 
-export function RoleNbrCell(value, cb, max) {
-  console.log({ max });
+export function RoleNbrCell({ value, cb, max }) {
   return (
     <input
       type="number"
       min={0}
-      max={max}
+      // max={max}
       className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
       value={value}
       onChange={(e) => {
         const x = parseInt(e.target.value);
-        if (x >= 0 && x <= max) cb(e.target.value);
+        // if (x >= 0 && x <= max)
+        console.log({ max });
+        console.log(x <= parseInt(max));
+        cb(e.target.value);
       }}
     />
   );
