@@ -6,6 +6,8 @@ import RequestForm from "./RequestForm";
 import RequestHistory from "./RequestHistory";
 
 const ClientPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   let navigate = useNavigate();
   let handlLogout = async (e) => {
     e.preventDefault();

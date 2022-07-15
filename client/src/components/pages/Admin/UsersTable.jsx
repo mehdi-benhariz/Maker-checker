@@ -41,7 +41,7 @@ const UsersTable = () => {
       setRole("");
     } else console.log(res);
   }
-
+  const [addChecker, setAddChecker] = useState(false);
   function init() {
     initStaff();
     initRoles();

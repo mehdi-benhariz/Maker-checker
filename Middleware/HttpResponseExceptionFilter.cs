@@ -23,6 +23,16 @@ namespace maker_checker_v1.Middleware
 
                 context.ExceptionHandled = true;
             }
+            if (context.Exception is System.Exception ex)
+            {
+                context.Result = new ObjectResult(ex.Message)
+                {
+                    // StatusCode =ex.
+
+                };
+                Console.WriteLine(ex);
+
+            }
         }
     }
 }

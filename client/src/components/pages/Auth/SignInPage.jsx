@@ -142,12 +142,12 @@ const SignInPage = () => {
               </button>
 
               <p className="mt-4">
-                <a
+                <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  href="./forgot-password.html"
+                  to="/forgetPwd"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </p>
               <p className="mt-1">
                 <Link
