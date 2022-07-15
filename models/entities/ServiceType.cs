@@ -9,7 +9,7 @@ namespace maker_checker_v1.models.entities
         public string Name { get; set; } = "";
         public Validation? Validation { get; set; }
         public List<Request> Requests { get; set; } = new List<Request>();
-
+        public int RquiredNbrOfStaff() => Validation!.Rules.Sum(rule => rule.Nbr);
         public ServiceType(string name)
         {
             this.Name = name;

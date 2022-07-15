@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField } from "../../utils/InputFields";
 import proxym from "./proxym.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,19 +14,42 @@ const SignInPage = () => {
 
   async function handlLogin(e) {
     e.preventDefault();
+    console.log({ user });
     let res = await login(user.username, user.password);
+    console.log(res);
     if (res.status === 200) {
       setCurrentUser({
         isLoggedIn: true,
         ...res.data,
       });
-
-      navigate(`/${res.data.role}`);
+      switch (res.data.role) {
+        case "Admin":
+          navigate(`/${res.data.role}`);
+          break;
+        case "Client":
+          navigate(`/${res.data.role}`);
+          break;
+        default:
+          navigate("/Staff");
+          break;
+      }
     } else {
       // console.log(res.data.errors);
       if (res.data.errors) setErrors(res.data.errors);
     }
   }
+  useEffect(() => {
+    document.addEventListener(
+      "keydown",
+      (e) => e.key === "Enter" && handlLogin(e)
+    );
+    return () => {
+      document.removeEventListener(
+        "keydown",
+        (e) => e.key === "Enter" && handlLogin(e)
+      );
+    };
+  });
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -49,6 +72,7 @@ const SignInPage = () => {
                   Username
                 </span>
                 <TextField
+                  placeholder="Username"
                   cb={(x) => {
                     setErrors({});
                     setField("username", x);

@@ -39,7 +39,7 @@ namespace maker_checker_v1.Controllers
         [Authorize(Policy = "Client")]
         public async Task<ActionResult<IEnumerable<RequestToClient>>> GetRequestsForClient([FromQuery] int pageNumber = 1)
         {
-            var userId = _hContext.User.FindFirstValue("sub") ?? "1";
+            var userId = _hContext.User.FindFirstValue("sub");
             var (requests, pagginationMetaData) = await _requestRepository.getRequestsHistory(Int32.Parse(userId), pageNumber);
             Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
 

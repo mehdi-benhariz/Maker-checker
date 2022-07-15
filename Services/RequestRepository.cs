@@ -53,7 +53,12 @@ namespace maker_checker_v1.Services
 
         internal async Task<(IEnumerable<RequestToClient>, PagginationMetaData)> getRequestsHistory(int userId, int pageNumber, int pageSize = 5)
         {
-            var collection = _context.Set<Request>() as IQueryable<Request>;
+            var collection = _context.Set<Request>()
+                    .Include("ValidationProgress")
+                    .Include("ValidationProgress.Request")
+                    .Include("ValidationProgress.Request.ServiceType")
+                    .Include("ValidationProgress.Request.ServiceType.Validation")
+                     as IQueryable<Request>;
             collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
             collection = collection.OrderByDescending(r => r.CreationDate);
             int totalItems = await collection.CountAsync();
@@ -70,6 +75,8 @@ namespace maker_checker_v1.Services
                         serviceType = st.Name,
                         Status = req.Status,
                         Amount = req.Amount,
+                        Progress = req.ValidationProgress == null ? (byte)0 : req.ValidationProgress!.Progress(),
+                        // Progress = req.ValidationProgress == null ? (byte)0 : req.ValidationProgress.Progress(),
                         CreationDate = req.CreationDate.ToString("dd-MM-yyyy"),
                     }
                 )
