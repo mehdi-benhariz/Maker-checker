@@ -6,6 +6,7 @@ import AdminPage from "./components/pages/Admin/AdminPage";
 import SignInPage from "./components/pages/Auth/SignInPage";
 import SignUpPage from "./components/pages/Auth/SignUpPage";
 import ClientPage from "./components/pages/Client/ClientPage";
+
 import NotFound from "./components/pages/NotFound";
 import StaffPage from "./components/pages/Staff/StaffPage";
 import ProtectedRoute from "./components/ProtectedRoute";
