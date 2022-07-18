@@ -59,7 +59,7 @@ namespace maker_checker_v1.Services
                     .Include("ValidationProgress.Request.ServiceType")
                     .Include("ValidationProgress.Request.ServiceType.Validation")
                      as IQueryable<Request>;
-            collection = collection.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            collection = collection.Where(r => r.UserId == userId).Skip((pageNumber - 1) * pageSize).Take(pageSize);
             collection = collection.OrderByDescending(r => r.CreationDate);
             int totalItems = await collection.CountAsync();
             var pagginationMetaData = new PagginationMetaData(pageNumber, pageSize, totalItems);
@@ -136,10 +136,6 @@ namespace maker_checker_v1.Services
             //*step 2 : collection where operations with RoleName are less than Nbr from Rule
             collection = collection.Where(r => r.ServiceType.Validation!.Rules.First(rule => rule.RoleId == RoleId)
                                 .Nbr > r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId));
-
-            // collection = collection.Where(r => r.ServiceType.Validation!.Rules
-            //     .Any(rule => rule.Nbr > r.ValidationProgress!.Operations.Count(op => op.User!.RoleId == RoleId)));
-
             //*step 3 : collection where operations wasn't made by that userId 
             collection = collection.Where(r => !r.ValidationProgress!.Operations.Any(op => op.User!.Id == UserId));
             List<RequestToStaff> collectionToReturn = new List<RequestToStaff>();

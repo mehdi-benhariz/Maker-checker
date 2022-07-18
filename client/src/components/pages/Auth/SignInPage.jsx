@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TextField } from "../../utils/InputFields";
 import proxym from "./proxym.png";
 import { Link, useNavigate } from "react-router-dom";

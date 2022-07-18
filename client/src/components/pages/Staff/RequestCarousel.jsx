@@ -5,6 +5,8 @@ import { getRequestsToStaff } from "../../../API/RequestAPI";
 import { notify } from "../../utils/Notify";
 
 const RequestCarousel = () => {
+  console.log("RequestCarousel");
+
   const [requests, setRequests] = useState([]);
   const [selectedReqId, setSelectedReqId] = useState(2);
   //validate the request

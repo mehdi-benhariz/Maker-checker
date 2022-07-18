@@ -12,7 +12,7 @@ const SignUpPage = () => {
   const [errors, setErrors] = useState({});
   let setField = (field, x) => setUser({ ...user, [field]: x });
 
-  const { CurrentUser, setCurrentUser } = React.useContext(AuthContext);
+  const { setCurrentUser } = React.useContext(AuthContext);
   const navigate = useNavigate();
 
   async function handlRegister(e) {

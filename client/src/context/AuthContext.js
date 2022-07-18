@@ -11,14 +11,19 @@ const AuthContextProvider = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [roles, setRoles] = useState([]);
   let handleUserInfo = async () => {
-    let res = await getUserInfo();
-    console.log(res);
-    if (res.status === 200)
-      setCurrentUser({
-        isLoggedIn: true,
-        ...res.data,
-      });
-    else alert(res.errors);
+    try {
+      let res = await getUserInfo();
+      console.log(res);
+      if (res.status === 200)
+        setCurrentUser({
+          isLoggedIn: true,
+          ...res.data,
+        });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
     setIsLoading(false);
   };
   let getRoles = async () => {

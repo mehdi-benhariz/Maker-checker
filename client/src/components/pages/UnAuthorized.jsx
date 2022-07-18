@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UnAuthorized = () => {
   return (
@@ -14,13 +15,13 @@ const UnAuthorized = () => {
           <p className="mt-4 mb-8 dark:text-gray-400">
             But dont worry, you can find plenty of other things on our homepage.
           </p>
-          <button
+          <Link
             rel="noopener noreferrer"
-            href="/"
+            to="/login"
             className="px-8 py-3 bg-indigo-400 text-white font-semibold rounded dark:bg-indigo-400 dark:text-gray-900"
           >
             Back to homepage
-          </button>
+          </Link>
         </div>
       </div>
     </section>

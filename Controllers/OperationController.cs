@@ -27,40 +27,56 @@ namespace maker_checker_v1.Controllers
         [HttpPost]
         public async Task<ActionResult<Operation>> Post([FromBody] int requestId)
         {
-            int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub"));
-            int RoleId = Int32.Parse(_hContext.User.FindFirstValue("roleId"));
-            //
-            var requestToFill = await _unitOfWork.Requests.Get(r => r.Id == requestId, includes: new List<string> { "ValidationProgress" });
-            if (requestToFill == null)
-                return NotFound("request doesn't exist");
-            //if validation progress doesn't exist create a one
-            if (requestToFill.ValidationProgress == null)
+            try
             {
-                ValidationProgress valProg = new ValidationProgress(requestToFill.Id);
-                await _unitOfWork.ValidationProgresses.Insert(valProg);
+
+                int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub"));
+                int RoleId = Int32.Parse(_hContext.User.FindFirstValue("roleId"));
+                //
+                var requestToFill = await _unitOfWork.Requests.Get(r => r.Id == requestId, includes: new List<string> { "ValidationProgress" });
+                if (requestToFill == null)
+                    return NotFound("request doesn't exist");
+                //if validation progress doesn't exist create a one
+                if (requestToFill.ValidationProgress == null)
+                {
+                    ValidationProgress valProg = new ValidationProgress(requestToFill.Id);
+                    await _unitOfWork.ValidationProgresses.Insert(valProg);
+                    if (!await _unitOfWork.Save())
+                        return BadRequest("error while saving the progress");
+                    requestToFill.ValidationProgress = valProg;
+                }
+                else
+                    if (await _unitOfWork.Operations.Exists(o => o.userId == UserId &&
+                             o.validationProgressId == requestToFill.ValidationProgress.Id))
+                    return Unauthorized("you don't have right to validate it!");
+
+                var RuleToFill = await _unitOfWork.Rules.Get(expression: r => r.RoleId == RoleId
+                                         && r.ValidationProgress.RequestId == requestId);
+
+                // var operation = _mapper.Map<Operation>(operationDTO);
+                var operation = new Operation()
+                {
+                    userId = UserId,
+                    validationProgressId = requestToFill.ValidationProgress!.Id
+
+                };
+                await _unitOfWork.Operations.Insert(operation);
                 if (!await _unitOfWork.Save())
-                    return BadRequest("error while saving the progress");
-                requestToFill.ValidationProgress = valProg;
+                    return BadRequest("problem occured while saving operation");
+                //todo : find a better solution later
+                _unitOfWork.Requests.Refresh(requestToFill);
+                requestToFill.Status = requestToFill.CalcStatus();
+                //!error hna !
+                _unitOfWork.Requests.Update(requestToFill);
+                if (!await _unitOfWork.Save())
+                    return BadRequest("problem occured while saving request");
+                return Ok(operation);
             }
-            else
-                if (await _unitOfWork.Operations.Exists(o => o.userId == UserId &&
-                         o.validationProgressId == requestToFill.ValidationProgress.Id))
-                return Unauthorized("you don't have right to validate it!");
-
-            var RuleToFill = await _unitOfWork.Rules.Get(expression: r => r.RoleId == RoleId
-                                     && r.ValidationProgress.RequestId == requestId);
-
-            // var operation = _mapper.Map<Operation>(operationDTO);
-            var operation = new Operation()
+            catch (System.Exception ex)
             {
-                userId = UserId,
-                validationProgressId = requestToFill.ValidationProgress!.Id
-
-            };
-            await _unitOfWork.Operations.Insert(operation);
-            if (!await _unitOfWork.Save())
-                return BadRequest("problem occured while saving operation");
-            return Ok(operation);
+                return BadRequest(ex.Message);
+                throw;
+            }
         }
 
     }

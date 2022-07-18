@@ -31,7 +31,7 @@ namespace maker_checker_v1.Middleware
 
                     // StatusCode =ex.
                 };
-                Console.WriteLine(httpResponseException);
+                Console.WriteLine(ex);
                 return;
             }
 

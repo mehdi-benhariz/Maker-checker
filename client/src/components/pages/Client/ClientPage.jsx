@@ -19,8 +19,6 @@ const ClientPage = () => {
   const [changeReq, setChangeReq] = useState(false);
   let toggleChange = () => setChangeReq(!changeReq);
 
-  const [showSidebar, setShowSidebar] = React.useState(false);
-  let toggleSidebar = () => setShowSidebar(!showSidebar);
   return (
     <TemplatePage
       MainComponent={

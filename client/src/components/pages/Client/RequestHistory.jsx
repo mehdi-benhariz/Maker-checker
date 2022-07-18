@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ProgressCell, StatusCell } from "../../utils/Cells";
 import { getRequestByClient } from "../../../API/RequestAPI";
+
 const RequestHistory = ({ depend }) => {
   const [requests, setRequests] = useState([]);
   const [pagginationData, setPagginationData] = useState({});
@@ -65,25 +66,27 @@ const RequestHistory = ({ depend }) => {
           History
         </h2>
 
-        <div className="inline-flex mt-2 xs:mt-0">
-          <button
-            onClick={decrement}
-            className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l"
-          >
-            Prev
-          </button>
-          &nbsp;
-          <span className="h-full w-10 text-center text-base text-gray-800">
-            {pagginationData.PageNumber}
-          </span>
-          &nbsp;
-          <button
-            onClick={increment}
-            className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r"
-          >
-            Next
-          </button>
-        </div>
+        {pagginationData.TotalItems > pagginationData.PageSize && (
+          <div className="inline-flex mt-2 xs:mt-0">
+            <button
+              onClick={decrement}
+              className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l"
+            >
+              Prev
+            </button>
+            &nbsp;
+            <span className="h-full w-10 text-center text-base text-gray-800">
+              {pagginationData.PageNumber}
+            </span>
+            &nbsp;
+            <button
+              onClick={increment}
+              className="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="overflow-y-auto h-40">{content()}</div>

@@ -18,15 +18,10 @@ const ProtectedRoute = () => {
   console.log(location.pathname);
   switch (location.pathname) {
     case "/Admin":
-      console.log("test");
       if (currentUser.role === "Admin") return <AdminPage />;
       break;
     case "/Staff":
-      console.log(roles.some((r) => r.name === currentUser.role));
-      if (roles.some((r) => r.name === currentUser.role)) {
-        return <StaffPage />;
-      }
-
+      if (roles.some((r) => r.name === currentUser.role)) return <StaffPage />;
       break;
     case "/Client":
       if (currentUser.role === "Client") return <ClientPage />;
