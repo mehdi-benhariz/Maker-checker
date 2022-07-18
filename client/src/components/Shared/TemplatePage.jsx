@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../API/AuthAPI";
+import { AuthContext } from "../../context/AuthContext";
 
 const TemplatePage = ({ MainComponent }) => {
+  const { currentUser } = useContext(AuthContext);
   const profileImg =
     "https://forbesthailand.com/wp-content/uploads/2021/08/https-specials-images.forbesimg.com-imageserve-5f47d4de7637290765bce495-0x0.jpgbackground000000cropX11699cropX23845cropY1559cropY22704.jpg";
   let navigate = useNavigate();
@@ -31,9 +33,11 @@ const TemplatePage = ({ MainComponent }) => {
                 className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
               />
               <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-                Cynthia J. Watts
+                {currentUser.username}
               </h5>
-              <span className="hidden text-gray-400 lg:block">Admin</span>
+              <span className="hidden text-gray-400 lg:block">
+                {currentUser.role}
+              </span>
             </div>
 
             <ul className="space-y-2 tracking-wide mt-8">
@@ -79,7 +83,7 @@ const TemplatePage = ({ MainComponent }) => {
                       className="fill-current text-gray-300 group-hover:text-indigo-300"
                       fillRule="evenodd"
                       d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                     <path
                       className="fill-current text-gray-600 group-hover:text-indigo-600"
@@ -104,7 +108,7 @@ const TemplatePage = ({ MainComponent }) => {
                       className="fill-current text-gray-600 group-hover:text-indigo-600"
                       fillRule="evenodd"
                       d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                     <path
                       className="fill-current text-gray-300 group-hover:text-indigo-300"
@@ -156,7 +160,7 @@ const TemplatePage = ({ MainComponent }) => {
                       className="fill-current text-gray-600 group-hover:text-indigo-600"
                       fillRule="evenodd"
                       d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                   <span className="group-hover:text-gray-700">Finance</span>
@@ -175,9 +179,9 @@ const TemplatePage = ({ MainComponent }) => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                 />
               </svg>

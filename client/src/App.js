@@ -9,6 +9,7 @@ import ClientPage from "./components/pages/Client/ClientPage";
 
 import NotFound from "./components/pages/NotFound";
 import StaffPage from "./components/pages/Staff/StaffPage";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {

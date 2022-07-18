@@ -6,7 +6,7 @@ import { login } from "../../../API/AuthAPI";
 import { AuthContext } from "../../../context/AuthContext";
 
 const SignInPage = () => {
-  const { setCurrentUser } = React.useContext(AuthContext);
+  const { setCurrentUser, roles } = React.useContext(AuthContext);
   const [user, setUser] = useState({});
   const [errors, setErrors] = useState({});
   let setField = (field, x) => setUser({ ...user, [field]: x });
@@ -14,7 +14,6 @@ const SignInPage = () => {
 
   async function handlLogin(e) {
     e.preventDefault();
-    console.log({ user });
     let res = await login(user.username, user.password);
     console.log(res);
     if (res.status === 200) {
@@ -22,19 +21,10 @@ const SignInPage = () => {
         isLoggedIn: true,
         ...res.data,
       });
-      switch (res.data.role) {
-        case "Admin":
-          navigate(`/${res.data.role}`);
-          break;
-        case "Client":
-          navigate(`/${res.data.role}`);
-          break;
-        default:
-          navigate("/Staff");
-          break;
-      }
+      console.log(roles);
+      if (roles.some((role) => role.name === res.data.role)) navigate("/Staff");
+      else navigate(`/${res.data.role}`);
     } else {
-      // console.log(res.data.errors);
       if (res.data.errors) setErrors(res.data.errors);
     }
   }

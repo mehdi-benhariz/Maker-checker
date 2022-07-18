@@ -29,7 +29,7 @@ export const logout = async () => {
 };
 
 export const getUserInfo = () => {
-  const url = `${process.env.REACT_APP_API_URL}/api/Auth/user`;
+  const url = `${process.env.REACT_APP_API_URL}/api/Auth/getUser`;
   try {
     return axios.get(url);
   } catch (error) {

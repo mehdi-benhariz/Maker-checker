@@ -111,7 +111,13 @@ namespace maker_checker_v1.models.DTO
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Ok("logout successful");
         }
-
+        [HttpGet("getUser")]
+        [Authorize]
+        public async Task<ActionResult<UserToReturn>> GetUser()
+        {
+            var user = await _unitOfWork.Users.Get(u => u.Id == int.Parse(User.FindFirst("sub")!.Value), new List<string> { "Role" });
+            return Ok(_mapper.Map<UserToReturn>(user));
+        }
 
 
     }

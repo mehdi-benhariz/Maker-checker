@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { addOperation } from "../../../API/OperationAPI";
 import { getRequestsToStaff } from "../../../API/RequestAPI";
-import { useFetch } from "../../../hooks/useFetch";
+
 import { notify } from "../../utils/Notify";
+
 const RequestCarousel = () => {
   const [requests, setRequests] = useState([]);
   const [selectedReqId, setSelectedReqId] = useState(2);
