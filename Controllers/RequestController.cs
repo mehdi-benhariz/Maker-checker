@@ -36,7 +36,7 @@ namespace maker_checker_v1.Controllers
             _unitOfWork = unitOfWork ?? throw new System.ArgumentNullException(nameof(unitOfWork));
         }
         [HttpGet("client", Name = "GetClientRequests")]
-        [Authorize(Policy = "Client")]
+        [Authorize(Roles = "Client")]
         public async Task<ActionResult<IEnumerable<RequestToClient>>> GetRequestsForClient([FromQuery] int pageNumber = 1)
         {
             var userId = _hContext.User.FindFirstValue("sub");

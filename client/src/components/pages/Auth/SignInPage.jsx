@@ -14,6 +14,7 @@ const SignInPage = () => {
 
   async function handlLogin(e) {
     e.preventDefault();
+    console.log({ user });
     let res = await login(user.username, user.password);
     console.log(res);
     if (res.status === 200) {
@@ -28,18 +29,14 @@ const SignInPage = () => {
       if (res.data.errors) setErrors(res.data.errors);
     }
   }
-  useEffect(() => {
-    document.addEventListener(
-      "keydown",
-      (e) => e.key === "Enter" && handlLogin(e)
-    );
-    return () => {
-      document.removeEventListener(
-        "keydown",
-        (e) => e.key === "Enter" && handlLogin(e)
-      );
-    };
-  }, []);
+  let handleEnter = (e) => e.key === "Enter" && handlLogin(e);
+
+  // useEffect(() => {
+  //   window.addEventListener("keydown", handleEnter);
+  //   return () => {
+  //     window.removeEventListener("keydown", handleEnter);
+  //   };
+  // }, []);
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -57,7 +54,7 @@ const SignInPage = () => {
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Login
               </h1>
-              <label className="block text-sm">
+              <label className="block text-sm" onKeyDown={handleEnter}>
                 <span className="text-gray-700 dark:text-gray-400">
                   Username
                 </span>
@@ -69,7 +66,7 @@ const SignInPage = () => {
                   }}
                 />
               </label>
-              <label className="block mt-4 text-sm">
+              <label className="block mt-4 text-sm" onKeyDown={handleEnter}>
                 <span className="text-gray-700 dark:text-gray-400">
                   Password
                 </span>

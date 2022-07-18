@@ -25,13 +25,13 @@ const SignUpPage = () => {
       console.log(res.data);
       setErrors({});
       setCurrentUser({ isLoggedIn: true, ...res.data });
-      navigate("/client");
+      navigate("/Client");
     } else {
       console.log(res.data);
-      // console.log(res.data.errors);
-      // setErrors(res.data.errors);
+      setErrors(res.data.errors);
     }
   }
+  let handleEnter = (e) => e.key === "Enter" && handlRegister(e);
 
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -50,7 +50,7 @@ const SignUpPage = () => {
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Create account
               </h1>
-              <label className="block text-sm">
+              <label className="block text-sm" onKeyDown={handleEnter}>
                 <span className="text-gray-700 dark:text-gray-400">
                   username
                 </span>
@@ -61,7 +61,7 @@ const SignUpPage = () => {
                   }}
                 />
               </label>
-              <label className="block mt-4 text-sm">
+              <label className="block mt-4 text-sm" onKeyDown={handleEnter}>
                 <span className="text-gray-700 dark:text-gray-400">
                   Password
                 </span>
@@ -73,7 +73,7 @@ const SignUpPage = () => {
                   }}
                 />
               </label>
-              <label className="block mt-4 text-sm">
+              <label className="block mt-4 text-sm" onKeyDown={handleEnter}>
                 <span className="text-gray-700 dark:text-gray-400">
                   Confirm password
                 </span>
@@ -86,7 +86,7 @@ const SignUpPage = () => {
                 />
               </label>
 
-              <div className="flex mt-6 text-sm">
+              <div className="flex mt-6 text-sm" onKeyDown={handleEnter}>
                 <label className="flex items-center dark:text-gray-400">
                   <input
                     type="checkbox"
