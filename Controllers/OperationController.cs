@@ -29,7 +29,6 @@ namespace maker_checker_v1.Controllers
         {
             try
             {
-
                 int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub"));
                 int RoleId = Int32.Parse(_hContext.User.FindFirstValue("roleId"));
                 //

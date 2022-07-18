@@ -43,9 +43,6 @@ export const addRules = async (ruleDtos, serviceTypeId) => {
   const url = `${baseURL}/api/Rule/rules`;
   try {
     //todo change it later to patch
-
-    console.log(ruleDtos, serviceTypeId);
-
     return await axios.post(url, JSON.stringify(ruleDtos), {
       headers: {
         "Content-Type": "application/json-patch+json",

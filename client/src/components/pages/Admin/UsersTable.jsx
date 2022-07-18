@@ -122,6 +122,9 @@ const UsersTable = () => {
                       </div>
                       <div className="px-2">
                         <select
+                          defaultValue={
+                            roles.find((r) => r.name === row.role).id
+                          }
                           onChange={(e) => {
                             handleUserChange(e, row);
                           }}
@@ -131,7 +134,6 @@ const UsersTable = () => {
                               className="h-8 w-8"
                               key={role.id}
                               value={role.id}
-                              selected={row.role === role.name}
                             >
                               {role.name}
                             </option>

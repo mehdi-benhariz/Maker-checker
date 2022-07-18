@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getAllStaffRoles } from "../../../API/RoleAPI";
 import { editRules, addRules } from "../../../API/RuleAPI";
 import {
   getAllServiceTypes,
@@ -11,7 +12,7 @@ import { TextField } from "../../utils/InputFields";
 import { notify } from "../../utils/Notify";
 
 const RulesTable = () => {
-  const heads = ["serviceType", "A", "B", "C", "Action"];
+  const [heads, setHeads] = useState(["serviceType", "Action"]);
   const [data, setData] = useState([]);
   const [addST, setAddST] = useState(false);
   const [errors, setErrors] = useState([]);
@@ -21,16 +22,17 @@ const RulesTable = () => {
 
     const ruleExist = row.rules[0].roleId;
     let res;
+    console.log({ row });
     const ruleDtos = row.rules.map((r) => ({
       roleId: r.RoleId,
-      nbr: r.Nbr,
+      nbr: r.nbr,
     }));
-    console.log(ruleDtos, row.id);
+    console.log({ ruleDtos, row });
     // update rule
     if (ruleExist) res = await editRules(ruleDtos, row.id);
     // add rule
     else res = await addRules(ruleDtos, row.id);
-
+    console.log({ res });
     if (res.status === 200) {
       notify(e, "success", "Success", "Rule updated successfully");
     } else {
@@ -45,15 +47,27 @@ const RulesTable = () => {
     if (res.status === 200) return res.data;
   };
   //todo :get it from api
-  const rules = [
-    { Nbr: 0, RoleId: 2 },
-    { Nbr: 0, RoleId: 3 },
-    { Nbr: 0, RoleId: 4 },
-  ];
+  const [rules, setRules] = useState([
+    { nbr: 0, RoleId: 2 },
+    { nbr: 0, RoleId: 3 },
+    { nbr: 0, RoleId: 4 },
+  ]);
+  async function initRules() {
+    const res = await getAllStaffRoles();
+    if (res.status === 200) {
+      const data = res.data.map((r) => ({
+        RoleId: r.id,
+        nbr: 0,
+      }));
+      setRules(data);
+      const roleNames = res.data.map((r) => r.name);
+      setHeads(["serviceType", ...roleNames, "Action"]);
+    }
+  }
   //call when update the table cell data
   const updateRule = (rowId, ruleIndex, value) => {
     let newData = [...data];
-    newData[rowId].rules[ruleIndex].nbr = value;
+    newData[rowId].rules[ruleIndex].nbr = parseInt(value);
     setData([...newData]);
     console.log({ newData });
     console.log(rowId, ruleIndex, value);
@@ -67,7 +81,7 @@ const RulesTable = () => {
   //the init function
   let initData = async () => {
     const res = await getData();
-    console.log({ res });
+
     //if rules table is empty , fill it with default values
 
     for (let i = 0; i < res.length; i++) {
@@ -101,6 +115,7 @@ const RulesTable = () => {
   //init the table here
   useEffect(() => {
     initData();
+    initRules();
   }, []);
 
   return (
@@ -171,7 +186,7 @@ const RulesTable = () => {
                       {RoleNbrCell({
                         value: getRoleNbr(i, j),
                         cb: (x) => updateRule(i, j, x),
-                        max: rule.maxNbr,
+                        max: rule.maxNbr || 5,
                       })}
                     </td>
                   );

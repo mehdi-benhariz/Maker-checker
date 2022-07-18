@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, Navigate } from "react-router";
 
 import "./App.css";
 import AdminPage from "./components/pages/Admin/AdminPage";
@@ -23,6 +23,7 @@ function App() {
         </Route>
         <Route path="/register" element={<SignUpPage />} />
         <Route path="/login" element={<SignInPage />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

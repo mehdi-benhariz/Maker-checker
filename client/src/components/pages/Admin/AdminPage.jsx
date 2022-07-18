@@ -10,14 +10,6 @@ import TemplatePage from "../../Shared/TemplatePage";
 // import { getAllServiceTypes } from "../api/serviceType";
 
 const AdminPage = () => {
-  //get initial service types and their api
-  const navigate = useNavigate();
-  let handlLogout = async (e) => {
-    e.preventDefault();
-    const res = await logout();
-    if (res.status === 200) navigate("/login");
-    //todo add custom error handling
-  };
   return (
     <TemplatePage
       MainComponent={
