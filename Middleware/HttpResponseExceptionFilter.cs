@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace maker_checker_v1.Middleware
 {
@@ -14,6 +16,9 @@ namespace maker_checker_v1.Middleware
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
+            if (context.Exception == null)
+                return;
+
             if (context.Exception is HttpResponseException httpResponseException)
             {
                 context.Result = new ObjectResult(httpResponseException.Value)
@@ -21,20 +26,23 @@ namespace maker_checker_v1.Middleware
                     StatusCode = httpResponseException.StatusCode
                 };
 
-                context.ExceptionHandled = true;
-                return;
+
             }
             if (context.Exception is System.Exception ex)
             {
-                context.Result = new ObjectResult(ex.Message)
+                //create a json named errors 
+
+                string title = ex.Message.Split("|")[0];
+                string[] content = new string[] { ex.Message.Split("|")[1] };
+                var json = "{\" " + title + "\":" + JsonConvert.SerializeObject(content) + "}";
+                context.Result = new ObjectResult(JsonConvert.SerializeObject(new { errors = JObject.Parse(json) }))
                 {
-
-                    // StatusCode =ex.
+                    StatusCode = 400
                 };
-                Console.WriteLine(ex);
-                return;
-            }
+                // StatusCode =ex.
 
+            }
+            context.ExceptionHandled = true;
         }
     }
 }

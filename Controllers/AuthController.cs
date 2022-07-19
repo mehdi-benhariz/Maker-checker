@@ -76,10 +76,10 @@ namespace maker_checker_v1.models.DTO
             User? user = await _unitOfWork.Users.Get(u => u.Username == userModel.Username, new List<string> { "Role" });
             //todo make a standart error format
             if (user == null)
-                throw new Exception(@"{ 'username' :'User does not exist' }");
+                throw new Exception("username|User not found");
             // return BadRequest("User does not exist");
             if (!entities.User.CompareHash(userModel.Password, user.Password))
-                return BadRequest("Wrong password");
+                throw new Exception("password| Wrong password");
 
             var payload = new Claim[]{
                 new Claim("sub",user.Id.ToString()),
