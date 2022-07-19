@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using maker_checker_v1.Utils;
 namespace maker_checker_v1.models.DTO
 {
     [ApiController]
@@ -35,7 +35,7 @@ namespace maker_checker_v1.models.DTO
         {
             if (await _unitOfWork.Users.Exists(u => u.Username == userModel.Username))
                 // if (await _userRepository.Exists(userModel.Username))
-                return BadRequest("User already exists");
+                throw new CustomException("useranme |User already exists") { StatusCode = 400 };
             //
             var userToBeCreated = new User()
             {
@@ -44,7 +44,8 @@ namespace maker_checker_v1.models.DTO
             };
             await _unitOfWork.Users.Insert(userToBeCreated);
             if (!await _unitOfWork.Save())
-                return BadRequest("problem occured while saving user");
+                throw new CustomException("user |Error while saving user") { StatusCode = 500 };
+
             //generating token
             var payload = new Claim[]{
                 new Claim("sub",userToBeCreated.Id.ToString()),
@@ -65,8 +66,8 @@ namespace maker_checker_v1.models.DTO
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
 
             return Ok(userToBeCreated);
         }
@@ -76,10 +77,10 @@ namespace maker_checker_v1.models.DTO
             User? user = await _unitOfWork.Users.Get(u => u.Username == userModel.Username, new List<string> { "Role" });
             //todo make a standart error format
             if (user == null)
-                throw new Exception("username|User not found");
+                throw new CustomException("username|User not found") { StatusCode = 400 };
             // return BadRequest("User does not exist");
             if (!entities.User.CompareHash(userModel.Password, user.Password))
-                throw new Exception("password| Wrong password");
+                throw new CustomException("password| Wrong password") { StatusCode = 400 };
 
             var payload = new Claim[]{
                 new Claim("sub",user.Id.ToString()),

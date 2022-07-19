@@ -15,12 +15,6 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
-// builder.WebHost.ConfigureKestrel(options =>
-// {
-//     // Setup a HTTP/2 endpoint without TLS.
-//     options.ListenLocalhost(5000, o => o.Protocols = HttpProtocols.Http2);
-// });
-// Add services to the container.
 
 builder.Services.AddControllers(
     options =>

@@ -46,28 +46,19 @@ namespace maker_checker_v1.Controllers
             return Ok(requests);
         }
         [HttpGet("admin", Name = "GetAdminRequests")]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<RequestToAdmin>>> GetRequestsForAdmin([FromQuery] int pageNumber = 1, [FromQuery] string? search = "")
         {
-            //todo add better error handler
-            try
-            {
-                var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
-                Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
-                return Ok(requests);
-            }
-            catch (System.Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var (requests, pagginationMetaData) = await _requestRepository.getRequestsForAdmin(search, pageNumber);
+            Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
+            return Ok(requests);
+
         }
 
         [HttpGet("staff")]
-        // [Authorize(Policy = "Staff")]]
+        [Authorize]
         public ActionResult<IEnumerable<RequestToStaff>> GetRequestsForStaff()
         {
-            // var (requests, pagginationMetaData) = await _requestRepository.(search, pageNumber);
-            // Response.Headers.Add("X-Paggination", JsonSerializer.Serialize(pagginationMetaData));
 
             int RoleId = Int32.Parse(_hContext.User.FindFirstValue("roleId"));
             int UserId = Int32.Parse(_hContext.User.FindFirstValue("sub"));
@@ -77,6 +68,7 @@ namespace maker_checker_v1.Controllers
 
         //impliment search and filter (maybe paggination)
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Request>>> Get()
         {
             var requests = await _requestRepository.getRequests();
@@ -84,11 +76,13 @@ namespace maker_checker_v1.Controllers
 
         }
         [HttpGet("{id}", Name = "GetRequest")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Request>> Get(int id)
         {
             var request = await _requestRepository.getRequest(id);
             if (request == null)
-                return NotFound("Request not found");
+                throw new Exception("Request |Request not found");
+
             return Ok(request);
         }
         [HttpPost(Name = "submit request")]
@@ -99,6 +93,7 @@ namespace maker_checker_v1.Controllers
 
             var serviceType = await _serviceTypeRepository.getServiceType(request.ServiceTypeId);
             if (serviceType == null)
+
                 return NotFound("Service type not found");
 
             // var requestToCreate = new Request(request.Name, request.ServiceTypeId, request.Amount);

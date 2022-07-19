@@ -9,6 +9,7 @@ namespace maker_checker_v1
         {
 
             options.AddPolicy("Client", policy => policy.RequireClaim(ClaimTypes.Role, "Client"));
+            //TODO policy check if the role exists in database
 
         }
     }

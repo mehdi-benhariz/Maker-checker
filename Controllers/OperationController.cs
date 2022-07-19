@@ -25,6 +25,7 @@ namespace maker_checker_v1.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Operation>> Post([FromBody] int requestId)
         {
             try
@@ -34,14 +35,14 @@ namespace maker_checker_v1.Controllers
                 //
                 var requestToFill = await _unitOfWork.Requests.Get(r => r.Id == requestId, includes: new List<string> { "ValidationProgress" });
                 if (requestToFill == null)
-                    return NotFound("request doesn't exist");
+                    throw new Exception("request |Request not found");
                 //if validation progress doesn't exist create a one
                 if (requestToFill.ValidationProgress == null)
                 {
                     ValidationProgress valProg = new ValidationProgress(requestToFill.Id);
                     await _unitOfWork.ValidationProgresses.Insert(valProg);
                     if (!await _unitOfWork.Save())
-                        return BadRequest("error while saving the progress");
+                        throw new Exception("request |Error while saving validation progress");
                     requestToFill.ValidationProgress = valProg;
                 }
                 else
@@ -61,14 +62,16 @@ namespace maker_checker_v1.Controllers
                 };
                 await _unitOfWork.Operations.Insert(operation);
                 if (!await _unitOfWork.Save())
-                    return BadRequest("problem occured while saving operation");
+                    throw new Exception("request |Error while saving operation");
+                _unitOfWork.Operations.Detach(operation);
                 //todo : find a better solution later
-                _unitOfWork.Requests.Refresh(requestToFill);
-                requestToFill.Status = requestToFill.CalcStatus();
-                //!error hna !
-                _unitOfWork.Requests.Update(requestToFill);
+
+                var finalRequest = await _unitOfWork.Requests.Get(r => r.Id == requestId, includes: new List<string> { "ValidationProgress", "ServiceType", "ServiceType.Validation" });
+                finalRequest.Status = finalRequest.CalcStatus();
+
+                _unitOfWork.Requests.Update(finalRequest);
                 if (!await _unitOfWork.Save())
-                    return BadRequest("problem occured while saving request");
+                    throw new Exception("request |Error while saving request");
                 return Ok(operation);
             }
             catch (System.Exception ex)

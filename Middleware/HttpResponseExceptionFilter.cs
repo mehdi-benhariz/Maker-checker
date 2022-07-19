@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using maker_checker_v1.Utils;
 namespace maker_checker_v1.Middleware
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
@@ -28,7 +28,7 @@ namespace maker_checker_v1.Middleware
 
 
             }
-            if (context.Exception is System.Exception ex)
+            if (context.Exception is CustomException ex)
             {
                 //create a json named errors 
 
@@ -37,7 +37,7 @@ namespace maker_checker_v1.Middleware
                 var json = "{\" " + title + "\":" + JsonConvert.SerializeObject(content) + "}";
                 context.Result = new ObjectResult(JsonConvert.SerializeObject(new { errors = JObject.Parse(json) }))
                 {
-                    StatusCode = 400
+                    StatusCode = ex.StatusCode
                 };
                 // StatusCode =ex.
 

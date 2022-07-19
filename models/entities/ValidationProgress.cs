@@ -29,7 +29,7 @@ namespace maker_checker_v1.models.entities
         {
             this.RequestId = requestId;
         }
-        // initRules();
+
 
     }
 }

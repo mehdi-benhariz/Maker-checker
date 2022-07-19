@@ -62,9 +62,11 @@ namespace maker_checker_v1
         {
             return _db.AnyAsync(expression);
         }
-        public void Refresh(TEntity entity)
+        //deattach entity from context
+        public void Detach(TEntity entity)
         {
-            _context.Entry(entity).Reload();
+            _context.Entry(entity).State = EntityState.Detached;
         }
+
     }
 }
